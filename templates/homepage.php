@@ -40,26 +40,32 @@
 			</div>			
 		</div>
 
-		<hr>
+		<hr class="homeBar">
 
 		<div class="creation">
 			<h2>Créations</h2>
 			<div class="global_work"></div>
+				<?php 
+					foreach ($posts as $post) {
+				?>
+			
 				<div class="work_creation">
-
+					<h4>
+						<?php echo htmlspecialchars($post['title']); ?>
+					</h4>
+					<h4>
+						<?php echo htmlspecialchars($post['author']); ?>
+						- <?php echo htmlspecialchars($post['creation_date']); ?>
+					</h4>
+					<h4>
+						<?php echo htmlspecialchars($post['chapo']); ?>
+					</h4>
+					<a href="index.php?action=post&id=<?= urlencode($post['id']) ?>">Accéder au Blog Post</a>
 				</div>
 
-				<div class="work_creation">
-
-				</div>
-
-				<div class="work_creation">
-
-				</div>
-
-				<div class="work_creation">
-
-				</div>
+				<?php
+					}
+				?>		
 
 				<div class="cv">
 					<div>
@@ -74,10 +80,10 @@
 		</div>
 
 
-		<hr>
+		<hr class="homeBar">
 
 		<div class="form_contact">
-			<form action="" method=post>
+			<form action="index.php" method=post>
 				<h2>Contact</h2>
 
 				<div class="form_case">
