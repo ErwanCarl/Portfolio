@@ -26,7 +26,7 @@
 }
 
 nav ul a {
-    color : white;
+    color : #e07dc3;
     font-weight: bold;
     text-decoration:none;
     font-size : 24px;
@@ -79,15 +79,12 @@ nav ul a {
     margin-right: 10px;
 }
 
-/* homepage */
+/* --------------------   homepage   ------------------------ */
 
 body {
-    /* background: linear-gradient(to right, #0A0B39, #1b0675 20%, #1321a3 40%,#1321a3 60%,#1b0675 80%, #0A0B39 100%); */
-    color : black;
     margin : 0;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-
-}
+} 
 
 .mainpart {
     display : flex;
@@ -138,7 +135,7 @@ h2 {
     margin-top: 9px;
 }
 
-hr {
+.homeBar {
 	border: solid;
     height: 2px;
     color: #adacab;
@@ -166,7 +163,7 @@ hr {
 }
 
 
-/* form */
+/* ------------- form ------------------ */
 
 form {
     border: solid 2px #23096b;
@@ -231,4 +228,119 @@ button {
     cursor: pointer;
     margin: 5px;
     border-width: 0px;
+}
+
+
+/* -------------------------------------- passion.php ---------------------------------------- */
+
+.passion {
+    display:flex;
+    flex-direction: row;
+    width : 70%;
+    margin : 0 auto 80px auto;
+}
+
+.passion img {
+    margin: auto;
+}
+
+.passionTitle {
+    color : #e07dc3;
+}
+
+.passion h2 {
+    font-size : 28px;
+}
+
+.passionTitle h1 {
+    font-size : 46px;
+}
+
+.passionPic img {
+    max-width:80%;
+    max-height : 80%;
+    padding: 20px;
+    
+}
+
+#passionBar{
+    width: 15%;
+    background-color: #e07dc3 ;
+    border: solid;
+    height: 0.2px;
+    color: #e07dc3;
+    margin: 20px auto 80px auto;
+}
+
+.passionText, .passionPic {
+    flex : 1;
+    justify-content: center;
+    justify-items: center;
+    background-color: antiquewhite;
+    text-align: center;
+}
+
+.passionText p, .passionText h2 {
+    padding : 0 20px 0 20px;
+}
+
+.passionPic {
+    display: flex;
+    justify-content: center;
+    justify-items: center;
+    align-items: center;
+    align-content: center;
+}
+
+.passionText p {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+/* ------------------ contact.php ----------------------*/
+
+#contactPage {
+    background-image: url(images/digitV2.jpg);
+    background-size: cover;
+}
+
+.bannerContact {
+        min-height: 300px;
+        display : flex;
+        font-family :'Parisienne', 'Arial Narrow', Arial, sans-serif;
+}
+
+.bannerContact a {
+    color: #e07dc3;
+}
+
+.contactInfo {
+    color: #e07dc3;
+    margin : 0 100px 200px 40px; 
+    width : 20%;
+    font-weight: bold;
+    padding : 50px;
+    border : 3px solid #e07dc3;
+    border-radius: 50%;
+}
+
+#getInTouch {
+    margin-bottom : 50px;
+    text-align: center;
+}
+
+.logoContact {
+    display : flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
+.logoContact img {
+    max-width:  30px;
+    max-height: 30px;
+}
+
+.logoContact p {
+    margin : 0;
+    padding-left : 10px;
+    
 }

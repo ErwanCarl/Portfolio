@@ -4,10 +4,10 @@
         <div class="nav1">
             <nav>
                 <ul>
-                    <li><a href="homepage.php">Accueil</a></li>
-                    <li><a href="">Blog posts</a></li>
-                    <li><a href="passions.php">Passions</a></li>
-                    <li><a href="">Contact</a></li>
+                    <li><a href="index.php">Accueil</a></li>
+                    <li><a href="index.php?action=blogposts">Blog posts</a></li>
+                    <li><a href="index.php?action=passions">Passions</a></li>
+                    <li><a href="index.php?action=contact">Contact</a></li>
                 </ul>
             </nav>
         </div>
