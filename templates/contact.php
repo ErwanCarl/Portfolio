@@ -18,41 +18,41 @@
 
 	<body id = contactPage>
 
-    <div class="bannerContact">
-        <div class="nav1">
-            <nav>
-                <ul>
-                    <li><a href="index.php">Accueil</a></li>
-                    <li><a href="">Blog posts</a></li>
-                    <li><a href="index.php?action=passions">Passions</a></li>
-                    <li><a href="index.php?action=contact">Contact</a></li>
-                </ul>
-            </nav>
-        </div>
-
-        <div class="nav2">
-            <nav>
-                <ul>
-                    <li><a href="">Connexion</a></li>
-                </ul>
-            </nav>
-        </div>
-    </div>
-
-    <div class = "contactInfo">
-        <p id="getInTouch">Je suis disponible pour échanger à tout moment, n'hésitez pas à me contacter.</p>
-        <div class ="logoContact">
-            <div>
-                <img alt ="Logo Mail" src="images/maillogo.png"/>
+        <div class="bannerContact">
+            <div class="nav1">
+                <nav>
+                    <ul>
+                        <li><a href="index.php">Accueil</a></li>
+                        <li><a href="index.php?action=blogposts">Blog posts</a></li>
+                        <li><a href="index.php?action=passions">Passions</a></li>
+                        <li><a href="index.php?action=contact">Contact</a></li>
+                    </ul>
+                </nav>
             </div>
-            <div>
-                <p>erwan.carlini@gmail.com</p>
+
+            <div class="nav2">
+                <nav>
+                    <ul>
+                        <li><a href="">Connexion</a></li>
+                    </ul>
+                </nav>
             </div>
         </div>
 
-    </div>
+        <div class = "contactInfo">
+            <p id="getInTouch">Je suis disponible pour échanger à tout moment, n'hésitez pas à me contacter.</p>
+            <div class ="logoContact">
+                <div>
+                    <img alt ="Logo Mail" src="images/maillogo.png"/>
+                </div>
+                <div>
+                    <p>erwan.carlini@gmail.com</p>
+                </div>
+            </div>
 
-    <?php include('footer.php'); ?>
+        </div>
+
+        <?php include('footer.php'); ?>
 
     </body>
 </html>

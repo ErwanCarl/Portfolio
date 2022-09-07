@@ -139,7 +139,7 @@ h2 {
 	border: solid;
     height: 2px;
     color: #adacab;
-    margin: 100px auto;
+    margin: 30px auto 80px auto;
     width: 50%;
 }
 
@@ -149,6 +149,11 @@ h2 {
 
 .cv {
     text-align: center;
+    margin : 50px auto 0 auto;
+    border : double 6px #23096b;
+    border-radius: 30%;
+    width:15%;
+    padding : 10px;
 }
 
 .cv h4 {
@@ -162,6 +167,15 @@ h2 {
     max-height: 30px;
 }
 
+.work_creation {
+    width: 40%;
+}
+
+
+
+.global_work {
+    display: flex;
+}
 
 /* ------------- form ------------------ */
 
@@ -172,6 +186,7 @@ form {
     border-radius: 10%;
     font-size: 24px;
     font-family :'Parisienne', 'Arial Narrow', Arial, sans-serif;
+    width: 40%;
 }
 
 .form_contact h2 {
@@ -343,4 +358,18 @@ button {
     margin : 0;
     padding-left : 10px;
     
+}
+
+/* ------------ post template ------------------- */
+
+.return a {
+    color : blue;
+    text-align: right;
+    text-decoration: none;
+    border : solid 1px grey;
+    border-radius: 2px;
+}
+
+.comments {
+    width :80%;
 }

@@ -9,16 +9,37 @@
 		<meta name="keywords" content="">
 		<title>Erwan Carlini - Portfolio</title>
 		<link rel="icon" type="" href="">
-		<link rel="stylesheet" type="text/css" href="style.css">
-		<link rel="stylesheet" type="text/css" href="responsive.css">
 		<link rel="preconnect" href="https://fonts.googleapis.com">
 		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 		<link href="https://fonts.googleapis.com/css2?family=Parisienne&display=swap" rel="stylesheet">
+		<!-- Bootstrap -->
+		<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+		<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+		<script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+		<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+		<!-- Fin bootstrap -->
+		<link rel="stylesheet" type="text/css" href="style.css">
+		<link rel="stylesheet" type="text/css" href="responsive.css">
+		
 	</head>
 
 	<body>
 
-	<?php include('header.php'); ?>
+		<?php include('header.php'); ?>
+
+		<?php 
+			if(isset($_SESSION['FlashValidConnection'])) { 
+		?>
+				<div class="alert alert-success" role="alert">
+					<?php 
+						$message = $_SESSION['FlashValidConnection'];
+                        unset($_SESSION['FlashValidConnection']);
+                        echo $message;
+					?>
+				</div>
+		<?php 
+		} 
+		?>
 
 		<div class="mainpart">    			
 			<div class="logoname">
@@ -40,11 +61,20 @@
 			</div>			
 		</div>
 
+		<div class="cv">
+			<div>
+				<h4>Curriculum Vitae</h4>
+			</div>
+			<div>
+				<a href="images/CV%20-%20062022.pdf"><img src="images/download_logo.png" /></a>
+			</div>
+		</div>
+
 		<hr class="homeBar">
 
 		<div class="creation">
 			<h2>Créations</h2>
-			<div class="global_work"></div>
+			<div class="global_work">
 				<?php 
 					foreach ($posts as $post) {
 				?>
@@ -57,33 +87,20 @@
 						<?php echo htmlspecialchars($post['author']); ?>
 						- <?php echo htmlspecialchars($post['creation_date']); ?>
 					</h4>
-					<h4>
-						<?php echo htmlspecialchars($post['chapo']); ?>
-					</h4>
+
 					<a href="index.php?action=post&id=<?= urlencode($post['id']) ?>">Accéder au Blog Post</a>
 				</div>
 
 				<?php
 					}
 				?>		
-
-				<div class="cv">
-					<div>
-						<h4>Curriculum Vitae</h4>
-					<div>
-					<div>
-						<a href="images/CV%20-%20062022.pdf"><img src="images/download_logo.png" /></a>
-					</div>
-				</div>
-			</div>
-
+			</div>		
 		</div>
-
 
 		<hr class="homeBar">
 
 		<div class="form_contact">
-			<form action="index.php" method=post>
+			<form action="index.php" method="post">
 				<h2>Contact</h2>
 
 				<div class="form_case">

@@ -7,7 +7,7 @@
 		<meta name="description" content="">
 		<meta name="copyright" content="Erwan Carlini">
 		<meta name="keywords" content="">
-		<title>Erwan Carlini - Portfolio</title>
+		<title>Erwan Carlini - Portfolio</title> 
 		<link rel="icon" type="" href="">
 		<link rel="stylesheet" type="text/css" href="style.css">
 		<link rel="stylesheet" type="text/css" href="responsive.css">
@@ -29,13 +29,13 @@
         <div class="post">
             <div class="postTitle">
                 <h2>
-                    <?php echo htmlspecialchars($post['title']); ?>
+                    <?php echo htmlspecialchars($post->getTitle()); ?>
                 </h2>
             </div>
 
             <div class="postChapo">
                 <h3>
-                    <?php echo htmlspecialchars($post['chapo']); ?>
+                    <?php echo htmlspecialchars($post->getChapo()); ?>
                 </h3>
                 
             </div>
@@ -46,14 +46,14 @@
 
             <div class="postContent">
                 <h4>
-                    <?php echo htmlspecialchars($post['content']); ?>
+                    <?php echo htmlspecialchars($post->getContent()); ?>
                 </h4>
             </div>
 
             <div class="postAuthor">
                 <h4>
-                    <?php echo htmlspecialchars($post['author']); ?> - 
-                    <?php echo htmlspecialchars($post['creation_date']); ?>
+                    <?php echo htmlspecialchars($post->getAuthor()); ?> - 
+                    <?php echo htmlspecialchars($post->getCreationDate()); ?>
                 </h4>
             </div>
 
@@ -62,26 +62,6 @@
 <!---------------- comments part ------------------>
 
         <div class="comments">
-
-            <div class="addComment">
-                <form method=post action="index.php?action=addComment&id=<?= $post['id'] ?>">
-                    <h2>Ajoutez un commentaire</h2>
-
-                    <div class="form_case">
-                        <label for="author">Pseudo</label>
-                        <input required type="text" name="author" id="author">
-                    </div>
-
-                    <div class="form_case">
-                        <label for="content">Message</label>
-                        <textarea required name="content" id="content" rows="5" cols="50"></textarea>  
-                    </div>
-
-                    <div class="form_button">
-                        <button type="submit">Envoyer</button>
-                    </div>
-                </form>
-            </div>
 
             <div class="commentsList">
                 <?php
@@ -100,16 +80,37 @@
                     </h4>
                 </div>
 
-
                 <?php
                 }
                 ?>
             </div>
         </div>
 
+        <div class="addComment">
+                <form method=post action="index.php?action=addComment&id=<?= $post->getId() ?>">
+                    <h2>Ajoutez un commentaire</h2>
+
+                    <div class="form_case">
+                        <label for="author">Pseudo</label>
+                        <input required type="text" name="author" id="author">
+                    </div>
+
+                    <div class="form_case">
+                        <label for="content">Message</label>
+                        <textarea required name="content" id="content" rows="5" cols="50"></textarea>  
+                    </div>
+
+                    <div class="form_button">
+                        <button type="submit">Envoyer</button>
+                    </div>
+                </form>
+            </div>
+
         <div class="return">
             <a href="">Retour aux blog posts</a>
         </div>
+
+        <?php include('footer.php'); ?>
 
     </body>
 </html>

@@ -42,4 +42,5 @@
             Copyright 2022 - Site réalisé par <em>Erwan Carlini</em> - Développeur d'application PhP / Symfony<br>
         </p>
     </div>
+    
 </footer>

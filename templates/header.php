@@ -12,13 +12,29 @@
             </nav>
         </div>
 
-        <div class="nav2">
-            <nav>
-                <ul>
-                    <li><a href="">Connexion</a></li>
-                </ul>
-            </nav>
-        </div>
+        <?php 
+            if(!isset($_SESSION['Connection'])) {
+        ;?>
+            <div class="nav2">
+                <nav>
+                    <ul>
+                        <li><a href="index.php?action=accountcreation">Connexion</a></li>
+                    </ul>
+                </nav>
+            </div>
+        <?php 
+            } else {
+        ?>
+            <div class="nav2">
+                <nav>
+                    <ul>
+                        <li><a href="index.php?action=closesession">Déconnexion</a></li>
+                    </ul>
+                </nav>
+            </div>
+        <?php
+            }
+        ?>
     </div>
 
 </header>
