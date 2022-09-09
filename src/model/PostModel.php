@@ -21,7 +21,7 @@ class PostModel extends Model
 
 /* Get and reach the choosen post with the id */
 
-    public function getPost(string $id): Post 
+    public function getPost(int $id): Post 
     {
         $statement = $this->connection->prepare("SELECT `id`, `title`,`author`,`chapo`,`creation_date`, `content` FROM `post` WHERE `id` = ? ORDER BY `creation_date` DESC");
         

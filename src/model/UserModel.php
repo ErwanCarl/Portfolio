@@ -27,14 +27,16 @@ class UserModel extends Model {
 
     // Il faudra changer le type array par une entité User - modifier toutes les pages en lien avec l'array > user entity //
 
-    public function accountCheck(array $formInput) : ?array
+    public function getUserInformations(array $formInput) : ?User
     {
         $statement = $this->connection->prepare("SELECT * FROM `user` WHERE `mail` = :mail");
+        
         $statement->execute(
             [
                 'mail' => $formInput['mail'],
             ]);
-        $users = $statement->fetchAll();
+        $statement->setFetchMode(PDO::FETCH_CLASS | PDO::FETCH_PROPS_LATE, 'User');
+        $users = $statement->fetch();
 
         if(count($users) === 0) {
             return null;
@@ -42,7 +44,9 @@ class UserModel extends Model {
 
         foreach ($users as $user) {
             if(password_verify($formInput['password'], $user['password'])) {
-                return $user;
+                $user['id']=(int)$user['id'];
+                $userInformations = new User($user);
+                return $userInformations;
             }
         }
 
@@ -64,4 +68,12 @@ class UserModel extends Model {
         $countMail = $statement->rowCount();
         return $countMail;
     }
+
+    // public function getPendingAccounts() : User 
+    // {
+    //     $statement = $this->connection->prepare("SELECT * FROM user WHERE validate_account = 0");
+    //     // A compléter
+    //     $statement->fetchAll();
+    //     return 
+    // }
 }

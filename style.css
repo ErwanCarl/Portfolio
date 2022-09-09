@@ -116,6 +116,9 @@ h4 {
     text-align :center;
 }
 
+body > div.mainpart > div.catchingwords > div.socialmedia > h4 {
+    margin-top: auto;
+}
 h2 {
     font-family :'Parisienne', 'Arial Narrow', Arial, sans-serif;
     font-size: 36px;
@@ -211,10 +214,11 @@ form {
 	padding-top: 20px;
 }
 
-input {
+input, textarea {
     border: 1px solid #ced4da;
     border-radius: 0.25rem;
-    padding: 4px;
+    font-family: sans-serif, Arial, Helvetica;
+    font-size: 14px;
 }
 
 .form_case {
@@ -245,6 +249,9 @@ button {
     border-width: 0px;
 }
 
+body > div:nth-child(2) > form {
+    margin-top: 40px;
+}
 
 /* -------------------------------------- passion.php ---------------------------------------- */
 
@@ -368,6 +375,10 @@ button {
     text-decoration: none;
     border : solid 1px grey;
     border-radius: 2px;
+}
+
+body > div:nth-child(2) > a {
+    border: none;
 }
 
 .comments {

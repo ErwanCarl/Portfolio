@@ -10,6 +10,7 @@ require_once('src/controllers/AddCommentController.php');
 require_once('src/controllers/AccountCreationController.php');
 require_once('src/controllers/AccountSubmitController.php');
 require_once('src/controllers/ConnectionController.php');
+require_once('src/controllers/AdminController.php');
 
 if(isset($_GET['action']) && $_GET['action'] !== '') {
 
@@ -47,7 +48,12 @@ if(isset($_GET['action']) && $_GET['action'] !== '') {
         $id = $_GET['id'];
         $controller = new AddCommentController();
         $controller->addComment($id, $_POST);
-    } 
+
+    } elseif($_GET['action'] === 'admin') {
+        $controller = new AdminController();
+// à compléter + if $session-role = admin > Go sinon erreur redirection homepage ''vous n'avez pas les droits admin''
+        $controller->administration();
+    }
 
 } else {
     $controller = new HomepageController();

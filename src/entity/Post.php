@@ -3,8 +3,10 @@
 /* To have a strict use of variable types */
 declare(strict_types=1);
 
-class Post {
+require_once('src/entity/Entity.php');
 
+class Post extends Entity
+{
     private $id;
     private $title;
     private $author;
@@ -16,20 +18,9 @@ class Post {
 
     public function __construct($data = []) 
     {
-        $this->hydrate($data);
+        parent::__construct($data);
     }
 
-    public function hydrate(array $data) : void
-    {
-        foreach($data as $key => $value)
-        {
-            $method = 'set'.ucfirst($key);
-            if(method_exists($this, $method))
-            {
-                $this->$method($value);
-            }
-        }
-    }
 
 /* ---------------------------- Getters -----------------------------*/
 
@@ -111,7 +102,7 @@ class Post {
         $this->modificationDate = $modificationDate;
     }
 
-    public function setUserId($userId) : void
+    public function setUserId(int $userId) : void
     {
         $this->userId = $userId;
     }

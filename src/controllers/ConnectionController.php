@@ -11,15 +11,14 @@ class ConnectionController
     public function accountConnection($formInput) : void
     {
         $userModel = new UserModel();
-        /* changer nom methode */
-        $userExtract = $userModel->accountCheck($formInput);
+        $userExtract = $userModel->getUserInformations($formInput);
       
         if ($userExtract) {
-            $_SESSION['FlashValidConnection'] = "Vous êtes connecté. Bienvenue !";
+            $_SESSION['success'] = "Vous êtes connecté. Bienvenue !";
             $_SESSION['Connection'] = "Connected";
             header('Location: index.php');
         } else {
-            $_SESSION['FlashFailedConnection'] = "Vos identifiants sont incorrects, veuillez réessayer.";
+            $_SESSION['error'] = "Vos identifiants sont incorrects, veuillez réessayer.";
             header('Location: index.php?action=accountcreation');
         }
     }

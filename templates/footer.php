@@ -14,7 +14,7 @@
                 <img src="images/roue_crantee.png" />
             </div>
             <div>
-                <a href="">Administration</a>
+                <a href="index.php?action=admin">Administration</a>
             </div>
         </div>
 

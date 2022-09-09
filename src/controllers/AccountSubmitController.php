@@ -16,18 +16,20 @@ class AccountSubmitController
         $usert = $userModel->userPseudoCheck($user);
 
         if ($userModel->userPseudoCheck($user) > 0) {
-            $_SESSION['FlashExistingPseudo'] = "Ce pseudo est déjà utilisé, veuillez en choisir un autre.";
+            $_SESSION['error'] = "Ce pseudo est déjà utilisé, veuillez en choisir un autre.";
             header('Location: index.php?action=accountcreation');
         } elseif ($userModel->userMailCheck($user) > 0) {
-            $_SESSION['FlashExistingMail'] = "Cet email est déjà utilisé, veuillez en utiliser un autre.";
+            $_SESSION['error'] = "Cet email est déjà utilisé, veuillez en utiliser un autre.";
             header('Location: index.php?action=accountcreation');
         } else {
             $result = $userModel->userCreation($user);
 
             if($result) {
+                $_SESSION['success'] = "Votre compte a bien été crée, vous pouvez désormais vous connecter.";
                 header('Location: index.php');
             }else{
-                die("Impossible de créer le compte.");
+                $_SESSION['error'] = "Impossible de créer le compte, veuillez contacter l'administrateur";
+                header('Location: index.php?action=accountcreation');
             }
         }
 

@@ -13,7 +13,7 @@ class Comment {
     private $postId;
     private $userId;
 
-    public function __construct($data) 
+    public function __construct($data = []) 
     {
         $this->hydrate($data);
     }
@@ -86,17 +86,17 @@ class Comment {
         $this->creationDate = $creationDate;
     }
 
-    public function setValidateComment($validateComment) : void
+    public function setValidateComment(int $validateComment) : void
     {
         $this->validateComment = $validateComment;
     }
 
-    public function setPostId($postId) : void
+    public function setPostId(int $postId) : void
     {
         $this->postId = $postId;
     }
 
-    public function setUserId($userId) : void
+    public function setUserId(int $userId) : void
     {
         $this->userId = $userId;
     }

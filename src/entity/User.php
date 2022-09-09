@@ -15,7 +15,7 @@ class User {
     private $phoneNumber;
     private $validateAccount;
 
-    public function __construct($data) 
+    public function __construct($data = []) 
     {
         $this->hydrate($data);
     }
@@ -82,6 +82,8 @@ class User {
 
 /* ---------------------------- Setters -----------------------------*/
 
+
+
     public function setName(string $name) : void
     {
         if (strlen($name) < 50) {
@@ -91,55 +93,49 @@ class User {
 
     public function setNickname(string $nickname) : void
     {
-        if(strlen($nickname) < 50){
+        if(strlen($nickname) < 50) {
             $this->nickname = $nickname;
         }
     }
 
-    public function setUsername($username) : void
+    public function setUsername(string $username) : void
     {
-        if(is_string($username) && strlen($username) < 100)
-        {
+        if(strlen($username) < 100) {
             $this->username = $username;
         }
     }
 
-    public function setLogo($logo) : void
+    public function setLogo(string $logo) : void
     {
-        if(is_string($logo) && strlen($logo) < 255)
-        {
+        if(strlen($logo) < 255) {
             $this->logo = $logo;
         }
     }
 
-    public function setPassword($password) : void
+    public function setPassword(string $password) : void
     {
-        if(is_string($password) && strlen($password) < 255)
-        {
+        if(strlen($password) < 255) {
             $this->password = $password;
         }
     }
 
-    public function setMail($mail) : void
+    public function setMail(string $mail) : void
     {
-        if(is_string($mail) && strlen($mail) < 255)
-        {
+        if (strlen($mail) < 255) {
             $this->mail = $mail;
         }
     }
 
-    public function setPhoneNumber($phoneNumber) : void
+    public function setPhoneNumber(string $phoneNumber) : void
     {
-        if(is_string($phoneNumber) && strlen($phoneNumber) < 20)
-        {
+        if (strlen($phoneNumber) < 20) {
             $this->phoneNumber = $phoneNumber;
         }
     }
 
-    public function setValidateAccount($validateAccount) : void
+    public function setValidateAccount(int $validateAccount) : void
     {
-        if(is_int($validateAccount) && strlen($validateAccount) <= 1)
-        {
+        if (strlen($validateAccount) <= 1) {
             $this->validateAccount = $validateAccount;
         }
     }

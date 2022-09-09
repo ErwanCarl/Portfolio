@@ -28,17 +28,27 @@
 		<?php include('header.php'); ?>
 
 		<?php 
-			if(isset($_SESSION['FlashValidConnection'])) { 
+			if(isset($_SESSION['success'])) { 
 		?>
 				<div class="alert alert-success" role="alert">
 					<?php 
-						$message = $_SESSION['FlashValidConnection'];
-                        unset($_SESSION['FlashValidConnection']);
+						$message = $_SESSION['success'];
+                        unset($_SESSION['success']);
                         echo $message;
 					?>
 				</div>
 		<?php 
-		} 
+			}elseif(isset($_SESSION['error'])){
+		?>
+				<div class="alert alert-danger" role="alert">
+					<?php
+						$message = $_SESSION['error'];
+						unset($_SESSION['error']);
+						echo $message;
+					?>
+				</div>
+		<?php
+		}
 		?>
 
 		<div class="mainpart">    			
