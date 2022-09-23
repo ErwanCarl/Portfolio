@@ -9,35 +9,19 @@
 		<meta name="keywords" content="">
 		<title>Erwan Carlini - Portfolio</title>
 		<link rel="icon" type="" href="">
-		<link rel="stylesheet" type="text/css" href="style.css">
-		<link rel="stylesheet" type="text/css" href="responsive.css">
 		<link rel="preconnect" href="https://fonts.googleapis.com">
 		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 		<link href="https://fonts.googleapis.com/css2?family=Parisienne&display=swap" rel="stylesheet">
+		<link rel="stylesheet" type="text/css" href="style.css">
+		<link rel="stylesheet" type="text/css" href="responsive.css">
+		
 	</head>
 
 	<body id = contactPage>
 
-        <div class="bannerContact">
-            <div class="nav1">
-                <nav>
-                    <ul>
-                        <li><a href="index.php">Accueil</a></li>
-                        <li><a href="index.php?action=blogposts">Blog posts</a></li>
-                        <li><a href="index.php?action=passions">Passions</a></li>
-                        <li><a href="index.php?action=contact">Contact</a></li>
-                    </ul>
-                </nav>
-            </div>
+    <?php include('header.php'); ?>
 
-            <div class="nav2">
-                <nav>
-                    <ul>
-                        <li><a href="">Connexion</a></li>
-                    </ul>
-                </nav>
-            </div>
-        </div>
+<!-- css position fixed top 0 sur section qui englobe + margin contactinfo  -->
 
         <div class = "contactInfo">
             <p id="getInTouch">Je suis disponible pour échanger à tout moment, n'hésitez pas à me contacter.</p>
@@ -49,7 +33,6 @@
                     <p>erwan.carlini@gmail.com</p>
                 </div>
             </div>
-
         </div>
 
         <?php include('footer.php'); ?>

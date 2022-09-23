@@ -9,7 +9,7 @@ require_once('src/entity/Comment.php');
 
 class AddCommentController 
 {  
-    public function addComment(string $id, array $formInput): void 
+    public function addComment(int $id, array $formInput): void 
     {
         $author = null;
         $content = null;
@@ -18,7 +18,8 @@ class AddCommentController
             $author = $formInput['author'];
             $content = $formInput['content'];
         } else {
-            die('Les données du formulaire sont invalides.');
+            $_SESSION['error'] = 'Les données du formulaire sont invalides, veuillez contacter l\'administrateur.';
+            header('Location: index.php?action=post&id='.$id);
         }
     
         $addComment = new CommentModel();
@@ -26,9 +27,11 @@ class AddCommentController
         $addCommentSuccessfull = $addComment->createComment($id, $comment);
 
         if($addCommentSuccessfull) {
+            $_SESSION['success'] = 'Votre commentaire a bien été ajouté et est en cours de modération.';
             header('Location: index.php?action=post&id='.$id);
         }else{
-            die("Impossible d'ajouter le commentaire.");
+            $_SESSION['error'] = 'Impossible d\'ajouter le commentaire.';
+            header('Location: index.php?action=post&id='.$id);
         }
     }
 }

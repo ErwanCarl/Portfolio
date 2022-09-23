@@ -1,13 +1,31 @@
 <footer>
     <div class="footer">
-        <div class="sub_footer">
-            <div>
-                <img src="images/logo_connexion.png" />
-            </div>
-            <div>
-                <a href="">Se connecter</a>
-            </div>
-        </div>
+
+        <?php 
+            if(!isset($_SESSION['Connection'])) {
+        ;?>
+                <div class="sub_footer">
+                    <div>
+                        <img src="images/logo_connexion.png" />
+                    </div>
+                    <div>
+                        <a href="index.php?action=accountcreation">Se connecter</a>
+                    </div>
+                </div>
+        <?php 
+            } else {
+        ?>
+                <div class="sub_footer">
+                    <div>
+                        <img src="images/logo_connexion.png" />
+                    </div>
+                    <div>
+                        <a href="index.php?action=closesession">Se déconnecter</a>
+                    </div>
+                </div>
+        <?php
+            }
+        ?>
 
         <div class="sub_footer">
             <div>   

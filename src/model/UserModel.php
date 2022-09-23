@@ -25,18 +25,14 @@ class UserModel extends Model {
         return ($line);
     } 
 
-    // Il faudra changer le type array par une entité User - modifier toutes les pages en lien avec l'array > user entity //
-
     public function getUserInformations(array $formInput) : ?User
     {
         $statement = $this->connection->prepare("SELECT * FROM `user` WHERE `mail` = :mail");
-        
         $statement->execute(
             [
                 'mail' => $formInput['mail'],
             ]);
-        $statement->setFetchMode(PDO::FETCH_CLASS | PDO::FETCH_PROPS_LATE, 'User');
-        $users = $statement->fetch();
+        $users = $statement->fetchAll();
 
         if(count($users) === 0) {
             return null;
@@ -49,7 +45,6 @@ class UserModel extends Model {
                 return $userInformations;
             }
         }
-
         return null;
     }
 
@@ -69,9 +64,10 @@ class UserModel extends Model {
         return $countMail;
     }
 
-    // public function getPendingAccounts() : User 
+    // cherche en admin le user pour changer le role
+    // public function getUserSearched() : User 
     // {
-    //     $statement = $this->connection->prepare("SELECT * FROM user WHERE validate_account = 0");
+    //     $statement = $this->connection->prepare("SELECT * FROM user WHERE username = ?");
     //     // A compléter
     //     $statement->fetchAll();
     //     return 

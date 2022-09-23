@@ -8,14 +8,25 @@ require_once('src/entity/User.php');
 
 class ConnectionController 
 {
-    public function accountConnection($formInput) : void
+    public function accountConnection(array $formInput) : void
     {
         $userModel = new UserModel();
         $userExtract = $userModel->getUserInformations($formInput);
       
-        if ($userExtract) {
+        if ($userExtract != null) {
             $_SESSION['success'] = "Vous êtes connecté. Bienvenue !";
             $_SESSION['Connection'] = "Connected";
+            $_SESSION['userInformations'] = [
+                'id'=>$userExtract->getId(),
+                'username'=>$userExtract->getUsername(),
+                'nickname'=>$userExtract->getNickname(),
+                'name'=>$userExtract->getName(),
+                'phonenumber'=>$userExtract->getPhonenumber(),
+                'mail'=>$userExtract->getMail(),
+                'logo'=>$userExtract->getLogo(),
+                'validateAccount'=>$userExtract->getValidateAccount(),
+                'role'=>$userExtract->getRole()
+            ];
             header('Location: index.php');
         } else {
             $_SESSION['error'] = "Vos identifiants sont incorrects, veuillez réessayer.";

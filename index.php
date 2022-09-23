@@ -36,6 +36,8 @@ if(isset($_GET['action']) && $_GET['action'] !== '') {
 
     } elseif($_GET['action'] === 'closesession') {
         unset($_SESSION['Connection']);
+        unset($_SESSION['userInformations']);
+        $_SESSION['success'] = 'Vous vous êtes bien déconnecté.';
         $controller = new AccountCreationController();
         $controller->accountCreation();
 
@@ -44,6 +46,10 @@ if(isset($_GET['action']) && $_GET['action'] !== '') {
         $postController = new PostController($id);
         $postController->post($id);
 
+    } elseif($_GET['action'] === 'blogposts') {
+        $postController = new PostController();
+        $postController->posts();
+
     } elseif($_GET['action'] === 'addComment' && isset($_GET['id']) && $_GET['id'] > 0) {
         $id = $_GET['id'];
         $controller = new AddCommentController();
@@ -51,8 +57,49 @@ if(isset($_GET['action']) && $_GET['action'] !== '') {
 
     } elseif($_GET['action'] === 'admin') {
         $controller = new AdminController();
-// à compléter + if $session-role = admin > Go sinon erreur redirection homepage ''vous n'avez pas les droits admin''
         $controller->administration();
+
+    } elseif($_GET['action'] === 'postdelete' && isset($_GET['id']) && $_GET['id'] > 0) {
+        $id = $_GET['id'];
+        $controller = new PostController();
+        $controller->postDelete($id);
+
+    } elseif($_GET['action'] === 'postmodify' && isset($_GET['id']) && $_GET['id'] > 0) {
+        $id = $_GET['id'];
+        $controller = new PostController();
+        $controller->postEdition($id);
+
+    } elseif($_GET['action'] === 'modifysubmit' && isset($_GET['id']) && $_GET['id'] > 0) {
+        $id = $_GET['id'];
+        $controller = new PostController();
+        $controller->modifySubmit($id, $_POST);
+
+    } elseif($_GET['action'] === 'postcreation') {
+        $controller = new PostController();
+        $controller->postCreation();
+
+    } elseif($_GET['action'] === 'newpostsubmit') {
+        $controller = new PostController();
+        $controller->newPostSubmit($_POST);
+
+    } elseif($_GET['action'] === 'validatecomment' && isset($_GET['id']) && $_GET['id'] > 0) {
+        $id = (int) $_GET['id'];
+        $controller = new AdminController();
+        $controller->commentValidate($id);
+    
+    } elseif($_GET['action'] === 'restauredcomment' && isset($_GET['id']) && $_GET['id'] > 0) {
+        $id = (int) $_GET['id'];
+        $controller = new AdminController();
+        $controller->commentRestaurate($id);
+
+    } elseif($_GET['action'] === 'refusedcomment' && isset($_GET['id']) && $_GET['id'] > 0) {
+        $id = (int) $_GET['id'];
+        $controller = new AdminController();
+        $controller->commentDelete($id);
+
+    } elseif($_GET['action'] === 'moderatedcomment') {
+        $controller = new AdminController();
+        $controller->moderatedComment();
     }
 
 } else {
