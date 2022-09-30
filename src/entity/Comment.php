@@ -3,38 +3,29 @@
 /* To have a strict use of variable types */
 declare(strict_types=1);
 
-class Comment {
+require_once('src/entity/Entity.php');
 
-    private $id;
-    private $author;
-    private $content;
+class Comment extends Entity {
+
+    private ?int $id;
+    private string $author;
+    private string $content;
     private $creationDate;
-    private $validateComment;
-    private $postId;
-    private $userId;
+    private int $validateComment;
+    private int $postId;
+    private int $userId;
 
     public function __construct($data = []) 
     {
-        $this->hydrate($data);
-    }
-
-    public function hydrate(array $data) : void
-    {
-        foreach($data as $key => $value)
-        {
-            $method = 'set'.ucfirst($key);
-            if(method_exists($this, $method))
-            {
-                $this->$method($value);
-            }
-        }
+        parent::__construct($data);
+        $this->creationDate = new \DateTimeImmutable('now');
     }
 
 /* ---------------------------- Getters -----------------------------*/
 
-    public function getId() : int
+    public function getId() : ?int
     { 
-        return $this->id; 
+        return (int) $this->id; 
     }
 
     public function getAuthor() : string
@@ -59,15 +50,20 @@ class Comment {
 
     public function getPostId() : int
     { 
-        return $this->postId; 
+        return (int) $this->postId; 
     }
 
     public function getUserId() : int
     { 
-        return $this->userId; 
+        return (int) $this->userId; 
     }
     
 /* ---------------------------- Setters -----------------------------*/
+
+    public function setId(int $id) : void
+    {
+            $this->id = $id;
+    }
 
     public function setAuthor(string $author) : void
     {
@@ -88,17 +84,17 @@ class Comment {
 
     public function setValidateComment(int $validateComment) : void
     {
-        $this->validateComment = $validateComment;
+        $this->validateComment = (int) $validateComment;
     }
 
     public function setPostId(int $postId) : void
     {
-        $this->postId = $postId;
+        $this->postId = (int) $postId;
     }
 
     public function setUserId(int $userId) : void
     {
-        $this->userId = $userId;
+        $this->userId = (int) $userId;
     }
 
 }

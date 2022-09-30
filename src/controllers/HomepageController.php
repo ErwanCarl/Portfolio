@@ -10,7 +10,7 @@ class HomepageController
     public function homepage() : void 
     {
         $postModel = new PostModel();
-        $posts = $postModel -> getPosts();
+        $posts = $postModel -> getPostsHomepage();
         require('templates/homepage.php');
     }
 }

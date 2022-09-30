@@ -25,31 +25,26 @@ class UserModel extends Model {
         return ($line);
     } 
 
-    // Il faudra changer le type array par une entité User - modifier toutes les pages en lien avec l'array > user entity //
-
     public function getUserInformations(array $formInput) : ?User
     {
         $statement = $this->connection->prepare("SELECT * FROM `user` WHERE `mail` = :mail");
-        
         $statement->execute(
             [
                 'mail' => $formInput['mail'],
             ]);
-        $statement->setFetchMode(PDO::FETCH_CLASS | PDO::FETCH_PROPS_LATE, 'User');
-        $users = $statement->fetch();
+        $users = $statement->fetchAll();
 
         if(count($users) === 0) {
             return null;
         } 
 
         foreach ($users as $user) {
-            if(password_verify($formInput['password'], $user['password'])) {
+            if(password_verify($formInput['password'], $user['password']) && $user['validateAccount'] === 1) {
                 $user['id']=(int)$user['id'];
                 $userInformations = new User($user);
                 return $userInformations;
             }
         }
-
         return null;
     }
 
@@ -69,11 +64,31 @@ class UserModel extends Model {
         return $countMail;
     }
 
-    // public function getPendingAccounts() : User 
-    // {
-    //     $statement = $this->connection->prepare("SELECT * FROM user WHERE validate_account = 0");
-    //     // A compléter
-    //     $statement->fetchAll();
-    //     return 
-    // }
+    // get user informations by username search
+
+    public function getUserSearched(array $username) : ?User 
+    {
+        $statement = $this->connection->prepare("SELECT * FROM user WHERE username = ?");
+        $statement->execute([$username['pseudo']]);
+        $statement->setFetchMode(PDO::FETCH_CLASS | PDO::FETCH_PROPS_LATE, 'User');
+        $userFound = $statement->fetch();
+        if($userFound === false) {
+            return null;
+        }else{
+            return $userFound;
+        }
+
+        
+    }
+
+    public function modifyUserRole(array $newRole) : bool
+    {
+        $statement = $this->connection->prepare("UPDATE user SET `role` = :role WHERE `username` = :username");
+        $line = $statement->execute([
+            'role' => $newRole['role'],
+            'username' => $newRole['username']
+        ]);
+        return $line;
+    }
+
 }

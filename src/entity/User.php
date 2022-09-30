@@ -3,41 +3,32 @@
 /* To have a strict use of variable types */
 declare(strict_types=1);
 
-class User {
+require_once('src/entity/Entity.php');
 
-    private $id;
-    private $name;
-    private $nickname;
-    private $username;
-    private $logo;
-    private $password;
-    private $mail;
-    private $phoneNumber;
-    private $validateAccount;
+class User extends Entity {
 
-    public function __construct($data = []) 
+    private ?int $id;
+    private string $name;
+    private string $nickname;
+    private string $username;
+    private ?string $logo;
+    private string $password;
+    private string $mail;
+    private ?string $phoneNumber;
+    private int $validateAccount;
+    private string $role;
+
+    public function __construct(array $data = []) 
     {
-        $this->hydrate($data);
-    }
-
-    public function hydrate(array $data) : void
-    {
-        foreach($data as $key => $value)
-        {
-            $method = 'set'.ucfirst($key);
-            if(method_exists($this, $method))
-            {
-                $this->$method($value);
-            }
-        }
+        parent::__construct($data);
     }
 
 
 /* ---------------------------- Getters -----------------------------*/
 
-    public function getId() : int
+    public function getId() : ?int
     { 
-        return $this->id; 
+        return (int) $this->id; 
     }
 
     public function getName() : string
@@ -55,7 +46,7 @@ class User {
         return $this->username; 
     }
 
-    public function getLogo() : string
+    public function getLogo() : ?string
     { 
         return $this->logo; 
     }
@@ -77,12 +68,20 @@ class User {
 
     public function getValidateAccount() : int
     { 
-        return $this->validateAccount; 
+        return (int) $this->validateAccount; 
+    }
+
+    public function getRole() : string
+    { 
+        return $this->role; 
     }
 
 /* ---------------------------- Setters -----------------------------*/
 
-
+    public function setId(int $id) : void
+    {
+            $this->id = $id;
+    }
 
     public function setName(string $name) : void
     {
@@ -105,10 +104,14 @@ class User {
         }
     }
 
-    public function setLogo(string $logo) : void
+    public function setLogo(?string $logo) : void
     {
-        if(strlen($logo) < 255) {
-            $this->logo = $logo;
+        if($logo != null) {
+            if (strlen($logo) < 255) {
+                $this->logo = $logo;
+            }
+        }else{
+            $this->logo = null;
         }
     }
 
@@ -133,11 +136,15 @@ class User {
         }
     }
 
-    public function setValidateAccount(int $validateAccount) : void
+    public function setValidateAccount($validateAccount) : void
     {
-        if (strlen($validateAccount) <= 1) {
-            $this->validateAccount = $validateAccount;
-        }
+        $this->validateAccount = (int) $validateAccount;
     }
+
+    public function setRole(string $role) : void
+    {
+            $this->role = $role;
+    }
+    
 
 }

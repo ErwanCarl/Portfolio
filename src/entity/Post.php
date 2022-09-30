@@ -7,24 +7,26 @@ require_once('src/entity/Entity.php');
 
 class Post extends Entity
 {
-    private $id;
-    private $title;
-    private $author;
-    private $content;
-    private $chapo;
+    private ?int $id;
+    private string $title;
+    private string $author;
+    private string $content;
+    private string $chapo;
     private $creationDate;
     private $modificationDate;
-    private $userId;
+    private ?string $picture;
+    private int $userId;
 
     public function __construct($data = []) 
     {
         parent::__construct($data);
+        $this->creationDate = new \DateTimeImmutable('now');
     }
 
 
 /* ---------------------------- Getters -----------------------------*/
 
-    public function getId() : int
+    public function getId() : ?int
     { 
         return (int) $this->id; 
     }
@@ -59,12 +61,22 @@ class Post extends Entity
         return $this->modificationDate; 
     }
 
+    public function getPicture() : string
+    { 
+        return $this->picture; 
+    }
+
     public function getUserId() : int
     { 
-        return $this->userId; 
+        return (int) $this->userId; 
     }
     
 /* ---------------------------- Setters -----------------------------*/
+
+    public function setId(int $id) : void
+    {
+            $this->id = $id;
+    }
 
     public function setTitle(string $title) : void
     {
@@ -102,9 +114,14 @@ class Post extends Entity
         $this->modificationDate = $modificationDate;
     }
 
+    public function setPicture(string $picture) : void
+    {
+        $this->picture =  $picture;
+    }
+
     public function setUserId(int $userId) : void
     {
-        $this->userId = $userId;
+        $this->userId = (int) $userId;
     }
 
 }

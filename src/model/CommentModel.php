@@ -10,39 +10,66 @@ class CommentModel extends Model
 {
 
 /* get all comments from a post thanks to its id */
-// Ajouter where validate_account = 1 quand page admin ready 
-    public function getComments (int $id) : Comment
+
+    public function getComments (int $id) : array
     {
-        $statement = $this->connection->prepare("SELECT `author`,`content`,`creation_date` FROM `comment` WHERE `post_id` = ? ORDER BY `creation_date` DESC");
-        $statement->setFetchMode(PDO::FETCH_CLASS | PDO::FETCH_PROPS_LATE, 'src/entity/Comment');
-        var_dump($statement);
-        die;
+        $statement = $this->connection->prepare("SELECT `author`,`content`,`creation_date` FROM `comment` WHERE (`post_id` = ? AND validateComment = 1) ORDER BY `creation_date` DESC");
         $statement->execute([$id]);
         return $statement->fetchAll();
     }
+
 
 
 /* register a new comment in db */
 
     public function createComment(int $postId, Comment $comment) : bool 
     {
-        $statement = $this->connection->prepare("INSERT INTO comment(post_id, author, content, user_id) VALUES(:post_id, :author, :content, 1)");
+        $statement = $this->connection->prepare("INSERT INTO comment(post_id, author, content, userId) VALUES(:post_id, :author, :content, :userId)");
 
-/* pas oublier de remplacer le 1 dans la requête par la variable du id user après avoir créer les comptes user + $_SESSION */
         $line = $statement->execute([
             'post_id' => $postId,
             'author'=> $comment->getAuthor(),
-            'content' => $comment->getContent()
+            'content' => $comment->getContent(),
+            'userId'=>$_SESSION['userInformations']['id']
         ]);
 
         return ($line);
     } 
 
-//     public function getPendingComments() : Comment
-//     {
-//         $statement = $this->connection->prepare("SELECT * FROM comment WHERE validate_comment = 0");
-//         // A compléter
-//         $statement->fetchAll();
-//         return 
-//     }
+    public function getPendingComments() : array
+    {
+        $statement = $this->connection->query("
+            SELECT * 
+            FROM post 
+            JOIN comment on comment.post_id = post.id
+            WHERE validateComment = 0
+            ORDER BY comment.creation_date"
+        );
+        
+        return $statement->fetchAll();
+    }
+
+    public function commentValidation(int $id) : bool 
+    {
+        $statement = $this->connection->prepare("UPDATE comment SET `validateComment` = 1 WHERE id = ?");
+        return $statement->execute([$id]);
+    }
+
+    public function commentModeration(int $id) : bool 
+    {
+        $statement = $this->connection->prepare("UPDATE comment SET `validateComment` = 2 WHERE id = ?");
+        return $statement->execute([$id]);
+    }
+
+    public function moderatedListing() : array 
+    {
+        $statement = $this->connection->query("
+            SELECT * 
+            FROM post 
+            JOIN comment on comment.post_id = post.id
+            WHERE validateComment = 2
+            ORDER BY comment.creation_date DESC"
+        );
+        return $statement->fetchAll();
+    }
 } 

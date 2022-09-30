@@ -13,6 +13,12 @@
     padding : 40px;
 }
 
+a:hover {
+    text-decoration:none; 
+    color: #301f61;
+}
+
+
 .nav1 ul {
     list-style-type: none;
     display : flex;
@@ -109,11 +115,13 @@ h1 {
     text-align: center;
     margin-bottom : 50px;
     font-family :'Parisienne', 'Arial Narrow', Arial, sans-serif;
+    color:#e07dc3;
+    font-weight: bold;
 }
 
 h4 {
     font-size: 18px;
-    text-align :center;
+    text-align: center;
 }
 
 body > div.mainpart > div.catchingwords > div.socialmedia > h4 {
@@ -122,6 +130,21 @@ body > div.mainpart > div.catchingwords > div.socialmedia > h4 {
 h2 {
     font-family :'Parisienne', 'Arial Narrow', Arial, sans-serif;
     font-size: 36px;
+    color: #e07dc3;
+    font-weight: bold;
+}
+
+#catchBar {
+    width: 30%;
+    background-color: #e07dc3 ;
+    border: solid;
+    height: 0.2px;
+    color: #e07dc3;
+    margin: 20px auto 40px auto;
+}
+
+.catchingwords h1 {
+    margin-bottom : 10px;
 }
 
 .socialmedia {
@@ -146,8 +169,62 @@ h2 {
     width: 50%;
 }
 
-.creation h2 {
+.creation h4 {
     text-align: center;
+    padding: 10px;
+    max-width: 190px;
+}
+
+.creation_title h2 {
+    text-align: center;
+    padding: 10px;
+}
+
+
+.creation img {
+    height: 190px;
+    width: 190px;
+}
+
+
+.posts_picture img:last-child, .posts_picture:hover img:first-child {
+    display:none;
+}
+
+.posts_picture:hover img:last-child {
+    display:block;
+    opacity: 0.7;
+}
+
+.posts_link {
+    max-height: 200px;
+}
+
+.posts_title {
+    display: flex;
+    height: 100%;
+    justify-content: center;
+    
+}
+
+.posts_title h4 {
+    margin-bottom : 0;
+    line-height: 100%;
+}
+
+.creation {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    max-width: 200px;
+    border: 1px solid #ced4da;
+    border-radius: 3px;
+}
+
+.global_creation {
+    display: flex;
+    justify-content: space-around;
+    margin-bottom : 100px;
 }
 
 .cv {
@@ -168,16 +245,6 @@ h2 {
 .cv img {
     max-width: 30px;
     max-height: 30px;
-}
-
-.work_creation {
-    width: 40%;
-}
-
-
-
-.global_work {
-    display: flex;
 }
 
 /* ------------- form ------------------ */
@@ -276,6 +343,7 @@ body > div:nth-child(2) > form {
 
 .passionTitle h1 {
     font-size : 46px;
+    margin-top: 70px;
 }
 
 .passionPic img {
@@ -285,7 +353,7 @@ body > div:nth-child(2) > form {
     
 }
 
-#passionBar{
+.passionBar{
     width: 15%;
     background-color: #e07dc3 ;
     border: solid;
@@ -306,6 +374,10 @@ body > div:nth-child(2) > form {
     padding : 0 20px 0 20px;
 }
 
+.passionText h2 {
+    margin-top: 20px;
+}
+
 .passionPic {
     display: flex;
     justify-content: center;
@@ -316,6 +388,7 @@ body > div:nth-child(2) > form {
 
 .passionText p {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-size: 16px;
 }
 
 /* ------------------ contact.php ----------------------*/
@@ -325,14 +398,8 @@ body > div:nth-child(2) > form {
     background-size: cover;
 }
 
-.bannerContact {
-        min-height: 300px;
-        display : flex;
-        font-family :'Parisienne', 'Arial Narrow', Arial, sans-serif;
-}
-
-.bannerContact a {
-    color: #e07dc3;
+#contactPage div.banner {
+    background-image: none;
 }
 
 .contactInfo {
@@ -369,6 +436,77 @@ body > div:nth-child(2) > form {
 
 /* ------------ post template ------------------- */
 
+.post {
+    border: 1px solid #ced4da;
+    border-radius: 3px;
+    margin: 0 auto 100px auto;
+    width: 70%;
+}
+
+.return_button {
+    display: flex;
+    margin: auto auto 30px auto;
+    justify-content: center;
+    width :30%;
+}
+
+.return_button button {
+    font-size: 20px;
+}
+
+#exampleModal > div > div > div.modal-footer > button.btn.btn-danger, #exampleModal > div > div > div.modal-footer > button.btn.btn-secondary {
+    margin: 0 10px 10px 10px;
+}
+
+.modal-dialog button { 
+    border-radius: 4px;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    color: white;
+    text-align: center;
+    font-size: 16px;
+    padding: 5px;
+    width: 50%;
+}
+
+.modal-footer {
+    width: 60%;
+    margin: auto;
+}
+
+body > div.post > div.post_author > h4:nth-child(2) {
+    font-style: italic;
+    font-size: 14px;
+}
+
+.post_author {
+    padding-top: 20px;
+}
+
+.post_title h1 {
+    margin: 80px auto 0 auto;
+    font-size: 46px;
+}
+
+body > div.post > div.post_chapo > h4, .post_content h4 {
+    text-align: left;
+    padding: 0 20px 0 20px;
+}
+
+.post_content h4 {
+    margin-top: 40px;
+}
+
+.bloc_post_pic {
+    display: flex;
+    justify-content: center;
+    margin: 60px auto 60px auto;
+}
+
+#post_pic {
+    max-height: 500px;
+    max-width: 500px; 
+}
+
 .return a {
     color : blue;
     text-align: right;
@@ -381,6 +519,357 @@ body > div:nth-child(2) > a {
     border: none;
 }
 
-.comments {
-    width :80%;
+.comment_bloc {
+    width: 70%;
+    border : solid 1px #ced4da;
+    border-radius: 2px;
+    margin: auto;
+    border-bottom: none;
 }
+
+.comments_author h4, .comments_content h4 {
+    font-size: 16px;
+}
+
+.comments_author h4{
+    font-weight: lighter;
+}
+
+.comment_head {
+    display: flex;
+    background-color: #e3e9f0;
+    border-bottom : solid 1px #ced4da;
+    border-radius: 2px;
+    margin-bottom: 20px;
+}
+
+.comment_head h4 {
+    padding: 10px 0 5px 20px;
+}
+
+.comment_bar {
+    margin: 20px auto 20px 0;
+}
+
+
+
+.comments_list h4 {
+    text-align: left;
+    padding-left: 50px;
+    padding-right: 50px;
+}
+
+#comment_connect {
+    margin: 100px auto 50px auto;
+}
+
+.post_admin {
+    display: flex;
+    flex-direction: row;
+    margin: 20px auto 30px auto;
+}
+
+.post_admin button {
+    width: 60%;
+} 
+
+#no_comment {
+    border-bottom : solid 1px #ced4da;
+    border-radius: 2px;
+}
+
+#no_comment p {
+    padding-left: 20px;
+    font-style: italic;
+}
+
+.user_administration {
+    display: flex;
+    flex-direction: column;
+}
+
+.search_bloc {
+    display: flex;
+}
+
+.user_administration input {
+    min-width: 300px;
+    padding-left: 10px;
+}
+
+.user_search_form {
+ border: none;
+ border-left: solid 3px #ced4da;
+ border-radius: 0%;
+ margin: auto 0 100px 100px;
+}  
+
+#search_button {
+    max-width: 40px;
+    max-height: 40px;
+    padding : 10px 5px 5px 5px;
+    margin: 0 0 0 10px;
+}
+
+
+
+
+/* ------ Account informations header --------- */
+
+.user_info{
+    background-color: #301f61;
+    height: 60px;
+    display: flex;
+    justify-content: center;
+}
+
+.username {
+    font-size: 30px;
+    font-family: 'Parisienne';
+    color:#e07dc3;
+    margin: auto;
+}
+
+.logo {
+    max-width : 20px;
+    max-height: 20px;
+}
+
+/* ------ Blogposts --------- */
+
+.work_creation {
+    border: 1px solid #ced4da;
+    border-radius: 3px;
+    width: 70%;
+    margin: auto auto 120px auto;
+
+}
+
+.title_bloc {
+    min-height: 70px;
+    border-bottom: 1px solid #ced4da;
+    display: flex;
+    justify-content: left;
+}
+
+.title_bloc h2 {
+    color: #e07dc3;
+    font-weight: bold;
+    padding: 10px 0 0 20px;
+}
+
+.author_bloc {
+    display: flex;
+}
+
+.author_bloc h4 {
+    font-style: italic;
+    padding: 20px 0 0 20px;
+    font-size: 14px;
+}
+
+.chapo_bloc h4 {
+    text-align: left;
+    padding: 0 20px 0 20px;
+
+}
+
+.work_creation hr {
+    color: #ced4da;
+    width: 80%;
+}
+
+.pic_bloc img {
+    height: 200px;
+    width: 200px;
+}
+
+
+.posts_picture img:last-child, .posts_picture:hover img:first-child {
+    display:none;
+}
+
+.posts_picture:hover img:last-child {
+    display:block;
+    opacity: 0.7;
+}
+
+.post_bloc {
+    display: flex;
+}
+
+.blogposts_title h1 {
+    margin: 70px auto auto auto;
+    font-size: 46px;
+}
+
+/* ------ Admin --------- */
+
+span {
+    font-weight: bold;
+}
+
+select {
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    font-size: 16px;
+    font-weight: 100;
+    padding: 5px 20px;
+    text-align: left;
+    margin-left: 10px;
+}
+
+#admin_creation {
+    margin-bottom : 0;
+}
+
+.post_admin_page {
+    display: flex;
+    border: 1px solid #ced4da;
+    border-top: none;
+    border-radius: 3px;
+    width: 70%;
+    margin: auto auto 60px auto;
+    padding-top: 10px;
+}
+
+.post_admin_page button {
+    margin: 20px auto 0 auto;
+    width: 100%;
+}
+
+.info_bloc {
+    max-height: 200px;
+}
+
+.info_bloc hr {
+    margin-left: 0;
+}
+
+.adminNav ul {
+    font-family: 'Parisienne';
+    border : 2px solid #ced4da;
+    padding: 0;
+}
+
+body > div.adminNav > div.nav1 {
+    margin: -40px auto 0 auto;
+    width: 80%;
+}
+
+.admin_title h1 {
+    margin : 20px auto 0 auto;
+    color:#e07dc3;
+    font-weight: bold;
+    font-size: 50px;
+}
+
+.section_title {
+    margin: 50px 0 30px 50px;
+}
+
+.comments_validation {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    margin-bottom: 30px;
+}
+
+.validation_button {
+    display: flex;
+    margin-right: auto;
+    justify-content: space-around;
+}
+
+.validation_system {
+    display:flex;
+    flex-direction: column;
+    margin: auto;
+    border: 3px solid #ced4da;
+    border-radius: 6px;
+    padding : 20px;
+    width : 60%;
+}
+
+.comment_button {
+    display: flex;
+    margin: auto 20px auto auto;
+
+}
+
+.comment_author {
+    border-bottom : 2px solid #ced4da;
+}
+
+.comment_content {
+    margin-top: 20px;
+}
+
+.form_role_change {
+    border: 3px solid #ced4da;
+    border-radius: 6px;
+    margin-left: 100px;
+    margin-top: -70px;
+}
+
+/* ------ Moderated comments page --------- */
+
+#moderated_comment {
+    width: 70%;
+    margin: 80px auto 80px auto;
+}
+
+#moderated_title {
+    margin: 40px auto 40px auto;
+}
+
+#moderation_bloc2 {
+    display:flex;
+    flex-direction: column;
+    width : 20%;
+    margin: auto;
+}
+
+#moderation_button {
+    display: flex;
+    margin: 0;
+    justify-content: center;
+}
+
+.restauration_details {
+    font-size: 14px;
+    font-style: italic;
+    text-align: center;
+    margin-top: 10px;
+}
+
+.no_restauration_list {
+    font-style: italic;
+    text-align: center;
+    margin-bottom: 80px;
+}
+
+#moderatedBar {
+    margin-bottom: 120px;
+}
+
+/* ------ Post creation page --------- */
+
+#image_input {
+    padding: 10px;
+}
+
+.form_post_creation form {
+    border: 3px solid #ced4da;
+    border-radius: 6px;
+    width: 70%;
+}
+
+.form_post_creation label {
+    margin: 20px 0 0 0;
+   
+}
+
+.form_post_creation button {
+    margin-top: 50px;
+}
+

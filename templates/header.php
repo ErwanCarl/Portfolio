@@ -1,6 +1,23 @@
 <header>
 
+    <?php 
+        if(isset($_SESSION['userInformations'])) {
+    ;?>
+        <div class="user_info">
+            <div class="username">
+                <?php echo htmlspecialchars('Bienvenue, '.$_SESSION['userInformations']['username'].'.'); ?>
+            </div>
+                        
+            <div class="logo">
+                <a href="index.php?action=account_parameters"><?php // echo htmlspecialchars($_SESSION['userInformations']['logo']);?></a>
+            </div>     
+        </div>
+    <?php 
+    } 
+    ?>
+
     <div class="banner">
+
         <div class="nav1">
             <nav>
                 <ul>
@@ -25,6 +42,7 @@
         <?php 
             } else {
         ?>
+                
             <div class="nav2">
                 <nav>
                     <ul>
@@ -32,6 +50,7 @@
                     </ul>
                 </nav>
             </div>
+        </div>
         <?php
             }
         ?>

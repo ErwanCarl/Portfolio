@@ -1,82 +1,273 @@
-<!DOCTYPE html>
-<html lang="fr">
-	<head>
-		<meta charset="utf-8">
-		<meta name="viewport" content="width=device-width, initial-scale=1">
-		<meta name="author" content="Erwan Carlini">
-		<meta name="description" content="">
-		<meta name="copyright" content="Erwan Carlini">
-		<meta name="keywords" content="">
-		<title>Erwan Carlini - Portfolio</title>
-		<link rel="icon" type="" href="">
-		<link rel="preconnect" href="https://fonts.googleapis.com">
-		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-		<link href="https://fonts.googleapis.com/css2?family=Parisienne&display=swap" rel="stylesheet">
-		<!-- Bootstrap -->
-		<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-		<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-		<script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-		<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
-		<!-- Fin bootstrap -->
-		<link rel="stylesheet" type="text/css" href="style.css">
-		<link rel="stylesheet" type="text/css" href="responsive.css">
-		
-	</head>
+<?php ob_start();?>
 
-	<body>
+<?php 
+    if(isset($_SESSION['success'])) { 
+?>
+        <div class="alert alert-success" role="alert">
+            <?php 
+                $message = $_SESSION['success'];
+                unset($_SESSION['success']);
+                echo $message;
+            ?>
+        </div>
+<?php 
+    }elseif(isset($_SESSION['error'])){
+?>
+        <div class="alert alert-danger" role="alert">
+            <?php
+                $message = $_SESSION['error'];
+                unset($_SESSION['error']);
+                echo $message;
+            ?>
+        </div>
+<?php
+}
+?>
 
-		<?php include('header.php'); ?>
-
+<div class="adminNav">
+    <div class="admin_title">
         <h1>Page d'administration</h1>
+    </div>
 
-        <div class="accounts_validation">
-            <?php
-//  Récupérer les infos du visiteur qui crée le compte pour pouvoir le valider ou supprimer de BDD et donc page admin
-//  Utiliser validate_account et role pour recevoir en front + select pour attribuer role user/admin
-//  + bouton check / croix pour SET validation = 1 et role = choix à ajouter
-                foreach($pendingAccounts as $pendingAccount) {
-            ?>
-                    <div class ="account">
-                        <?php echo htmlspecialchars($pendingAccount->getLogo()); ?>
-                    </div>
+    <hr class="passionBar">
 
-                    <div class ="account">
-                        <?php echo htmlspecialchars($pendingAccount->getUsername()); ?>
-                    </div>
-                    
-                    <div class ="account">
-                        <?php echo htmlspecialchars($pendingAccount->getNickname()." ".$pendingAccount->getName()); ?>
-                    </div>
+    <div class="nav1">
+        <nav>
+            <ul>
+                <li><a href="index.php?action=admin#commentValidation">Validation de commentaires</a></li>
+                <li><a href="index.php?action=admin#gestionArticle">Gestion des articles</a></li>
+                <li><a href="index.php?action=admin#permissions">Permissions utilisateurs</a></li>
+            </ul>
+        </nav>
+    </div>
+</div>
 
-                    <div class ="account">
-                        <?php echo htmlspecialchars($pendingAccount->getMail()); ?>
-                    </div>
+<hr class="adminBar">
 
-            <?php
-                }
-            ?>
+<div class="section_title" id="commentValidation">
+    <h2>Validation de commentaires</h2>
+</div>
+
+<?php if($pendingComments != null) { ?>
+
+    <?php
+        foreach($pendingComments as $pendingComment) {
+    ?>
+
+    <div class="comments_validation">
+        <div class="validation_system">
+            <div class ="comment_author">
+                <?php echo htmlspecialchars('Auteur : '.$pendingComment['author'].' - Article : '.$pendingComment['title']); ?>
+            </div>
+            
+            <div class ="comment_content">
+                <?php echo htmlspecialchars($pendingComment['content']); ?>
+            </div>
         </div>
 
-        <div class="comments_validation">
-            <?php
-//  Set en BDD comment validation = 1 ou est supprimmer de BDD et de l'affichage en admin
-//  + bouton check / croix pour SET validation = 1 et role = choix à ajouter
-                foreach($pendingComments as $pendingComment) {
-            ?>
-                    <div class ="comment">
-                        <?php echo htmlspecialchars($pendingComment->getAuthor()); ?>
-                    </div>
-                    
-                    <div class ="comment">
-                        <?php echo htmlspecialchars($pendingComment->getContent()); ?>
-                    </div>
+        <div class="validation_button">
+            <div class ="comment_button">
+                <a href="index.php?action=validatecomment&id=<?= $pendingComment['id'] ?>" class="btn btn-success mb-2 active" role="button">Valider</a>
+            </div>
 
-            <?php
-                }
+            <div class ="comment_button">
+                <a href="index.php?action=refusedcomment&id=<?= $pendingComment['id'] ?>" class="btn btn-danger mb-2 active" role="button">Refuser</a>
+            </div>
+        </div>
+    </div>
+
+    <?php
+        }
+    ?>
+
+<?php }else{ ?>
+	<div class="no_restauration_list">
+		<p>Il n'y a pas de commentaires à modérer actuellement.</p>
+	</div>
+<?php } ?>
+
+<div class="return_button" id="moderated_comment">
+    <button type="button" onclick="window.location='index.php?action=moderatedcomment'" class="btn btn-info mb-2">Accéder à la liste des commentaires modérés</button>
+</div>
+
+<hr class="adminBar">
+
+<div class="section_title" id="gestionArticle">
+    <h2>Gestions des articles</h2>
+</div>
+
+<?php 
+    if(isset($_SESSION['success2'])) { 
+?>
+        <div class="alert alert-success" role="alert">
+            <?php 
+                $message = $_SESSION['success2'];
+                unset($_SESSION['success2']);
+                echo $message;
             ?>
         </div>
+<?php 
+    }elseif(isset($_SESSION['error2'])){
+?>
+        <div class="alert alert-danger" role="alert">
+            <?php
+                $message = $_SESSION['error2'];
+                unset($_SESSION['error2']);
+                echo $message;
+            ?>
+        </div>
+<?php
+}
+?>
 
-        <?php include('footer.php'); ?>
+<div class="return_button">
+    <button type="button" onclick="window.location='index.php?action=postcreation'" class="btn btn-success mb-2">Créer un article</button>
+</div>
 
-    </body>
-</html>
+<div class="post_administration">
+    <?php 
+        foreach ($posts as $post) {
+    ?>
+
+    <div class="work_creation" id="admin_creation">
+        <div class="title_bloc">
+            <h2><?php echo htmlspecialchars($post['title']); ?></h2>
+        </div>
+        <div class="post_bloc">
+            <div class="pic_bloc">
+                <a href="index.php?action=post&id=<?= urlencode($post['id']) ?>">
+                    <div class="posts_picture">
+                        <img id="pic_base" src="<?php echo htmlspecialchars($post['picture']); ?>">
+                        <img id="pic_hover" src="images/loupe_post_hover.png">
+                    </div>
+                </a>
+            </div>
+            <div class="info_bloc">
+                <div class="author_bloc">
+                    <h4><?php 
+                    if($post['modificationDate'] === null) {
+                        echo htmlspecialchars($post['author'].' - Date de création : '.$post['creationDate']);
+                    }else{
+                        echo htmlspecialchars($post['author'].' - Dernière modification : '.$post['modificationDate']);
+                    }?>
+                    </h4>
+                </div>
+
+                <hr>
+
+                <div class="chapo_bloc">
+                    <h4><?php echo htmlspecialchars($post['chapo']); ?></h4>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="post_admin_page">
+        <div class="return_button">
+            <button type="button" onclick="window.location='index.php?action=postmodify&id=<?= urlencode($post['id']) ?>'" class="btn btn-warning mb-2">Modifier</button>
+        </div>
+
+        <div class="return_button">
+            <button type="button" class="btn btn-danger mb-2" data-toggle="modal" data-target="#exampleModal">Supprimer</button>
+        </div>
+        
+        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" data-backdrop="static" data-keyboard="false">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Suppression d'article</h5>
+                    </div>
+                    <div class="modal-body">
+                        <p>Voulez vous vraiment supprimer cet article ?</p>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Annuler</button>
+                        <button type="button" class="btn btn-danger" onclick="window.location='index.php?action=postdelete&id=<?= urlencode($post['id']) ?>'">Confirmer</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <?php
+    }
+    ?>		
+
+</div>
+		
+<hr class="adminBar">
+
+<div class="section_title" id="permissions">
+    <h2>Permissions utilisateurs</h2>
+</div>
+
+<?php 
+	if(isset($_SESSION['success3'])) { 
+?>
+		<div class="alert alert-success" role="alert">
+			<?php 
+				$message = $_SESSION['success3'];
+				unset($_SESSION['success3']);
+				echo $message;
+			?>
+		</div>
+<?php 
+	}elseif(isset($_SESSION['error3'])){
+?>
+		<div class="alert alert-danger" role="alert">
+			<?php
+				$message = $_SESSION['error3'];
+				unset($_SESSION['error3']);
+				echo $message;
+			?>
+		</div>
+<?php
+}
+?>
+
+
+<div class="user_administration">
+    <form class="user_search_form" action="index.php?action=usersearch" method="post">
+        <div class="form_case">
+            <label for="pseudo">Rechercher un utilisateur</label>
+        </div>
+        <div class= "search_bloc">
+            <input required type="text" name="pseudo" id="pseudo" placeholder="Rentrez le pseudo d'un utilisateur">
+			<button type="submit" class="btn btn-primary" id="search_button">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
+                    <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"></path>
+                </svg> 
+            </button>
+		</div>
+    </form>
+</div>
+
+<?php if(isset($_SESSION['userChange'])) { ?>
+    <div class="role_change_bloc">
+        <form class="form_role_change" action="index.php?action=changerole" method="post">
+            <div class="usernamefound_bloc">
+                <p>Utilisateur : <span><?php echo htmlspecialchars($_SESSION['userChange']['username']); ?></span></p>
+                <p>Rôle actuel : <span><?php echo htmlspecialchars($_SESSION['userChange']['role']); ?></span></p>
+            </div>
+            <div class="set_user_role">
+                <label for="role">Changer le rôle de l'utilisateur : </label>
+                <select name="role" id="role">
+                    <option value="admin">Administrateur</option>
+                    <option value="user">Utilisateur</option>
+                </select>
+            </div>
+            <div class="form_button">
+                <button type="submit">Valider</button>
+            </div>
+        </form>
+    </div>
+
+<?php } ?>
+
+
+
+
+<?php $content=ob_get_clean(); ?>
+
+<?php require('layout.php'); ?>
