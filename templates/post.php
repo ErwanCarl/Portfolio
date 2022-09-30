@@ -33,7 +33,7 @@
     </h1>
 </div>
 
-<hr id="passionBar">
+<hr class="passionBar">
 
 <div class="return_button">
     <button type="button" onclick="window.location='index.php?action=blogposts#return'" class="btn btn-info mb-2">Retour aux blog posts</button>
@@ -77,11 +77,29 @@
             </div>
 
             <div class="return_button">
-                <button type="button" onclick="window.location='index.php?action=postdelete&id=<?= urlencode($post->getId()) ?>'" class="btn btn-danger mb-2">Supprimer</button>
+                <button type="button" class="btn btn-danger mb-2" data-toggle="modal" data-target="#exampleModal" data-backdrop="static" data-keyboard="false">Supprimer</button>
             </div>
-        </div>
-    <?php } ?>
+            
+            <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel">Suppression d'article</h5>
+                        </div>
+                        <div class="modal-body">
+                            <p>Voulez vous vraiment supprimer cet article ?</p>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Annuler</button>
+                            <button type="button" class="btn btn-danger" onclick="window.location='index.php?action=postdelete&id=<?= urlencode($post->getId()) ?>'">Confirmer</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
 
+        </div>
+
+    <?php } ?>
 </div>
 
 
@@ -137,24 +155,23 @@
 
 <?php if(isset($_SESSION['Connection'])) { ?>
     <div class="add_comment" id="comment_connect">
-            <form method=post action="index.php?action=addComment&id=<?= $post->getId() ?>">
-                <h2>Ajoutez un commentaire</h2>
+        <form method=post action="index.php?action=addComment&id=<?= $post->getId() ?>">
+            <h2>Ajoutez un commentaire</h2>
 
-                <div class="form_case">
-                    <label for="author">Pseudo</label>
-                    <input required type="text" name="author" id="author" value="<?php echo htmlspecialchars($_SESSION['userInformations']['username']); ?>" readonly="readonly">
-                </div>
+            <div class="form_case">
+                <p>Pseudo : <strong><?php echo htmlspecialchars($_SESSION['userInformations']['username']); ?></strong></p>
+            </div>
 
-                <div class="form_case">
-                    <label for="content">Message</label>
-                    <textarea required name="content" id="content" rows="5" cols="50"></textarea>  
-                </div>
+            <div class="form_case">
+                <label for="content">Message</label>
+                <textarea required name="content" id="content" rows="5" cols="50"></textarea>  
+            </div>
 
-                <div class="form_button">
-                    <button type="submit">Envoyer</button>
-                </div>
-            </form>
-        </div>
+            <div class="form_button">
+                <button type="submit">Envoyer</button>
+            </div>
+        </form>
+    </div>
 
 <?php }else{ ?>
 

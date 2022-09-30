@@ -59,6 +59,15 @@ if(isset($_GET['action']) && $_GET['action'] !== '') {
         $controller = new AdminController();
         $controller->administration();
 
+    } elseif($_GET['action'] === 'usersearch') {
+        $controller = new AdminController();
+        $controller->usernameSearch($_POST);
+
+    } elseif($_GET['action'] === 'changerole') {
+        $_POST['username'] = $_SESSION['userChange']['username'];
+        $controller = new AdminController();
+        $controller->changeUserRole($_POST);
+
     } elseif($_GET['action'] === 'postdelete' && isset($_GET['id']) && $_GET['id'] > 0) {
         $id = $_GET['id'];
         $controller = new PostController();
@@ -72,7 +81,7 @@ if(isset($_GET['action']) && $_GET['action'] !== '') {
     } elseif($_GET['action'] === 'modifysubmit' && isset($_GET['id']) && $_GET['id'] > 0) {
         $id = $_GET['id'];
         $controller = new PostController();
-        $controller->modifySubmit($id, $_POST);
+        $controller->modifySubmit($id, $_POST, $_FILES);
 
     } elseif($_GET['action'] === 'postcreation') {
         $controller = new PostController();
@@ -80,7 +89,7 @@ if(isset($_GET['action']) && $_GET['action'] !== '') {
 
     } elseif($_GET['action'] === 'newpostsubmit') {
         $controller = new PostController();
-        $controller->newPostSubmit($_POST);
+        $controller->newPostSubmit($_POST, $_FILES);
 
     } elseif($_GET['action'] === 'validatecomment' && isset($_GET['id']) && $_GET['id'] > 0) {
         $id = (int) $_GET['id'];

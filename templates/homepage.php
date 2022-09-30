@@ -58,7 +58,7 @@
 
 <div class="creation_title">
 	<h2>Dernières créations</h2>
-	<hr id="passionBar">
+	<hr class="passionBar">
 </div>
 
 <div class="global_creation">

@@ -28,7 +28,7 @@
 	<h1>Listes des commentaires modérés</h1>
 </div>
 
-<hr id="passionBar">
+<hr class="passionBar">
 
 <?php if($moderatedComments != null) { ?>
 	<?php

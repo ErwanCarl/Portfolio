@@ -172,6 +172,7 @@ h2 {
 .creation h4 {
     text-align: center;
     padding: 10px;
+    max-width: 190px;
 }
 
 .creation_title h2 {
@@ -181,8 +182,8 @@ h2 {
 
 
 .creation img {
-    max-height: 200px;
-    max-width: 200px;
+    height: 190px;
+    width: 190px;
 }
 
 
@@ -352,7 +353,7 @@ body > div:nth-child(2) > form {
     
 }
 
-#passionBar{
+.passionBar{
     width: 15%;
     background-color: #e07dc3 ;
     border: solid;
@@ -451,6 +452,25 @@ body > div:nth-child(2) > form {
 
 .return_button button {
     font-size: 20px;
+}
+
+#exampleModal > div > div > div.modal-footer > button.btn.btn-danger, #exampleModal > div > div > div.modal-footer > button.btn.btn-secondary {
+    margin: 0 10px 10px 10px;
+}
+
+.modal-dialog button { 
+    border-radius: 4px;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    color: white;
+    text-align: center;
+    font-size: 16px;
+    padding: 5px;
+    width: 50%;
+}
+
+.modal-footer {
+    width: 60%;
+    margin: auto;
 }
 
 body > div.post > div.post_author > h4:nth-child(2) {
@@ -660,8 +680,8 @@ body > div:nth-child(2) > a {
 }
 
 .pic_bloc img {
-    max-height: 200px;
-    max-width: 200px;
+    height: 200px;
+    width: 200px;
 }
 
 
@@ -685,6 +705,18 @@ body > div:nth-child(2) > a {
 
 /* ------ Admin --------- */
 
+span {
+    font-weight: bold;
+}
+
+select {
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    font-size: 16px;
+    font-weight: 100;
+    padding: 5px 20px;
+    text-align: left;
+    margin-left: 10px;
+}
 
 #admin_creation {
     margin-bottom : 0;
@@ -720,7 +752,7 @@ body > div:nth-child(2) > a {
 }
 
 body > div.adminNav > div.nav1 {
-    margin: auto;
+    margin: -40px auto 0 auto;
     width: 80%;
 }
 
@@ -772,6 +804,13 @@ body > div.adminNav > div.nav1 {
     margin-top: 20px;
 }
 
+.form_role_change {
+    border: 3px solid #ced4da;
+    border-radius: 6px;
+    margin-left: 100px;
+    margin-top: -70px;
+}
+
 /* ------ Moderated comments page --------- */
 
 #moderated_comment {
@@ -814,6 +853,10 @@ body > div.adminNav > div.nav1 {
 }
 
 /* ------ Post creation page --------- */
+
+#image_input {
+    padding: 10px;
+}
 
 .form_post_creation form {
     border: 3px solid #ced4da;

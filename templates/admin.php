@@ -29,6 +29,8 @@
         <h1>Page d'administration</h1>
     </div>
 
+    <hr class="passionBar">
+
     <div class="nav1">
         <nav>
             <ul>
@@ -46,35 +48,43 @@
     <h2>Validation de commentaires</h2>
 </div>
 
-<?php
-    foreach($pendingComments as $pendingComment) {
-?>
+<?php if($pendingComments != null) { ?>
 
-<div class="comments_validation">
-    <div class="validation_system">
-        <div class ="comment_author">
-            <?php echo htmlspecialchars('Auteur : '.$pendingComment['author'].' - Article : '.$pendingComment['title']); ?>
+    <?php
+        foreach($pendingComments as $pendingComment) {
+    ?>
+
+    <div class="comments_validation">
+        <div class="validation_system">
+            <div class ="comment_author">
+                <?php echo htmlspecialchars('Auteur : '.$pendingComment['author'].' - Article : '.$pendingComment['title']); ?>
+            </div>
+            
+            <div class ="comment_content">
+                <?php echo htmlspecialchars($pendingComment['content']); ?>
+            </div>
         </div>
-        
-        <div class ="comment_content">
-            <?php echo htmlspecialchars($pendingComment['content']); ?>
+
+        <div class="validation_button">
+            <div class ="comment_button">
+                <a href="index.php?action=validatecomment&id=<?= $pendingComment['id'] ?>" class="btn btn-success mb-2 active" role="button">Valider</a>
+            </div>
+
+            <div class ="comment_button">
+                <a href="index.php?action=refusedcomment&id=<?= $pendingComment['id'] ?>" class="btn btn-danger mb-2 active" role="button">Refuser</a>
+            </div>
         </div>
     </div>
 
-    <div class="validation_button">
-        <div class ="comment_button">
-            <a href="index.php?action=validatecomment&id=<?= $pendingComment['id'] ?>" class="btn btn-success mb-2 active" role="button">Valider</a>
-        </div>
+    <?php
+        }
+    ?>
 
-        <div class ="comment_button">
-            <a href="index.php?action=refusedcomment&id=<?= $pendingComment['id'] ?>" class="btn btn-danger mb-2 active" role="button">Refuser</a>
-        </div>
-    </div>
-</div>
-
-<?php
-    }
-?>
+<?php }else{ ?>
+	<div class="no_restauration_list">
+		<p>Il n'y a pas de commentaires à modérer actuellement.</p>
+	</div>
+<?php } ?>
 
 <div class="return_button" id="moderated_comment">
     <button type="button" onclick="window.location='index.php?action=moderatedcomment'" class="btn btn-info mb-2">Accéder à la liste des commentaires modérés</button>
@@ -158,8 +168,26 @@
         </div>
 
         <div class="return_button">
-            <button type="button" onclick="window.location='index.php?action=postdelete&id=<?= urlencode($post['id']) ?>'" class="btn btn-danger mb-2">Supprimer</button>
+            <button type="button" class="btn btn-danger mb-2" data-toggle="modal" data-target="#exampleModal">Supprimer</button>
         </div>
+        
+        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" data-backdrop="static" data-keyboard="false">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Suppression d'article</h5>
+                    </div>
+                    <div class="modal-body">
+                        <p>Voulez vous vraiment supprimer cet article ?</p>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Annuler</button>
+                        <button type="button" class="btn btn-danger" onclick="window.location='index.php?action=postdelete&id=<?= urlencode($post['id']) ?>'">Confirmer</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
     </div>
 
     <?php
@@ -174,9 +202,33 @@
     <h2>Permissions utilisateurs</h2>
 </div>
 
+<?php 
+	if(isset($_SESSION['success3'])) { 
+?>
+		<div class="alert alert-success" role="alert">
+			<?php 
+				$message = $_SESSION['success3'];
+				unset($_SESSION['success3']);
+				echo $message;
+			?>
+		</div>
+<?php 
+	}elseif(isset($_SESSION['error3'])){
+?>
+		<div class="alert alert-danger" role="alert">
+			<?php
+				$message = $_SESSION['error3'];
+				unset($_SESSION['error3']);
+				echo $message;
+			?>
+		</div>
+<?php
+}
+?>
 
-<form class="user_search_form" action="index.php?usersearch" method="post">
-    <div class="user_administration">
+
+<div class="user_administration">
+    <form class="user_search_form" action="index.php?action=usersearch" method="post">
         <div class="form_case">
             <label for="pseudo">Rechercher un utilisateur</label>
         </div>
@@ -188,10 +240,30 @@
                 </svg> 
             </button>
 		</div>
+    </form>
+</div>
+
+<?php if(isset($_SESSION['userChange'])) { ?>
+    <div class="role_change_bloc">
+        <form class="form_role_change" action="index.php?action=changerole" method="post">
+            <div class="usernamefound_bloc">
+                <p>Utilisateur : <span><?php echo htmlspecialchars($_SESSION['userChange']['username']); ?></span></p>
+                <p>Rôle actuel : <span><?php echo htmlspecialchars($_SESSION['userChange']['role']); ?></span></p>
+            </div>
+            <div class="set_user_role">
+                <label for="role">Changer le rôle de l'utilisateur : </label>
+                <select name="role" id="role">
+                    <option value="admin">Administrateur</option>
+                    <option value="user">Utilisateur</option>
+                </select>
+            </div>
+            <div class="form_button">
+                <button type="submit">Valider</button>
+            </div>
+        </form>
     </div>
-</form>
 
-
+<?php } ?>
 
 
 

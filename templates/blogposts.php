@@ -26,7 +26,7 @@
 
 <div class="blogposts_title" id="return">
 	<h1>Listes des articles</h1>
-	<hr id="passionBar">
+	<hr class="passionBar">
 </div>
 
 <?php 

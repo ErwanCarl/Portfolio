@@ -24,13 +24,13 @@ class CommentModel extends Model
 
     public function createComment(int $postId, Comment $comment) : bool 
     {
-        $statement = $this->connection->prepare("INSERT INTO comment(post_id, author, content, user_id) VALUES(:post_id, :author, :content, :user_id)");
+        $statement = $this->connection->prepare("INSERT INTO comment(post_id, author, content, userId) VALUES(:post_id, :author, :content, :userId)");
 
         $line = $statement->execute([
             'post_id' => $postId,
             'author'=> $comment->getAuthor(),
             'content' => $comment->getContent(),
-            'user_id'=>$_SESSION['userInformations']['id']
+            'userId'=>$_SESSION['userInformations']['id']
         ]);
 
         return ($line);

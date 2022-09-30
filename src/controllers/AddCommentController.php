@@ -11,11 +11,11 @@ class AddCommentController
 {  
     public function addComment(int $id, array $formInput): void 
     {
-        $author = null;
+        $author = $_SESSION['userInformations']['username'];
         $content = null;
         
-        if (!empty($formInput['author']) && !empty($formInput['content'])) {
-            $author = $formInput['author'];
+        if (!empty($author) && !empty($formInput['content'])) {
+           $formInput['author'] = $author;
             $content = $formInput['content'];
         } else {
             $_SESSION['error'] = 'Les données du formulaire sont invalides, veuillez contacter l\'administrateur.';

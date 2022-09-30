@@ -4,7 +4,7 @@
     <h1>Passions et hobbys</h1>
 </div>
 
-<hr id="passionBar">
+<hr class="passionBar">
 
 <div class="passion">
     <div class ="passionText">

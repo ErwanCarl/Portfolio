@@ -78,6 +78,36 @@ class AdminController
         require('templates/moderatedComments.php');
     }
 
+    public function usernameSearch(array $username) : void 
+    {
+        unset($_SESSION['userChange']);
+        $userModel = new UserModel();
+        $userFound = $userModel->getUserSearched($username);
 
+        if(isset($userFound)) {
+            $_SESSION['userChange']['username'] = $userFound->getUsername();
+            $_SESSION['userChange']['role'] = $userFound->getRole();
+            header('Location: index.php?action=admin#permissions');
+        }else{
+            $_SESSION['error3'] = 'Aucun utilisateur trouvé avec ce pseudo.';
+            header('Location: index.php?action=admin#permissions');
+        }
+    }
+
+    public function changeUserRole(array $newUserRole) : void 
+    {
+        unset($_SESSION['userChange']);
+        $userModel = new UserModel();
+        // est ce que je dois créer un new User ? Même si ici j'ai que role + username ?
+        $roleChange = $userModel->modifyUserRole($newUserRole);
+
+        if($roleChange) {
+            $_SESSION['success3'] = 'Le changement de rôle a été effectué.';
+            header('Location: index.php?action=admin#permissions');
+        }else{
+            $_SESSION['error3'] = 'Le changement de rôle a échoué.';
+            header('Location: index.php?action=admin#permissions');
+        }
+    }
 
 }

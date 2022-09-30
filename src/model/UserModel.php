@@ -39,7 +39,7 @@ class UserModel extends Model {
         } 
 
         foreach ($users as $user) {
-            if(password_verify($formInput['password'], $user['password'])) {
+            if(password_verify($formInput['password'], $user['password']) && $user['validateAccount'] === 1) {
                 $user['id']=(int)$user['id'];
                 $userInformations = new User($user);
                 return $userInformations;
@@ -64,12 +64,31 @@ class UserModel extends Model {
         return $countMail;
     }
 
-    // cherche en admin le user pour changer le role
-    // public function getUserSearched() : User 
-    // {
-    //     $statement = $this->connection->prepare("SELECT * FROM user WHERE username = ?");
-    //     // A compléter
-    //     $statement->fetchAll();
-    //     return 
-    // }
+    // get user informations by username search
+
+    public function getUserSearched(array $username) : ?User 
+    {
+        $statement = $this->connection->prepare("SELECT * FROM user WHERE username = ?");
+        $statement->execute([$username['pseudo']]);
+        $statement->setFetchMode(PDO::FETCH_CLASS | PDO::FETCH_PROPS_LATE, 'User');
+        $userFound = $statement->fetch();
+        if($userFound === false) {
+            return null;
+        }else{
+            return $userFound;
+        }
+
+        
+    }
+
+    public function modifyUserRole(array $newRole) : bool
+    {
+        $statement = $this->connection->prepare("UPDATE user SET `role` = :role WHERE `username` = :username");
+        $line = $statement->execute([
+            'role' => $newRole['role'],
+            'username' => $newRole['username']
+        ]);
+        return $line;
+    }
+
 }

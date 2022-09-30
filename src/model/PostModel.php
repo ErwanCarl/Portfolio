@@ -36,16 +36,16 @@ class PostModel extends Model
         return $statement->fetch();
     }
 
-    // Pas oublier de rajouter colonne picture à insert quand dev done
     public function postCreate(Post $post) : bool 
     {
-        $statement = $this->connection->prepare("INSERT INTO post(author, title, chapo, content, user_id) VALUES(:author, :title, :chapo, :content, :user_id)");
+        $statement = $this->connection->prepare("INSERT INTO post(author, title, chapo, content, user_id, picture) VALUES(:author, :title, :chapo, :content, :user_id, :picture)");
         $line = $statement->execute([
             'author' => $post->getAuthor(),
             'title' => $post->getTitle(),
             'chapo' => $post->getChapo(),
             'content' => $post->getContent(),
-            'user_id' => $post->getUserId()
+            'user_id' => $post->getUserId(),
+            'picture' => $post->getPicture()
         ]);
         return $line;
     }
@@ -60,12 +60,13 @@ class PostModel extends Model
 
     public function modifyRegister(Post $post) : bool 
     {
-        $statement = $this->connection->prepare("UPDATE post SET title = :title, chapo = :chapo, content = :content, modificationDate = NOW() WHERE id = :id");
+        $statement = $this->connection->prepare("UPDATE post SET title = :title, chapo = :chapo, content = :content, modificationDate = NOW(), picture = :picture WHERE id = :id");
         return $statement->execute([
             'id' => $post->getId(),
             'title' => $post->getTitle(),
             'chapo' => $post->getChapo(),
             'content' => $post->getContent(),
+            'picture' => $post->getPicture()
         ]);
     }
 

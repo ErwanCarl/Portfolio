@@ -29,7 +29,7 @@ class ConnectionController
             ];
             header('Location: index.php');
         } else {
-            $_SESSION['error'] = "Vos identifiants sont incorrects, veuillez réessayer.";
+            $_SESSION['error'] = "Vos identifiants sont incorrects, veuillez réessayer ou vérifier dans votre boîte mail que votre compte est bien validé.";
             header('Location: index.php?action=accountcreation');
         }
     }

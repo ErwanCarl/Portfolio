@@ -28,12 +28,13 @@
 	<h1>Édition d'un article</h1>
 </div>
 
+<hr class="passionBar">
+
 <?php if(isset($post) AND isset($_SESSION['Modify'])) { ?>
 	<div class="form_post_creation">
-		<form action="index.php?action=modifysubmit&id=<?=urlencode($post->getId())?>" method="post">
+		<form action="index.php?action=modifysubmit&id=<?=urlencode($post->getId())?>" method="post" enctype="multipart/form-data">
 			<div class="form_case">
-				<label for="author">Auteur</label>
-				<input required type="text" name="author" id="author" readonly="readonly" value="<?php echo htmlspecialchars($post->getAuthor()); ?>">
+				<p>Auteur : <span><?php echo htmlspecialchars($post->getAuthor()); ?></p></span>
 			</div>
 
 			<div class="form_case">
@@ -50,19 +51,23 @@
 				<label for="content">Contenu</label>
 				<textarea required name="content" id="content" rows="5" cols="50"><?php echo htmlspecialchars($post->getContent()); ?></textarea>  
 			</div>
+
+			<div class="form_case">
+				<label for="picture">Image</label>
+				<input type="file" id="image_input" name="picture" id="picture" value="<?php echo htmlspecialchars($post->getPicture()); ?>" />
+            </div>
 	
 			<div class="form_button">
-				<button type="submit">Modifier l'article</button>
+				<button type="submit" >Modifier l'article</button>
 			</div>
 		</form>
 	</div>
 
 <?php }else{ ?>
 	<div class="form_post_creation">
-		<form action="index.php?action=newpostsubmit" method="post">
+		<form action="index.php?action=newpostsubmit" method="post" enctype="multipart/form-data">
 			<div class="form_case">
-				<label for="author">Auteur</label>
-				<input required type="text" name="author" id="author">
+				<p>Auteur : <span><?php echo htmlspecialchars($_SESSION['userInformations']['username']); ?></span></p>
 			</div>
 			<div class="form_case">
 				<label for="title">Titre</label>
@@ -79,6 +84,13 @@
 				<textarea name="content" id="content" rows="5" cols="50"></textarea>  
 			</div>
 		
+			<div class="form_case">
+				<!-- <input type="hidden" name="MAX_FILE_SIZE" value="1000000" /> -->
+				<label for="picture">Image</label>
+				<input type="file" id="image_input" name="picture" id="picture"/>
+
+            </div>
+
 			<div class="form_button">
 				<button type="submit">Créer l'article</button>
 			</div>
