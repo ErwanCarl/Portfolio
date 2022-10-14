@@ -13,11 +13,15 @@
     padding : 40px;
 }
 
-a:hover {
+a:hover, a:active {
     text-decoration:none; 
-    color: #301f61;
+    color: white;
 }
 
+.footer a:hover, .footer a:active {
+    text-decoration:none; 
+    color: #e07dc3;
+}
 
 .nav1 ul {
     list-style-type: none;
@@ -56,7 +60,9 @@ nav ul a {
 .footer a {
     text-decoration:none;
     color : white;
+    
 }
+
 
 .sub_footer {
     display: flex;

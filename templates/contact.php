@@ -21,8 +21,6 @@
 
     <?php include('header.php'); ?>
 
-<!-- css position fixed top 0 sur section qui englobe + margin contactinfo  -->
-
         <div class = "contactInfo">
             <p id="getInTouch">Je suis disponible pour échanger à tout moment, n'hésitez pas à me contacter.</p>
             <div class ="logoContact">

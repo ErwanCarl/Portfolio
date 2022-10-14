@@ -1,0 +1,243 @@
+/* Mobile */
+
+@media screen and (max-width: 576px) {
+
+/* -------------------- homepage ---------------  */
+    body {
+        max-width: 576px;
+    }
+
+    .user_info, .banner {
+       width: 100%;
+    }
+
+    .footer a {
+        vertical-align: middle;
+    }
+
+    .sub_footer {
+        margin: 10px auto;
+        padding: 10px 0;
+    }
+
+    .footer_socialmedia {
+        padding: 10px 0;
+    }
+
+    .banner {
+        flex-direction: column;
+    }
+
+    .mainpart, .global_creation, .footer {
+        flex-direction: column;
+    }
+
+    .global_creation {
+        margin-bottom: 40px;
+    }
+
+    .catchingwords {
+       margin: 30px auto 0 auto;
+    }
+
+    .cv {
+        width: 50%;
+    }
+
+    .logoname {
+        margin: auto;
+    }
+
+    .logoname img {
+        max-width: 250px;
+        width: 100%;
+    }
+
+    .socialmedia {
+        width: 100%;
+        flex-direction: column;
+        margin-top : 40px;
+    }
+
+    .form_case2 {
+        margin-top : 10px;
+        display: flex;
+    }
+
+    .form_case2 input {
+        margin-right: 15px;
+    }
+
+    .creation {
+        margin : 5px auto 10px;
+    }
+    
+    .form_contact form {
+        width: 100%;
+    }
+
+    .form_contact {
+        width : 90%;
+    }
+
+    .nav1, .nav2 {
+        display: flex;
+        flex-direction: row;
+        width: 100%;
+        justify-content: center;
+    }
+
+    .nav1 ul, .nav2 ul {
+        flex-direction: column;
+        justify-content: center;
+        padding: 0;
+    }
+
+    .nav1 ul li, .nav2 ul li {
+        text-align: center;
+    }
+
+    .nav2 {
+        padding: 0;
+    }
+
+    .mlpdc, .mlpdc p {
+        text-align : center;
+    }
+
+
+/* -------------------- contact ---------------  */
+
+    #contactPage .nav1{
+        padding: 0;
+    }
+
+    .contactInfo {
+        margin: 0 auto 100px auto;
+        width: 70%;
+        border: 0;
+        padding: 0;
+    }
+
+    #getInTouch {
+        border: 3px solid #e07dc3;
+        border-radius: 50%;
+        padding: 30px;
+    }
+
+/* -------------------- passions ---------------  */
+
+    .passion {
+        margin: 0 auto 40px auto;
+        flex-direction: column;
+        width: 90%;
+    }
+
+    body > div:nth-child(5), body > div:nth-child(7) {
+        flex-direction: column-reverse;
+    }
+
+/* -------------------- blogposts ---------------  */
+
+    .title_bloc, .author_bloc {
+        display: block;
+        border-bottom: 0;
+    }
+
+    .title_bloc h2, .author_bloc h4 {
+        padding: 20px 0 0 0;
+        text-align: center;
+    }
+
+    #pic_hover {
+        margin: 0;
+    }
+
+    .post_bloc {
+        flex-direction: column;
+        justify-content: center;
+    }
+
+    .chapo_bloc h4 {
+        text-align: center;
+    }
+
+    .author_bloc hr {
+        margin: 16px auto;
+    }
+
+    .info_bloc {
+        max-height: 100%;
+    }
+
+    .info_bloc hr {
+        margin-left: auto;
+    }
+
+    .pic_base img {
+        margin: auto;
+    }
+
+    .posts_picture {
+        display: flex;
+        justify-content: center;
+    }
+
+    .posts_picture img {
+        padding-top: 20px;
+    }
+
+/* --------------------post ---------------  */
+
+    .return_button, .post, .comment_bloc {
+        width : 90%;
+    }
+
+    .post h4, body > div.post > div.post_chapo > h4, .post_content h4 {
+        text-align: center;
+    }
+
+    .add_comment form {
+        width: 70%;
+        margin-bottom: 0;
+    }
+
+    #comment_connect {
+        margin-top : 40px;
+    }
+
+    .bloc_post_pic {
+        margin: 0 0 60px 0;
+    }
+
+    #post_pic {
+        max-height: 200px;
+        max-width: 200px;
+    }
+
+    .pagination, .actual_pagination {
+        margin: 0;
+    }
+
+    .return_button button {
+        margin: auto;
+        width: 90%;
+    }
+
+    #comment_connect > form > h2 {
+        text-align: center;
+    }
+
+    /* --------------------post edition ---------------  */
+
+    body > div.form_post_creation > form {
+        width: 90%;
+    }
+
+    body > div.form_post_creation > form > div.form_button > button {
+        width: 80%;
+    }
+
+
+
+}
