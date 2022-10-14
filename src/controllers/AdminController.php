@@ -11,7 +11,7 @@ class AdminController
 {
     public function administration() : void
     {
-        if(isset($_SESSION['userInformations']) AND $_SESSION['userInformations']['role'] = 'admin') {
+        if(isset($_SESSION['userInformations']) && $_SESSION['userInformations']['role'] === 'admin' && isset($_SESSION['Connection'])) {
             $commentModel = new CommentModel();
             $pendingComments = $commentModel->getPendingComments();
 
@@ -19,6 +19,9 @@ class AdminController
             $posts = $postModel->getPosts();
 
             require('templates/admin.php');
+        } else if(!isset($_SESSION['Connection'])) {
+            $_SESSION['error'] = 'Vous devez être connecté pour administrer le site.';
+            header('Location: index.php');
         } else {
             $_SESSION['error'] = 'Accès interdit, vous ne possèdez pas les droits administrateur.';
             header('Location: index.php');
@@ -71,10 +74,21 @@ class AdminController
        
     }
 
-    public function moderatedComment() : void 
+    public function moderatedComment(int $page) : void 
     {
+       
+        $elementsNumber = 5;
         $commentModel = new CommentModel();
-        $moderatedComments = $commentModel->moderatedListing();
+        $moderatedCommentsNumber = $commentModel->moderatedCommentsCount();
+        $pageNumber = ceil($moderatedCommentsNumber[0]['moderatedCommentsNumber'] / $elementsNumber);
+
+        if(isset($page) && $page > 0 && $page <= $pageNumber) {
+            $currentPage = $page;
+        }else{
+            $currentPage = 1;
+        }
+
+        $moderatedComments = $commentModel->moderatedListing($currentPage, $elementsNumber);
         require('templates/moderatedComments.php');
     }
 

@@ -4,11 +4,11 @@
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 		<meta name="author" content="Erwan Carlini">
-		<meta name="description" content="">
+		<meta name="description" content="Erwan Carlini, développeur d'applications PhP, Html, CSS professionnel">
 		<meta name="copyright" content="Erwan Carlini">
-		<meta name="keywords" content="">
+		<meta name="keywords" content="Erwan Carlini, Développement Web, Application, PhP, CSS, Html, Professionnel">
 		<title>Erwan Carlini - Portfolio</title>
-		<link rel="icon" type="" href="">
+		<link rel="icon" type="image/jpg" href="images/digitV2.jpg">
 		<link rel="preconnect" href="https://fonts.googleapis.com">
 		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 		<link href="https://fonts.googleapis.com/css2?family=Parisienne&display=swap" rel="stylesheet">
@@ -21,6 +21,7 @@
 		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
 		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
 		<!-- Fin bootstrap -->
+		<script src="https://cdn.tiny.cloud/1/no-api-key/tinymce/6/tinymce.min.js" referrerpolicy="origin"></script>
 		<link rel="stylesheet" type="text/css" href="style.css">
 		<link rel="stylesheet" type="text/css" href="responsive.css">
 		

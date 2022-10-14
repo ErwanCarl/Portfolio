@@ -11,6 +11,8 @@ require_once('src/controllers/AccountCreationController.php');
 require_once('src/controllers/AccountSubmitController.php');
 require_once('src/controllers/ConnectionController.php');
 require_once('src/controllers/AdminController.php');
+require_once('src/controllers/LegalNoticeController.php');
+require_once('src/controllers/MailController.php');
 
 if(isset($_GET['action']) && $_GET['action'] !== '') {
 
@@ -21,6 +23,10 @@ if(isset($_GET['action']) && $_GET['action'] !== '') {
     } elseif($_GET['action'] === 'contact') {
         $controller = new ContactController();
         $controller->contact();
+
+    } elseif($_GET['action'] === 'legalnotice') {
+        $controller = new LegalNoticeController();
+        $controller->legalNotice();
 
     } elseif($_GET['action'] === 'accountcreation') {
         $controller = new AccountCreationController();
@@ -35,16 +41,21 @@ if(isset($_GET['action']) && $_GET['action'] !== '') {
         $controller->accountConnection($_POST);
 
     } elseif($_GET['action'] === 'closesession') {
-        unset($_SESSION['Connection']);
-        unset($_SESSION['userInformations']);
+        unset($_SESSION);
+        session_destroy();
         $_SESSION['success'] = 'Vous vous êtes bien déconnecté.';
         $controller = new AccountCreationController();
         $controller->accountCreation();
 
     } elseif($_GET['action'] === 'post' && isset($_GET['id']) && $_GET['id'] > 0) {
-        $id = $_GET['id'];
-        $postController = new PostController($id);
-        $postController->post($id);
+        $id = (int) $_GET['id'];
+        
+        $postController = new PostController();
+        if(isset($_GET['page'])){
+            $postController->post($id, (int)$_GET['page']);
+        }else{
+            $postController->post($id, 1);
+        }
 
     } elseif($_GET['action'] === 'blogposts') {
         $postController = new PostController();
@@ -58,7 +69,16 @@ if(isset($_GET['action']) && $_GET['action'] !== '') {
     } elseif($_GET['action'] === 'admin') {
         $controller = new AdminController();
         $controller->administration();
+    
+    } elseif($_GET['action'] === 'sendcontactmail') {
+        $controller = new MailController();
+        $controller->contactMail($_POST);
 
+    } elseif($_GET['action'] === 'inscriptionvalidation') {
+        $accountKey = $_GET['token'];
+        $controller = new AccountSubmitController();
+        $controller->inscriptionValidation($accountKey);
+        
     } elseif($_GET['action'] === 'usersearch') {
         $controller = new AdminController();
         $controller->usernameSearch($_POST);
@@ -108,7 +128,12 @@ if(isset($_GET['action']) && $_GET['action'] !== '') {
 
     } elseif($_GET['action'] === 'moderatedcomment') {
         $controller = new AdminController();
-        $controller->moderatedComment();
+        if(isset($_GET['page'])){
+            $controller->moderatedComment((int)$_GET['page']);
+        }else{
+            $currentPage = 1;
+            $controller->moderatedComment($currentPage);
+        }
     }
 
 } else {

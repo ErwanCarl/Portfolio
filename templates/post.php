@@ -110,7 +110,7 @@
 <!---------------- comments part ------------------>
 
 <div class="comment_bloc">
-    <div class="comment_head">
+    <div class="comment_head" id="comment_post">
         <h4>Commentaires</h4>
     </div>
 
@@ -149,6 +149,21 @@
             <p>Il n'y a pas encore de commentaires sur cet article.</p>
         </div>
     <?php } ?>
+</div>
+
+<div class="pagination_bloc">
+    <?php for($i=1;$i<=$pageNumber;$i++) { 
+		if($i === $currentPage) { ?>
+			<div class="actual_pagination">
+				<?php echo($i); ?>
+			</div>
+		<?php }else{ ?>
+			<div class="pagination">
+				<a href='index.php?action=post&id=<?= urlencode($post->getId()) ?>&page=<?= $i ?>#comment_post'><?php echo($i); ?></a>
+			</div>
+		<?php } ?>
+            
+	<?php } ?>
 </div>
 
 <!-- Comment system if user connected -->

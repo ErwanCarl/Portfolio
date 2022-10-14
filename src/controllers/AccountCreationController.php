@@ -7,7 +7,7 @@ class AccountCreationController
 {
     public function accountCreation() : void 
     {
-        require('templates/accountCreation.php');
+            require('templates/accountCreation.php');
     }
 
 }

@@ -6,11 +6,7 @@
         <div class="user_info">
             <div class="username">
                 <?php echo htmlspecialchars('Bienvenue, '.$_SESSION['userInformations']['username'].'.'); ?>
-            </div>
-                        
-            <div class="logo">
-                <a href="index.php?action=account_parameters"><?php // echo htmlspecialchars($_SESSION['userInformations']['logo']);?></a>
-            </div>     
+            </div>  
         </div>
     <?php 
     } 
@@ -31,7 +27,7 @@
 
         <?php 
             if(!isset($_SESSION['Connection'])) {
-        ;?>
+        ?>
             <div class="nav2">
                 <nav>
                     <ul>

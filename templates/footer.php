@@ -41,7 +41,7 @@
                 <img src="images/law_logo.png" />
             </div>
             <div>
-                <a href="">Mentions légales</a>
+                <a href="index.php?action=legalnotice">Mentions légales</a>
             </div>
         </div>
 
