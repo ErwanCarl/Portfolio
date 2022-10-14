@@ -6,6 +6,8 @@ declare(strict_types=1);
 require_once('src/model/UserModel.php');
 require_once('src/entity/User.php');
 require_once('src/controllers/MailController.php');
+require_once('src/services/sendMail.php');
+
 
 class AccountSubmitController
 {
@@ -28,8 +30,8 @@ class AccountSubmitController
             $result = $userModel->userCreation($user);
 
             if($result) {
-                $mail = new MailController();
-                $accountValidationMail = $mail->accountValidationMail($user);
+                $sendMail = new sendMail();
+                $accountValidationMail = $sendMail->sendAccountValidationMail($user);
 
                 if($accountValidationMail) {
                     $_SESSION['success'] = "Votre compte a bien été créé, vérifiez vos mails pour le valider.";
@@ -54,7 +56,7 @@ class AccountSubmitController
             $_SESSION['success'] = "Votre compte a été validé, vous pouvez désormais vous connecter.";
             header('Location: index.php?action=accountcreation');
         }else{
-            $_SESSION['error'] = "La validation a échouée, veuillez contacter l'administrateur.";
+            $_SESSION['error'] = "Le lien a expiré ou a déjà été utilisé, veuillez tenter de vous connecter ou contactez l'administrateur.";
             header('Location: index.php?action=accountcreation');
         }
     }

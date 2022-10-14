@@ -92,10 +92,17 @@ class UserModel extends Model {
 
     public function validateAccount(string $account_key) : bool 
     {
-        $statement = $this->connection->prepare("UPDATE user SET `validateAccount` = 1 WHERE `account_key` = ?");
-        $line = $statement->execute([$account_key]);
-        return $line;
+        $user = $this->connection->prepare("SELECT * FROM user WHERE `account_key` = ?");
+        $userFound = $user->execute([$account_key]);
+        $user->setFetchMode(PDO::FETCH_CLASS | PDO::FETCH_PROPS_LATE, 'User');
+        $userFound = $user->fetch();
+        
+        if($userFound) {
+            $statement = $this->connection->prepare("UPDATE user SET `validateAccount` = 1, `account_key` = null WHERE `account_key` = ?");
+            $line = $statement->execute([$account_key]);
+            return $line;
+        }else{
+            return false;
+        }
     }
-
-
 }
