@@ -11,12 +11,12 @@ class User extends Entity {
     private string $name;
     private string $nickname;
     private string $username;
-    private ?string $logo;
     private string $password;
     private string $mail;
     private ?string $phoneNumber;
     private int $validateAccount;
     private string $role;
+    private ?string $accountKey;
 
     public function __construct(array $data = []) 
     {
@@ -46,11 +46,6 @@ class User extends Entity {
         return $this->username; 
     }
 
-    public function getLogo() : ?string
-    { 
-        return $this->logo; 
-    }
-
     public function getPassword() : string
     { 
         return $this->password; 
@@ -74,6 +69,11 @@ class User extends Entity {
     public function getRole() : string
     { 
         return $this->role; 
+    }
+
+    public function getAccountKey() : string
+    { 
+        return $this->accountKey; 
     }
 
 /* ---------------------------- Setters -----------------------------*/
@@ -101,17 +101,6 @@ class User extends Entity {
     {
         if(strlen($username) < 100) {
             $this->username = $username;
-        }
-    }
-
-    public function setLogo(?string $logo) : void
-    {
-        if($logo != null) {
-            if (strlen($logo) < 255) {
-                $this->logo = $logo;
-            }
-        }else{
-            $this->logo = null;
         }
     }
 
@@ -146,5 +135,9 @@ class User extends Entity {
             $this->role = $role;
     }
     
+    public function setAccountKey(string $accountKey) : void
+    {
+            $this->accountKey = $accountKey;
+    }
 
 }

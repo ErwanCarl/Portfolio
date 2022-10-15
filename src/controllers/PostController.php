@@ -9,14 +9,23 @@ require_once('src/model/PostModel.php');
 class PostController 
 {
 
-    public function post(int $id) : void
+    public function post(int $id, int $page) : void
     {
         $postModel = new PostModel();
         $post = $postModel->getPost($id);
-        
-        $commentModel = new CommentModel();
-        $comments = $commentModel->getComments($id);
 
+        $commentModel = new CommentModel();
+        $elementsNumber = 5;
+        $validateCommentsNumber = $commentModel->validateCommentsCount($id);
+        $pageNumber = ceil($validateCommentsNumber[0]['validateCommentsNumber'] / $elementsNumber);
+
+        if(isset($page) && $page > 0 && $page <= $pageNumber) {
+            $currentPage = $page;
+        }else{
+            $currentPage = 1;
+        }
+
+        $comments = $commentModel->getComments($id, $currentPage, $elementsNumber);
         require('templates/post.php');
     }
 

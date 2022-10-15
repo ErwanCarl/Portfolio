@@ -26,7 +26,7 @@
 
 <div class="mainpart">    			
 	<div class="logoname">
-		<img alt="Logo professionnel" src="images/logodev"/>
+		<img alt="Logo professionnel" src="images/logodev.png"/>
 	</div>
 	
 	<div class="catchingwords">
@@ -88,7 +88,7 @@
 <hr class="homeBar">
 
 <div class="form_contact">
-	<form action="index.php" method="post">
+	<form action="index.php?action=sendcontactmail" method="post">
 		<h2>Contact</h2>
 
 		<div class="form_case">

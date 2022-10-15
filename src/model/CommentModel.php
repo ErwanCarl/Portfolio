@@ -11,9 +11,9 @@ class CommentModel extends Model
 
 /* get all comments from a post thanks to its id */
 
-    public function getComments (int $id) : array
+    public function getComments (int $id, int $currentPage, int $elementsNumber) : array
     {
-        $statement = $this->connection->prepare("SELECT `author`,`content`,`creation_date` FROM `comment` WHERE (`post_id` = ? AND validateComment = 1) ORDER BY `creation_date` DESC");
+        $statement = $this->connection->prepare("SELECT `author`,`content`,`creation_date` FROM `comment` WHERE (`post_id` = ? AND validateComment = 1) ORDER BY `creation_date` DESC LIMIT ".(($currentPage-1)*$elementsNumber).", $elementsNumber");
         $statement->execute([$id]);
         return $statement->fetchAll();
     }
@@ -61,15 +61,44 @@ class CommentModel extends Model
         return $statement->execute([$id]);
     }
 
-    public function moderatedListing() : array 
+    public function moderatedListing(int $currentPage, int $elementsNumber) : array 
     {
         $statement = $this->connection->query("
             SELECT * 
             FROM post 
             JOIN comment on comment.post_id = post.id
             WHERE validateComment = 2
-            ORDER BY comment.creation_date DESC"
+            ORDER BY comment.creation_date DESC 
+            LIMIT ".(($currentPage-1)*$elementsNumber).", $elementsNumber"
         );
         return $statement->fetchAll();
     }
+
+
+// Pagination function
+
+    public function moderatedCommentsCount() : array 
+    {
+        $statement = $this->connection->query("
+            SELECT COUNT(id) as moderatedCommentsNumber 
+            FROM comment 
+            WHERE validateComment = 2"
+        );
+        $statement->execute();
+        return $statement->fetchAll();
+    }
+
+    public function validateCommentsCount(int $id) : array
+    {
+        $statement = $this->connection->prepare("
+            SELECT COUNT(id) as validateCommentsNumber
+            FROM comment 
+            WHERE validateComment = 1 AND post_id = :post_id"
+            );
+        $statement->execute([
+            'post_id' => $id
+        ]);
+        return $statement->fetchAll();
+    }
+    
 } 

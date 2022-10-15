@@ -5,7 +5,7 @@
             if(!isset($_SESSION['Connection'])) {
         ;?>
                 <div class="sub_footer">
-                    <div>
+                    <div class="foot_img">
                         <img src="images/logo_connexion.png" />
                     </div>
                     <div>
@@ -16,7 +16,7 @@
             } else {
         ?>
                 <div class="sub_footer">
-                    <div>
+                    <div class="foot_img">
                         <img src="images/logo_connexion.png" />
                     </div>
                     <div>
@@ -28,7 +28,7 @@
         ?>
 
         <div class="sub_footer">
-            <div>   
+            <div class="foot_img">   
                 <img src="images/roue_crantee.png" />
             </div>
             <div>
@@ -37,11 +37,11 @@
         </div>
 
         <div class="sub_footer">
-            <div>
+            <div class="foot_img">
                 <img src="images/law_logo.png" />
             </div>
             <div>
-                <a href="">Mentions légales</a>
+                <a href="index.php?action=legalnotice">Mentions légales</a>
             </div>
         </div>
 

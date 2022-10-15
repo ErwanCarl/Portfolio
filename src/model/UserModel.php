@@ -11,7 +11,7 @@ class UserModel extends Model {
    public function userCreation(User $user) : bool 
    {
 
-        $statement = $this->connection->prepare("INSERT INTO user(name, nickname, username, password, mail, phonenumber) VALUES(:name, :nickname, :username, :password, :mail, :phonenumber)");
+        $statement = $this->connection->prepare("INSERT INTO user(name, nickname, username, password, mail, phonenumber, account_key) VALUES(:name, :nickname, :username, :password, :mail, :phonenumber, :account_key)");
 
         $line = $statement->execute([
             'name' => $user->getName(),
@@ -19,7 +19,8 @@ class UserModel extends Model {
             'username' => $user->getUsername(),
             'password'=> password_hash($user->getPassword(), PASSWORD_DEFAULT),
             'mail'=> $user->getMail(),
-            'phonenumber'=> $user->getPhoneNumber()
+            'phonenumber'=> $user->getPhoneNumber(),
+            'account_key' => $user->getAccountKey()
         ]);
 
         return ($line);
@@ -39,7 +40,7 @@ class UserModel extends Model {
         } 
 
         foreach ($users as $user) {
-            if(password_verify($formInput['password'], $user['password']) && $user['validateAccount'] === 1) {
+            if(password_verify($formInput['password'], $user['password'])) {
                 $user['id']=(int)$user['id'];
                 $userInformations = new User($user);
                 return $userInformations;
@@ -77,8 +78,6 @@ class UserModel extends Model {
         }else{
             return $userFound;
         }
-
-        
     }
 
     public function modifyUserRole(array $newRole) : bool
@@ -91,4 +90,19 @@ class UserModel extends Model {
         return $line;
     }
 
+    public function validateAccount(string $account_key) : bool 
+    {
+        $user = $this->connection->prepare("SELECT * FROM user WHERE `account_key` = ?");
+        $userFound = $user->execute([$account_key]);
+        $user->setFetchMode(PDO::FETCH_CLASS | PDO::FETCH_PROPS_LATE, 'User');
+        $userFound = $user->fetch();
+        
+        if($userFound) {
+            $statement = $this->connection->prepare("UPDATE user SET `validateAccount` = 1, `account_key` = null WHERE `account_key` = ?");
+            $line = $statement->execute([$account_key]);
+            return $line;
+        }else{
+            return false;
+        }
+    }
 }

@@ -30,6 +30,10 @@
 
 <hr class="passionBar">
 
+<div class="return_button">
+	<button type="button" onclick="window.location='index.php?action=admin#commentValidation'" class="btn btn-info mb-2">Retour à la modération</button>
+</div>
+
 <?php if($moderatedComments != null) { ?>
 	<?php
 		foreach($moderatedComments as $moderatedComment) {
@@ -60,6 +64,21 @@
 	<?php
 		}
 	?>
+
+<div class="pagination_bloc">
+    <?php for($i=1;$i<=$pageNumber;$i++) { 
+		if($i === $currentPage) { ?>
+			<div class="actual_pagination">
+				<?php echo($i); ?>
+			</div>
+		<?php }else{ ?>
+			<div class="pagination">
+				<a href='index.php?action=moderatedcomment&page=<?= $i ?>'><?php echo($i); ?></a>
+			</div>
+		<?php } ?>
+            
+	<?php } ?>
+</div>
 
 <?php }else{ ?>
 	<div class="no_restauration_list">
