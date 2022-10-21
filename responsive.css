@@ -1,4 +1,4 @@
-/* Mobile */
+/* --------------------------------- Mobile --------------------------------------- */
 
 @media screen and (max-width: 576px) {
 
@@ -105,6 +105,19 @@
         text-align : center;
     }
 
+    .social_bloc {
+        display: flex;
+        justify-content: space-around;
+    }
+
+    .social_bloc div {
+        margin: 0 20px 20px 20px;
+    }
+
+    #contactPage > footer > div.footer > div.social_bloc > div:nth-child(1) {
+        margin-right: 20px;
+        margin-left: 20px;
+    }
 
 /* -------------------- contact ---------------  */
 
@@ -203,11 +216,11 @@
     }
 
     #comment_connect {
-        margin-top : 40px;
+        margin-top : 80px;
     }
 
     .bloc_post_pic {
-        margin: 0 0 60px 0;
+        margin: 40px 0 60px 0;
     }
 
     #post_pic {
@@ -215,8 +228,13 @@
         max-width: 200px;
     }
 
+    body > div.post > div.post_author > h4:nth-child(2) {
+        padding: 0 10px;
+    }
+
     .pagination, .actual_pagination {
-        margin: 0;
+        margin: 3px;
+
     }
 
     .return_button button {
@@ -226,6 +244,10 @@
 
     #comment_connect > form > h2 {
         text-align: center;
+    }
+
+    .modal-footer {
+        width: 100%;
     }
 
     /* --------------------post edition ---------------  */
@@ -238,6 +260,459 @@
         width: 80%;
     }
 
+    .comments_list h4 {
+        text-align: left;
+        padding-left: 20px;
+        padding-right: 20px
+    }
+
+        /* --------------------moderated comments ---------------  */
+
+    #moderation_bloc, .comments_validation {
+        flex-direction: column;
+    }
+
+    #moderation_bloc2 {
+        width: 100%;
+        margin-top: 20px;
+        border-bottom: 1px solid #ced4da 
+    }
+
+    .validation_system {
+        width: 80%;
+    }
+
+    .pagination_bloc {
+        max-width: 90%;
+        display: grid;
+        grid-template-columns: repeat(5, 2fr);
+    }
+
+    #moderatedBar {
+        margin-bottom: 50px;
+    }
+
+    .pagination a {
+        margin: auto;
+    }
+
+    .actual_pagination {
+        display: flex;
+        justify-content: center;
+    }
+
+        /* -------------------- admin ---------------  */
+
+    body > div.adminNav > div.nav1 > nav {
+        padding: 20px;
+    }
+
+    .adminNav nav {
+        padding: 0;
+    }
+
+    .adminNav li {
+        padding: 10px 10px 0 10px;
+    }
+
+    .validation_button .comment_button {
+        margin: auto 20px auto 20px;
+    }
+
+    body > div.adminNav > div.nav1 {
+        padding: 0;
+    }
+
+    #moderation_comment {
+        flex-direction: column;
+        border-bottom: 1px solid #ced4da;
+    }
+
+    .validation_button {
+        margin: 20px auto;
+    }
+
+    #moderated_comment {
+        width: 60%;
+    }
+
+    .section_title {
+        margin: 30px auto;
+    }
+
+    .section_title h2 {
+        text-align: center;
+    }
+
+    .post_admin_page .return_button {
+        margin: 0;
+    }
+
+    .post_admin_page button {
+        padding: 8px 0;
+    }
+
+    body > .return_button:nth-child(10) {
+        margin: 70px auto 30px auto;
+    }
+
+    body > div.role_change_bloc > form {
+        margin: 30px 0 30px 20px;
+        width: 80%;
+    }
+
+    body > div.user_administration > form {
+        margin: 0 0 0 20px;
+        width: 80%;
+    }
+
+    .search_bloc {
+        width: 60%;
+    }
+
+    #admin_creation > div.title_bloc > h2 {
+        padding: 20px 5px 0 5px;
+    }
+
+    .user_administration {
+        margin-bottom: 40px;
+    }
+
+    .user_administration input {
+        max-width: 300px; 
+        min-width: 150px;
+    }
+
+    .user_administration input::placeholder {
+        visibility: hidden;
+    }
+
+    #search_button {
+        padding: 10px 10px 5px 10px;
+    }
 
 
+
+        /* -------------------- connection / account creation ---------------  */
+
+    #account_create button, #connection_form button {
+        width: 70%;
+    }
+}
+
+/* -------------------------------------------   Tablette ----------------------------------------------------- */
+
+@media screen and (min-width: 576px) and (max-width: 992px) { 
+
+
+/* ----------- Homepage ------------*/
+
+    body > div.form_contact > form {
+        width: 100%;
+    }
+
+    .mainpart {
+        flex-direction: column;
+    }
+
+    .catchingwords {
+        margin: 30px auto 0 auto;
+     }
+ 
+     .cv {
+         width: 50%;
+     }
+
+     .homeBar {
+        margin: 30px auto 50px auto;
+    }
+
+    body > div.mainpart > div.catchingwords > div.socialmedia {
+        width: 70%;
+    }
+
+    .logoname {
+        margin: auto;
+    }
+
+/* ----------- admin ------------*/
+
+    .adminNav ul {
+        flex-direction: column;
+    }
+
+    .adminNav ul li {
+        text-align: center;
+    }
+
+    .validation_system {
+        width: 80%;
+    }
+
+    .post_admin_page {
+        width: 90%;
+    }
+
+    .post_admin_page {
+        padding: 20px 10px 12px 10px;
+    }
+
+    body > div.adminNav > div.nav1 > nav {
+        padding: 20px;
+    }
+
+    .adminNav nav {
+        padding: 0;
+    }
+
+    .adminNav li {
+        padding: 10px 10px 0 10px;
+    }
+
+    .validation_button .comment_button {
+        margin: auto 20px auto 20px;
+    }
+
+    body > div.adminNav > div.nav1 {
+        padding: 0;
+    }
+
+    #moderation_comment {
+        flex-direction: column;
+        border-bottom: 1px solid #ced4da;
+    }
+
+    .validation_button {
+        margin: 20px auto;
+    }
+
+    #moderated_comment {
+        width: 60%;
+    }
+
+    .section_title {
+        margin: 30px auto;
+    }
+
+    .section_title h2 {
+        text-align: center;
+    }
+
+    .post_admin_page .return_button {
+        margin: 0;
+    }
+
+    .post_admin_page button {
+        padding: 8px 0;
+    }
+
+    body > div.role_change_bloc > form {
+        width: 70%;
+    }
+
+    #search_button {
+        padding: 10px 10px 5px 10px;
+    }
+
+
+/* ----------- blogposts ------------*/
+
+    .work_creation {
+        width: 90%;
+    }
+
+    .info_bloc {
+        max-height: 400px; 
+    }
+
+    .author_bloc h4 {
+        padding-right: 20px;
+    }
+
+    .info_bloc hr {
+        margin-left: auto;
+    }
+
+/* ----------- contact ------------*/
+
+    #contactPage > footer > div.footer > div.social_bloc > div:nth-child(1) {
+        margin: auto 20px auto 0;
+    }
+
+    .contactInfo {
+        margin: 0 auto 200px auto;
+        width: 40%; 
+        padding: 100px;
+    }
+
+/* ----------- footer ------------*/
+
+    .footer {
+        flex-direction: column;
+    }
+
+    .footer a {
+        vertical-align: middle;
+    }
+
+    .sub_footer {
+        margin: 10px auto;
+        padding: 10px 0;
+    }
+
+    .footer_socialmedia {
+        padding: 10px 0;
+    }
+
+    body > footer > div.footer > div.social_bloc > div:nth-child(1) {
+        margin-right: 20px;
+        margin-left: 20px;
+    }
+
+/* ----------- header ------------*/
+
+    body > header > div.banner > div.nav1 > nav > ul {
+        flex-direction: column;  
+    }
+
+    body > header > div.banner > div.nav1 > nav > ul {
+        text-align: center;
+    }
+
+/* ----------- moderated comments ------------*/
+
+    #moderation_bloc, .comments_validation {
+        flex-direction: column;
+    }
+
+    #moderation_bloc2 {
+        width: 100%;
+        margin-top: 20px;
+        border-bottom: 1px solid #ced4da 
+    }
+
+    .validation_system {
+        width: 80%;
+    }
+
+    .pagination_bloc {
+        max-width: 90%;
+        display: grid;
+        grid-template-columns: repeat(10, 2fr);
+    }
+
+    #moderatedBar {
+        margin-bottom: 50px;
+    }
+
+    .pagination a {
+        margin: auto;
+    }
+
+    .actual_pagination {
+        display: flex;
+        justify-content: center;
+    }
+
+    .admin_title h1 {
+        padding: 0 10px;
+    }
+    
+/* ----------- passions ------------*/
+
+    .passion {
+        margin: 0 auto 40px auto;
+        flex-direction: column;
+        width: 90%;
+    }
+
+    body > .passion:nth-child(5), body > .passion:nth-child(7) {
+        flex-direction: column-reverse;
+    }
+
+/* ----------- post ------------*/
+
+    .post, .comment_bloc {
+        width : 90%;
+    }
+
+    .return_button {
+        width : 60%;
+    }
+
+    .add_comment form {
+        width: 70%;
+        margin-bottom: 0;
+    }
+
+    #comment_connect {
+        margin-top : 80px;
+    }
+
+    .bloc_post_pic {
+        margin: 40px 0 60px 0;
+    }
+
+    #post_pic {
+        max-height: 400px;
+        max-width: 400px;
+    }
+
+    body > div.post > div.post_author > h4:nth-child(2) {
+        padding: 0 10px;
+    }
+
+    .pagination, .actual_pagination {
+        margin: 3px;
+
+    }
+
+    .return_button button {
+        margin: auto;
+        width: 90%;
+    }
+
+    #comment_connect > form > h2 {
+        text-align: center;
+    }
+
+    .modal-footer {
+        width: 100%;
+    }
+
+/* ----------- posts edition ------------*/
+
+    .form_post_creation form {  
+        width: 90%;
+    }
+
+}
+
+@media screen and (min-width: 992px) and (max-width: 1200px) { 
+
+    /* ----------- Homepage ------------*/
+
+    .cv {
+        width: 35%;
+    }
+
+    body > div.form_contact > form {
+        width: 60%;
+    }
+
+    .socialmedia {
+        width: 100%;
+        margin-top : 20px;
+    }
+
+    body > div.mainpart > div.catchingwords > div.socialmedia {
+        width: 100%;
+    }
+
+    /* ----------- admin ------------*/
+
+    .post_admin_page .return_button {
+        width: 40%;
+    }
+  
 }

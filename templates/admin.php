@@ -54,7 +54,7 @@
         foreach($pendingComments as $pendingComment) {
     ?>
 
-    <div class="comments_validation">
+    <div class="comments_validation" id="moderation_comment">
         <div class="validation_system">
             <div class ="comment_author">
                 <?php echo htmlspecialchars('Auteur : '.$pendingComment['author'].' - Article : '.$pendingComment['title']); ?>
@@ -87,7 +87,7 @@
 <?php } ?>
 
 <div class="return_button" id="moderated_comment">
-    <button type="button" onclick="window.location='index.php?action=moderatedcomment'" class="btn btn-info mb-2">Accéder à la liste des commentaires modérés</button>
+    <button type="button" onclick="window.location='index.php?action=moderatedcomment'" class="btn btn-info mb-2">Restauration</button>
 </div>
 
 <hr class="adminBar">

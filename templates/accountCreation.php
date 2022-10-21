@@ -26,7 +26,7 @@
 }
 ?>
 
-<div class="form_contact">
+<div class="form_contact" id="connection_form">
     <form action="index.php?action=connection" method="post">
         <h2>Connexion</h2>
 
@@ -72,7 +72,7 @@
 }
 ?>
 
-<div class="form_contact">
+<div class="form_contact" id="account_create">
     <form action="index.php?action=accountsubmit" method="post">
         <h2>Création de compte utilisateur</h2>
 
