@@ -105,4 +105,42 @@ class UserModel extends Model {
             return false;
         }
     }
+
+    public function getUserByMailCheck(string $userMail) : ?User
+    {
+        $user = $this->connection->prepare("SELECT * FROM user WHERE `mail` = ?");
+        $userFound = $user->execute([$userMail]);
+        $user->setFetchMode(PDO::FETCH_CLASS | PDO::FETCH_PROPS_LATE, 'User');
+        $userFound = $user->fetch();
+        return $userFound;
+    }
+
+    public function accountCheck(string $account_key) : ?User 
+    {
+        $user = $this->connection->prepare("SELECT * FROM user WHERE `account_key` = ?");
+        $userFound = $user->execute([$account_key]);
+        $user->setFetchMode(PDO::FETCH_CLASS | PDO::FETCH_PROPS_LATE, 'User');
+        $userFound = $user->fetch();
+        return $userFound;
+    }
+
+    public function passwordChange(string $password, string $userMail) : bool 
+    {
+        $passwordChange = $this->connection->prepare("UPDATE user SET `password` = :password, `account_key` = null WHERE `mail` = :mail");
+        $success = $passwordChange->execute([
+            'password' => $password,
+            'mail' => $userMail
+        ]);
+        return $success;
+    }
+
+    public function accountKeyGeneration(string $user_account_key, string $userMail) : bool 
+    {
+        $accountKey = $this->connection->prepare("UPDATE user SET `account_key` = :account_key WHERE `mail` = :mail");
+        $success = $accountKey->execute([
+            'account_key' => $user_account_key,
+            'mail' => $userMail
+        ]);
+        return $success;
+    }
 }

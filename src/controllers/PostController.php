@@ -5,6 +5,8 @@ declare(strict_types=1);
 
 require_once('src/model/CommentModel.php');
 require_once('src/model/PostModel.php');
+require_once('src/services/PaginationHandler.php');
+require_once('src/services/PostHandler.php');
 
 class PostController 
 {
@@ -19,12 +21,9 @@ class PostController
         $validateCommentsNumber = $commentModel->validateCommentsCount($id);
         $pageNumber = ceil($validateCommentsNumber[0]['validateCommentsNumber'] / $elementsNumber);
 
-        if(isset($page) && $page > 0 && $page <= $pageNumber) {
-            $currentPage = $page;
-        }else{
-            $currentPage = 1;
-        }
-
+        $pagination = new PaginationHandler();
+        $currentPage = $pagination->pagination($page, $pageNumber);
+        
         $comments = $commentModel->getComments($id, $currentPage, $elementsNumber);
         require('templates/post.php');
     }
@@ -44,7 +43,7 @@ class PostController
     public function newPostSubmit(array $form_input, array $picture_file) : void 
     {
         if(!isset($picture_file['picture']) || $picture_file['picture']['error'] != 0) {
-            $_SESSION['error'] = 'Le téléchargement de l\'image a échoué.';
+            $_SESSION['error'] = 'Une image est requise, son téléchargement a échoué.';
             header('Location:index.php?action=postcreation');
         } else {    
             if($picture_file['picture']['size'] <= 1000000) {
@@ -133,15 +132,8 @@ class PostController
         $postModel = new PostModel();
         $postDelete = $postModel->postSuppression($id);
 
-        if($postDelete) {
-            $_SESSION['success2'] = 'L\'article a bien été supprimé.';
-            header('Location:index.php?action=admin#gestionArticle');
-        } else {
-            $_SESSION['error2'] = 'La suppression de l\'article a échouée.';
-            header('Location:index.php?action=admin#gestionArticle');
-        }
-
-        
+        $deleteCheck = new PostHandler();
+        $deleteCheck->deleteCheck($postDelete); 
     }
 
 }

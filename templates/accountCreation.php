@@ -23,7 +23,7 @@
             ?>
         </div>
 <?php
-}
+    }
 ?>
 
 <div class="form_contact" id="connection_form">
@@ -43,8 +43,12 @@
         <div class="form_button">
             <button type="submit">Se connecter</button>
         </div>
+        <div class="lost_password">
+            <button type="button" onclick="window.location='index.php?action=passwordlandingpage'" class="btn btn-secondary mb-2">Mot de passe oublié</button>
+        </div>
     </form>
 </div>
+
 
 <!-- ------------------------ Creation system -------------------- --> 
 
@@ -69,7 +73,7 @@
             ?>
         </div>
 <?php
-}
+    }
 ?>
 
 <div class="form_contact" id="account_create">

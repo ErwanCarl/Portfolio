@@ -9,5 +9,4 @@ class PassionController
     {
         require('templates/passions.php');
     }
-
 }
