@@ -45,14 +45,15 @@
             </div>
         </div>
 
-        <div class="footer_socialmedia">
-			<a href="https://github.com/ErwanCarl"><img alt="Logo GitHub" src="images/Githublogo_footer.png"/></a>          
-        </div>
+        <div class="social_bloc">
+            <div class="footer_socialmedia">
+                <a href="https://github.com/ErwanCarl"><img alt="Logo GitHub" src="images/Githublogo_footer.png"/></a>          
+            </div>
 
-        <div class="footer_socialmedia">
-            <a href="https://www.linkedin.com/in/erwan-carlini-711a1a134/"><img alt="Logo LinkedIn" src="images/linkedinlogo_footer.png" /></a>          
+            <div class="footer_socialmedia">
+                <a href="https://www.linkedin.com/in/erwan-carlini-711a1a134/"><img alt="Logo LinkedIn" src="images/linkedinlogo_footer.png" /></a>          
+            </div>
         </div>
-
     </div>	
 
     <div class="copyright">

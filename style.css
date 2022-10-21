@@ -23,6 +23,10 @@ a:hover, a:active {
     color: #e07dc3;
 }
 
+body > footer > div.footer > div.social_bloc > div:nth-child(1) {
+    margin-right: 120px;
+}
+
 .nav1 ul {
     list-style-type: none;
     display : flex;
@@ -90,6 +94,18 @@ nav ul a {
 .sub_footer img {
     margin-right: 10px;
 }
+
+.social_bloc {
+    display: flex;
+    justify-content: space-around;
+}
+
+#contactPage > footer > div.footer > div.social_bloc > div:nth-child(1) {
+    margin-right: 120px;
+    margin-left: -50px;
+}
+
+
 
 /* --------------------   homepage   ------------------------ */
 
@@ -263,7 +279,7 @@ form {
     border-radius: 10%;
     font-size: 24px;
     font-family :'Parisienne', 'Arial Narrow', Arial, sans-serif;
-    width: 40%;
+    width: 60%;
 }
 
 .form_contact h2 {
@@ -454,7 +470,7 @@ body > div:nth-child(2) > form {
     display: flex;
     margin: auto auto 30px auto;
     justify-content: center;
-    width :30%;
+    width: 50%;
 }
 
 .return_button button {
@@ -711,6 +727,14 @@ body > div:nth-child(2) > a {
 }
 
 /* ------ Admin --------- */
+
+body > div.role_change_bloc > form > div.form_button > button {
+    width: 40%;
+}
+
+body > div.role_change_bloc > form {
+    width: 70%;
+}
 
 span {
     font-weight: bold;
