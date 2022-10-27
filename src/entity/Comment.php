@@ -96,5 +96,4 @@ class Comment extends Entity {
     {
         $this->userId = (int) $userId;
     }
-
 }

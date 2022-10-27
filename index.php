@@ -52,7 +52,7 @@ if(isset($_GET['action']) && $_GET['action'] !== '') {
         $controller = new ConnectionController();
         $controller->passwordModifyCheck($_GET);
 
-    } elseif($_GET['action'] === 'passwordModify') {
+    } elseif($_GET['action'] === 'passwordmodify') {
         $controller = new ConnectionController();
         $controller->passwordModify($_POST);
 

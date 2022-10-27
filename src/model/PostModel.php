@@ -60,7 +60,16 @@ class PostModel extends Model
 
     public function modifyRegister(Post $post) : bool 
     {
-        $statement = $this->connection->prepare("UPDATE post SET title = :title, chapo = :chapo, content = :content, modificationDate = NOW(), picture = :picture WHERE id = :id");
+        if($post->getPicture() === null) {
+            $statement = $this->connection->prepare("UPDATE post SET title = :title, chapo = :chapo, content = :content, modificationDate = NOW() WHERE id = :id");
+        return $statement->execute([
+            'id' => $post->getId(),
+            'title' => $post->getTitle(),
+            'chapo' => $post->getChapo(),
+            'content' => $post->getContent(),
+        ]);
+        }else{
+            $statement = $this->connection->prepare("UPDATE post SET title = :title, chapo = :chapo, content = :content, modificationDate = NOW(), picture = :picture WHERE id = :id");
         return $statement->execute([
             'id' => $post->getId(),
             'title' => $post->getTitle(),
@@ -68,6 +77,7 @@ class PostModel extends Model
             'content' => $post->getContent(),
             'picture' => $post->getPicture()
         ]);
+        }
     }
 
     public function postSuppression(int $id): bool
@@ -75,6 +85,4 @@ class PostModel extends Model
         $statement = $this->connection->prepare("DELETE FROM post WHERE id = ?");
         return $statement->execute([$id]);
     }
-
-
 }

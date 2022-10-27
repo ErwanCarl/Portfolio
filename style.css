@@ -23,6 +23,10 @@ a:hover, a:active {
     color: #e07dc3;
 }
 
+#adminNavBar a:hover {
+    color: #301f61;
+}
+
 body > footer > div.footer > div.social_bloc > div:nth-child(1) {
     margin-right: 120px;
 }

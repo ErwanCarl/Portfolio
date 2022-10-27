@@ -26,11 +26,11 @@ class AccountValidationHandler {
                     $_SESSION['success'] = "Votre compte a bien été créé, vérifiez vos mails pour le valider.";
                     header('Location: index.php?action=accountcreation');
                 }else{
-                    $_SESSION['error'] = "Le mail de validation de compte n'a pas été envoyé, veuillez contacter l'administrateur";
+                    $_SESSION['error'] = "Le mail de validation de compte n'a pas été envoyé, veuillez contacter l'administrateur.";
                     header('Location: index.php?action=accountcreation');
                 }
             }else{
-                $_SESSION['error'] = "Impossible de créer le compte, veuillez contacter l'administrateur";
+                $_SESSION['error'] = "Impossible de créer le compte, veuillez contacter l'administrateur.";
                 header('Location: index.php?action=accountcreation');
             }
         }

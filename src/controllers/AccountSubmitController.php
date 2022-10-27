@@ -6,6 +6,7 @@ declare(strict_types=1);
 require_once('src/model/UserModel.php');
 require_once('src/entity/User.php');
 require_once('src/services/AccountValidationHandler.php');
+require_once('src/services/EmailFormatHandler.php');
 
 class AccountSubmitController
 {
@@ -13,6 +14,10 @@ class AccountSubmitController
     {
         $userModel = new UserModel();
         $user = new User($formInput);
+
+        $emailFormatCheck = new EmailFormatHandler();
+        $emailFormatCheck->emailFormatCheck($user);
+
         $accountKey = base_convert(hash('sha256', time() . mt_rand()), 16, 36);
         $user->setAccountKey($accountKey);
         $usert = $userModel->userPseudoCheck($user);
@@ -29,5 +34,4 @@ class AccountSubmitController
         $accountValidation = new AccountValidationHandler();
         $accountValidation->validationCheck($validateAccount);
     }
-
 }

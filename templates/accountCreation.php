@@ -52,30 +52,6 @@
 
 <!-- ------------------------ Creation system -------------------- --> 
 
-<?php 
-    if(isset($_SESSION['FlashExistingPseudo'])) { 
-?>
-        <div class="flash_connection">
-            <?php 
-                $message = $_SESSION['FlashExistingPseudo'];
-                unset($_SESSION['FlashExistingPseudo']);
-                echo $message;
-                ?>
-        </div>
-<?php 
-    } elseif (isset($_SESSION['FlashExistingMail'])) {
-?>
-        <div class="flash_connection">
-            <?php
-                $message = $_SESSION['FlashExistingMail'];
-                unset($_SESSION['FlashExistingMail']);
-                echo $message;
-            ?>
-        </div>
-<?php
-    }
-?>
-
 <div class="form_contact" id="account_create">
     <form action="index.php?action=accountsubmit" method="post">
         <h2>Création de compte utilisateur</h2>
@@ -107,7 +83,7 @@
 
         <div class="form_case">
             <label for="password">Mot de passe</label>
-            <input required type="password" name="password" id="password">
+            <input required type="password" name="password" id="password" minlength="8" pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$" TITLE="Le mot de passe doit contenir au minimum 8 caractères, une lettre minuscule, une lettre majuscule et un chiffre.">
         </div>
 
         <div class="form_button">

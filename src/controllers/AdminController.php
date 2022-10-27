@@ -3,9 +3,8 @@
 /* To have a strict use of variable types */
 declare(strict_types=1);
 
-require_once('src/entity/Comment.php');
 require_once('src/model/CommentModel.php');
-require_once('src/model/PostModel.php');
+require_once('src/model/UserModel.php');
 require_once('src/services/AdminHandler.php');
 require_once('src/services/PaginationHandler.php');
 
@@ -14,22 +13,8 @@ class AdminController
 {
     public function administration() : void
     {
-        if(isset($_SESSION['userInformations']) && $_SESSION['userInformations']['role'] === 'admin' && isset($_SESSION['Connection'])) {
-            $commentModel = new CommentModel();
-            $pendingComments = $commentModel->getPendingComments();
-
-            $postModel = new PostModel();
-            $posts = $postModel->getPosts();
-
-            require('templates/admin.php');
-        } else if(!isset($_SESSION['Connection'])) {
-            $_SESSION['error'] = 'Vous devez être connecté pour administrer le site.';
-            header('Location: index.php');
-        } else {
-            $_SESSION['error'] = 'Accès interdit, vous ne possèdez pas les droits administrateur.';
-            header('Location: index.php');
-        }
-     
+        $admin = new AdminHandler();
+        $admin->adminAccessCheck();
     }
 
     public function commentValidate($id) : void 
@@ -39,7 +24,6 @@ class AdminController
 
         $adminValidateCommentCheck = new AdminHandler();
         $adminValidateCommentCheck->adminValidateCommentCheck($validateComment);
-       
     }
 
     public function commentRestaurate($id) : void 
