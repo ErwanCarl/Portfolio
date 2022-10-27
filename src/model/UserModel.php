@@ -3,8 +3,11 @@
 /* To have a strict use of variable types */
 declare(strict_types=1);
 
-require_once('src/model/Model.php');
-require_once('src/entity/User.php');
+namespace App\model;
+
+use App\entity\User;
+use App\model\Model;
+use \PDO;
 
 class UserModel extends Model {
 
@@ -71,7 +74,7 @@ class UserModel extends Model {
     {
         $statement = $this->connection->prepare("SELECT * FROM user WHERE username = ?");
         $statement->execute([$username['pseudo']]);
-        $statement->setFetchMode(PDO::FETCH_CLASS | PDO::FETCH_PROPS_LATE, 'User');
+        $statement->setFetchMode(PDO::FETCH_CLASS | PDO::FETCH_PROPS_LATE, 'App\entity\User');
         $userFound = $statement->fetch();
 
         if($userFound === false) {
@@ -95,7 +98,7 @@ class UserModel extends Model {
     {
         $user = $this->connection->prepare("SELECT * FROM user WHERE `account_key` = ?");
         $user->execute([$account_key]);
-        $user->setFetchMode(PDO::FETCH_CLASS | PDO::FETCH_PROPS_LATE, 'User');
+        $user->setFetchMode(PDO::FETCH_CLASS | PDO::FETCH_PROPS_LATE, 'App\entity\User');
         $userFound = $user->fetch();
         
         if($userFound) {
@@ -111,7 +114,7 @@ class UserModel extends Model {
     {
         $user = $this->connection->prepare("SELECT * FROM user WHERE `mail` = ?");
         $user->execute([$userMail]);
-        $user->setFetchMode(PDO::FETCH_CLASS | PDO::FETCH_PROPS_LATE, 'User');
+        $user->setFetchMode(PDO::FETCH_CLASS | PDO::FETCH_PROPS_LATE, 'App\entity\User');
         $userFound = $user->fetch();
         
         if($userFound === false) {
@@ -126,7 +129,7 @@ class UserModel extends Model {
     {
         $user = $this->connection->prepare("SELECT * FROM user WHERE `account_key` = ?");
         $userFound = $user->execute([$accountKey]);
-        $user->setFetchMode(PDO::FETCH_CLASS | PDO::FETCH_PROPS_LATE, 'User');
+        $user->setFetchMode(PDO::FETCH_CLASS | PDO::FETCH_PROPS_LATE, 'App\entity\User');
         $userFound = $user->fetch();
         if($userFound != null) {
             $userFound->setAccountKey($accountKey);
@@ -164,7 +167,7 @@ class UserModel extends Model {
             'account_key' => $userInfo['token'],
             'mail' => $userInfo['email']
         ]);
-        $checkUser->setFetchMode(PDO::FETCH_CLASS | PDO::FETCH_PROPS_LATE, 'User');
+        $checkUser->setFetchMode(PDO::FETCH_CLASS | PDO::FETCH_PROPS_LATE, 'App\entity\User');
         $userFound = $checkUser->fetch();
         if($userFound != false) {
             return $userFound;

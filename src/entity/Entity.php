@@ -1,5 +1,7 @@
 <?php 
 
+namespace App\entity;
+
 Class Entity
 {
 

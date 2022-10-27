@@ -3,7 +3,9 @@
 /* To have a strict use of variable types */
 declare(strict_types=1);
 
-require_once('src/entity/Comment.php');
+namespace App\services;
+
+use App\entity\Comment;
 
 class AddCommentHandler {
 

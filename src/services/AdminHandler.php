@@ -3,8 +3,11 @@
 /* To have a strict use of variable types */
 declare(strict_types=1);
 
-require_once('src/model/CommentModel.php');
-require_once('src/model/PostModel.php');
+namespace App\services;
+
+use App\model\CommentModel;
+use App\model\PostModel;
+use App\entity\User;
 
 class AdminHandler 
 {

@@ -3,11 +3,12 @@
 /* To have a strict use of variable types */
 declare(strict_types=1);
 
-require_once('src/model/CommentModel.php');
-require_once('src/model/UserModel.php');
-require_once('src/services/AdminHandler.php');
-require_once('src/services/PaginationHandler.php');
+namespace App\controllers;
 
+use App\model\CommentModel;
+use App\model\UserModel;
+use App\services\AdminHandler;
+use App\services\PaginationHandler;
 
 class AdminController 
 {

@@ -1,18 +1,21 @@
 <?php
 
-session_start();
+require_once('Autoloader.php');
+Autoloader::register();
 
-require_once('src/controllers/HomepageController.php');
-require_once('src/controllers/PostController.php');
-require_once('src/controllers/PassionController.php');
-require_once('src/controllers/ContactController.php');
-require_once('src/controllers/AddCommentController.php');
-require_once('src/controllers/AccountCreationController.php');
-require_once('src/controllers/AccountSubmitController.php');
-require_once('src/controllers/ConnectionController.php');
-require_once('src/controllers/AdminController.php');
-require_once('src/controllers/LegalNoticeController.php');
-require_once('src/controllers/MailController.php');
+use App\controllers\AccountCreationController;
+use App\controllers\AccountSubmitController;
+use App\controllers\AddCommentController;
+use App\controllers\AdminController;
+use App\controllers\ConnectionController;
+use App\controllers\ContactController;
+use App\controllers\HomepageController;
+use App\controllers\LegalNoticeController;
+use App\controllers\MailController;
+use App\controllers\PassionController;
+use App\controllers\PostController;
+
+session_start();
 
 if(isset($_GET['action']) && $_GET['action'] !== '') {
 

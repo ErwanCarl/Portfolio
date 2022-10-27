@@ -3,7 +3,9 @@
 /* To have a strict use of variable types */
 declare(strict_types=1);
 
-require_once('src/model/PostModel.php');
+namespace App\controllers;
+
+use App\model\PostModel;
 
 class HomepageController 
 {

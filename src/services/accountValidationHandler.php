@@ -3,7 +3,11 @@
 /* To have a strict use of variable types */
 declare(strict_types=1);
 
-require_once('src/services/SendMail.php');
+namespace App\services;
+
+use App\services\SendMail;
+use App\entity\User;
+use App\model\UserModel;
 
 class AccountValidationHandler {
 

@@ -3,10 +3,12 @@
 /* To have a strict use of variable types */
 declare(strict_types=1);
 
-require_once('src/model/UserModel.php');
-require_once('src/entity/User.php');
-require_once('src/services/AccountValidationHandler.php');
-require_once('src/services/EmailFormatHandler.php');
+namespace App\controllers;
+
+use App\model\UserModel;
+use App\entity\User;
+use App\services\AccountValidationHandler;
+use App\services\EmailFormatHandler;
 
 class AccountSubmitController
 {

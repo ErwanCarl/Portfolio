@@ -1,6 +1,13 @@
 <?php
 
-require_once('src/config/ConfigMail.php');
+/* To have a strict use of variable types */
+declare(strict_types=1);
+
+namespace App\services;
+
+use App\config\ConfigMail;
+use App\entity\User;
+
 require 'vendor/autoload.php';
 use \Mailjet\Resources;
 use \PHPMailer\PHPMailer\PHPMailer;
