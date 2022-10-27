@@ -12,6 +12,8 @@ use \PDO;
 class PostModel extends Model
 {
 
+    private const PostClass = 'App\entity\Post'; 
+
 /* Get all blogposts informations */
 
     public function getPosts(): array 
@@ -35,7 +37,7 @@ class PostModel extends Model
         $statement = $this->connection->prepare("SELECT `id`, `title`,`author`,`chapo`,`creationDate`, `content`, `modificationDate`, `picture` FROM `post` WHERE `id` = ? ORDER BY `creationDate` DESC");
         
         $statement->execute([$id]);
-        $statement->setFetchMode(PDO::FETCH_CLASS | PDO::FETCH_PROPS_LATE, 'App\entity\Post');
+        $statement->setFetchMode(PDO::FETCH_CLASS | PDO::FETCH_PROPS_LATE, self::PostClass);
         return $statement->fetch();
     }
 
@@ -57,7 +59,7 @@ class PostModel extends Model
     {
         $statement = $this->connection->prepare("SELECT * FROM post WHERE id = ?");
         $statement->execute([$id]);
-        $statement->setFetchMode(PDO::FETCH_CLASS | PDO::FETCH_PROPS_LATE, 'App\entity\Post');
+        $statement->setFetchMode(PDO::FETCH_CLASS | PDO::FETCH_PROPS_LATE, self::PostClass);
         return $statement->fetch();
     }
 
