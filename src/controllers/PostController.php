@@ -5,10 +5,11 @@ declare(strict_types=1);
 
 require_once('src/model/CommentModel.php');
 require_once('src/model/PostModel.php');
+require_once('src/services/PaginationHandler.php');
+require_once('src/services/PostHandler.php');
 
 class PostController 
 {
-
     public function post(int $id, int $page) : void
     {
         $postModel = new PostModel();
@@ -19,12 +20,9 @@ class PostController
         $validateCommentsNumber = $commentModel->validateCommentsCount($id);
         $pageNumber = ceil($validateCommentsNumber[0]['validateCommentsNumber'] / $elementsNumber);
 
-        if(isset($page) && $page > 0 && $page <= $pageNumber) {
-            $currentPage = $page;
-        }else{
-            $currentPage = 1;
-        }
-
+        $pagination = new PaginationHandler();
+        $currentPage = $pagination->pagination($page, $pageNumber);
+        
         $comments = $commentModel->getComments($id, $currentPage, $elementsNumber);
         require('templates/post.php');
     }
@@ -43,41 +41,8 @@ class PostController
 
     public function newPostSubmit(array $form_input, array $picture_file) : void 
     {
-        if(!isset($picture_file['picture']) || $picture_file['picture']['error'] != 0) {
-            $_SESSION['error'] = 'Le téléchargement de l\'image a échoué.';
-            header('Location:index.php?action=postcreation');
-        } else {    
-            if($picture_file['picture']['size'] <= 1000000) {
-                $fileInfo = pathinfo($picture_file['picture']['name']);
-                $extension = $fileInfo['extension'];
-                $allowedExtensions = ['jpg', 'jpeg', 'gif', 'png'];
-                if (in_array($extension, $allowedExtensions)) {
-                    move_uploaded_file($picture_file['picture']['tmp_name'], 'images/posts_pictures/' . basename($picture_file['picture']['name']));
-                    $picture = 'images/posts_pictures/' . basename($picture_file['picture']['name']);
-                    $form_input['author'] = $_SESSION['userInformations']['username'];
-
-                    $postModel = new PostModel();
-                    $post = new Post($form_input);
-                    $post->setUserId($_SESSION['userInformations']['id']);
-                    $post->setPicture($picture);
-                    $postCreate = $postModel->postCreate($post);
-
-                    if($postCreate) {
-                        $_SESSION['success'] = 'L\'article a correctement été crée.';
-                        header('Location:index.php?action=blogposts');
-                    } else {
-                        $_SESSION['error'] = 'La création de l\'article a échouée.';
-                        header('Location:index.php?action=postcreation');
-                    }
-                } else {
-                    $_SESSION['error'] = 'Attention, les extensions autorisées pour les images sont PNG, JPG, JPEG et GIF.';
-                    header('Location:index.php?action=postcreation');
-                }
-            } else {
-                $_SESSION['error'] = 'L\'image ne doit pas dépasser 1 Mo.';
-                header('Location:index.php?action=postcreation');
-            } 
-        }
+        $postDataCheck = new PostHandler();
+        $postDataCheck->postCreateDataCheck($form_input, $picture_file);
     }
 
     public function postEdition($id) : void 
@@ -90,42 +55,8 @@ class PostController
 
     public function modifySubmit(int $id, array $form_input, array $picture_file) : void 
     {
-        if(!isset($picture_file['picture']) || $picture_file['picture']['error'] != 0) {
-            $_SESSION['error'] = 'Le téléchargement de l\'image a échoué.';
-            header('Location:index.php?action=postmodify&id='.$id);
-        } else {    
-            if($picture_file['picture']['size'] <= 1000000) {
-                $fileInfo = pathinfo($picture_file['picture']['name']);
-                $extension = $fileInfo['extension'];
-                $allowedExtensions = ['jpg', 'jpeg', 'gif', 'png'];
-                if (in_array($extension, $allowedExtensions)) {
-                    move_uploaded_file($picture_file['picture']['tmp_name'], 'images/posts_pictures/' . basename($picture_file['picture']['name']));
-                    $picture = 'images/posts_pictures/' . basename($picture_file['picture']['name']);
-
-                    $postModel = new PostModel();
-                    $form_input['author'] = $_SESSION['userInformations']['username'];
-                    $post = new Post($form_input);
-                    $post->setId($id);
-                    $post->setPicture($picture);
-                    $postModify = $postModel->modifyRegister($post);
-
-                    if($postModify) {
-                        unset($_SESSION['Modify']);
-                        $_SESSION['success'] = 'L\'article a été correctement modifié.';
-                        header('Location:index.php?action=post&id='.$id);
-                    } else {
-                        $_SESSION['error'] = 'La modification de l\'article a échouée.';
-                        header('Location:index.php?action=postmodify&id='.$id);  
-                    }                  
-                } else {
-                    $_SESSION['error'] = 'Attention, les extensions autorisées pour les images sont PNG, JPG, JPEG et GIF.';
-                    header('Location:index.php?action=postmodify&id='.$id);                    
-                }
-            } else {
-                $_SESSION['error'] = 'L\'image ne doit pas dépasser 1 Mo.';
-                header('Location:index.php?action=postmodify&id='.$id);                    
-            } 
-        }
+        $postDataCheck = new PostHandler();
+        $postDataCheck->postModifyDataCheck($form_input, $picture_file, $id);
     }
 
     public function postDelete(int $id) : void 
@@ -133,15 +64,7 @@ class PostController
         $postModel = new PostModel();
         $postDelete = $postModel->postSuppression($id);
 
-        if($postDelete) {
-            $_SESSION['success2'] = 'L\'article a bien été supprimé.';
-            header('Location:index.php?action=admin#gestionArticle');
-        } else {
-            $_SESSION['error2'] = 'La suppression de l\'article a échouée.';
-            header('Location:index.php?action=admin#gestionArticle');
-        }
-
-        
+        $deleteCheck = new PostHandler();
+        $deleteCheck->deleteCheck($postDelete); 
     }
-
 }

@@ -119,6 +119,10 @@
         margin-left: 20px;
     }
 
+    body > footer > div.footer > div.social_bloc > div:nth-child(1) {
+        margin-right: 20px;
+    }
+
 /* -------------------- contact ---------------  */
 
     #contactPage .nav1{
@@ -391,12 +395,20 @@
         padding: 10px 10px 5px 10px;
     }
 
-
-
         /* -------------------- connection / account creation ---------------  */
 
     #account_create button, #connection_form button {
-        width: 70%;
+        width: 80%;
+    }
+
+    /* -------------------- Lost password ---------------  */
+
+    .form_password form {
+        width: 90%;
+    } 
+
+    .form_password form h2 {
+        text-align: center;
     }
 }
 

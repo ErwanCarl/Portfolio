@@ -54,7 +54,7 @@
 
 			<div class="form_case">
 				<label for="picture">Image</label>
-				<input type="file" id="image_input" name="picture" id="picture" value="<?php echo htmlspecialchars($post->getPicture()); ?>" />
+				<input type="file" id="image_input" name="picture" id="picture" placeholder="<?php echo htmlspecialchars($post->getPicture()); ?>" value="<?php echo htmlspecialchars($post->getPicture()); ?>" />
             </div>
 	
 			<div class="form_button">
@@ -85,7 +85,7 @@
 			</div>
 		
 			<div class="form_case">
-				<!-- <input type="hidden" name="MAX_FILE_SIZE" value="1000000" /> -->
+				<input type="hidden" name="MAX_FILE_SIZE" value="1000000" />
 				<label for="picture">Image</label>
 				<input type="file" id="image_input" name="picture" id="picture"/>
 

@@ -31,7 +31,7 @@
 
     <hr class="passionBar">
 
-    <div class="nav1">
+    <div class="nav1" id="adminNavBar">
         <nav>
             <ul>
                 <li><a href="index.php?action=admin#commentValidation">Validation de commentaires</a></li>

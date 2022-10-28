@@ -40,6 +40,22 @@ if(isset($_GET['action']) && $_GET['action'] !== '') {
         $controller = new ConnectionController();
         $controller->accountConnection($_POST);
 
+    } elseif($_GET['action'] === 'sendpasswordmail') {
+        $controller = new ConnectionController();
+        $controller->lostPassword($_POST);
+
+    } elseif($_GET['action'] === 'passwordlandingpage') {
+        $controller = new ConnectionController();
+        $controller->passwordLandingPage();
+
+    } elseif($_GET['action'] === 'lostpassword') {
+        $controller = new ConnectionController();
+        $controller->passwordModifyCheck($_GET);
+
+    } elseif($_GET['action'] === 'passwordmodify') {
+        $controller = new ConnectionController();
+        $controller->passwordModify($_POST);
+
     } elseif($_GET['action'] === 'closesession') {
         unset($_SESSION);
         session_destroy();

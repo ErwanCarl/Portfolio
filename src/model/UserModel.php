@@ -73,6 +73,7 @@ class UserModel extends Model {
         $statement->execute([$username['pseudo']]);
         $statement->setFetchMode(PDO::FETCH_CLASS | PDO::FETCH_PROPS_LATE, 'User');
         $userFound = $statement->fetch();
+
         if($userFound === false) {
             return null;
         }else{
@@ -93,7 +94,7 @@ class UserModel extends Model {
     public function validateAccount(string $account_key) : bool 
     {
         $user = $this->connection->prepare("SELECT * FROM user WHERE `account_key` = ?");
-        $userFound = $user->execute([$account_key]);
+        $user->execute([$account_key]);
         $user->setFetchMode(PDO::FETCH_CLASS | PDO::FETCH_PROPS_LATE, 'User');
         $userFound = $user->fetch();
         
@@ -103,6 +104,72 @@ class UserModel extends Model {
             return $line;
         }else{
             return false;
+        }
+    }
+
+    public function getUserByMailCheck(string $userMail) : ?User
+    {
+        $user = $this->connection->prepare("SELECT * FROM user WHERE `mail` = ?");
+        $user->execute([$userMail]);
+        $user->setFetchMode(PDO::FETCH_CLASS | PDO::FETCH_PROPS_LATE, 'User');
+        $userFound = $user->fetch();
+        
+        if($userFound === false) {
+            return null;
+        }else{
+            return $userFound;
+        }
+
+    }
+
+    public function accountCheck(string $accountKey) : ?User 
+    {
+        $user = $this->connection->prepare("SELECT * FROM user WHERE `account_key` = ?");
+        $userFound = $user->execute([$accountKey]);
+        $user->setFetchMode(PDO::FETCH_CLASS | PDO::FETCH_PROPS_LATE, 'User');
+        $userFound = $user->fetch();
+        if($userFound != null) {
+            $userFound->setAccountKey($accountKey);
+            return $userFound;
+        }else{
+            return null;
+        }
+        
+    }
+
+    public function passwordChange(string $password, string $userMail) : bool 
+    {
+        $passwordChange = $this->connection->prepare("UPDATE user SET `password` = :password, `account_key` = null WHERE `mail` = :mail");
+        $success = $passwordChange->execute([
+            'password' => password_hash($password, PASSWORD_DEFAULT),
+            'mail' => $userMail
+        ]);
+        return $success;
+    }
+
+    public function accountKeyGeneration(string $user_account_key, string $userMail) : bool 
+    {
+        $accountKey = $this->connection->prepare("UPDATE user SET `account_key` = :account_key WHERE `mail` = :mail");
+        $success = $accountKey->execute([
+            'account_key' => $user_account_key,
+            'mail' => $userMail
+        ]);
+        return $success;
+    }
+
+    public function userPasswordChangeSecurity(array $userInfo) : ?User
+    {
+        $checkUser = $this->connection->prepare("SELECT * FROM user WHERE `mail` = :mail AND `account_key` = :account_key");
+        $checkUser->execute([
+            'account_key' => $userInfo['token'],
+            'mail' => $userInfo['email']
+        ]);
+        $checkUser->setFetchMode(PDO::FETCH_CLASS | PDO::FETCH_PROPS_LATE, 'User');
+        $userFound = $checkUser->fetch();
+        if($userFound != false) {
+            return $userFound;
+        }else{
+            return null;
         }
     }
 }

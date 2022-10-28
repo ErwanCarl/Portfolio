@@ -61,7 +61,7 @@ class Post extends Entity
         return $this->modificationDate; 
     }
 
-    public function getPicture() : string
+    public function getPicture() : ?string
     { 
         return $this->picture; 
     }
@@ -114,7 +114,7 @@ class Post extends Entity
         $this->modificationDate = $modificationDate;
     }
 
-    public function setPicture(string $picture) : void
+    public function setPicture(?string $picture) : void
     {
         $this->picture =  $picture;
     }
@@ -123,5 +123,4 @@ class Post extends Entity
     {
         $this->userId = (int) $userId;
     }
-
 }
