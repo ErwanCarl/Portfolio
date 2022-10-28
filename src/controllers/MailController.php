@@ -3,9 +3,11 @@
 /* To have a strict use of variable types */
 declare(strict_types=1);
 
-require_once('src/services/SendMail.php');
-require_once('src/services/EmailFormatHandler.php');
-require_once('src/entity/User.php');
+namespace App\controllers;
+
+use App\services\SendMail;
+use App\services\EmailFormatHandler;
+use App\entity\User;
 
 class MailController
 {

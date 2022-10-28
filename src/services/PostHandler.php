@@ -3,9 +3,10 @@
 /* To have a strict use of variable types */
 declare(strict_types=1);
 
-require_once('src/model/PostModel.php');
-require_once('src/entity/Post.php');
+namespace App\services;
 
+use App\model\PostModel;
+use App\entity\Post;
 
 class PostHandler {
 

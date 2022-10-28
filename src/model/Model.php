@@ -2,6 +2,10 @@
 
 declare(strict_types=1);
 
+namespace App\model;
+
+use \PDO;
+
 class Model 
 {
     public ?PDO $connection = null;

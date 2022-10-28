@@ -3,8 +3,11 @@
 /* To have a strict use of variable types */
 declare(strict_types=1);
 
-require_once('src/model/Model.php');
-require_once('src/entity/Comment.php');
+namespace App\model;
+
+use App\entity\Comment;
+use App\model\Model;
+use \PDO;
 
 class CommentModel extends Model
 {

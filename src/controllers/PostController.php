@@ -3,10 +3,12 @@
 /* To have a strict use of variable types */
 declare(strict_types=1);
 
-require_once('src/model/CommentModel.php');
-require_once('src/model/PostModel.php');
-require_once('src/services/PaginationHandler.php');
-require_once('src/services/PostHandler.php');
+namespace App\controllers;
+
+use App\model\CommentModel;
+use App\model\PostModel;
+use App\services\PaginationHandler;
+use App\services\PostHandler;
 
 class PostController 
 {

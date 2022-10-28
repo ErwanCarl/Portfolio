@@ -3,11 +3,16 @@
 /* To have a strict use of variable types */
 declare(strict_types=1);
 
-require_once('src/model/Model.php');
-require_once('src/entity/Post.php');
+namespace App\model;
+
+use App\entity\Post;
+use App\model\Model;
+use \PDO;
 
 class PostModel extends Model
 {
+
+    private const PostClass = 'App\entity\Post'; 
 
 /* Get all blogposts informations */
 
@@ -32,7 +37,7 @@ class PostModel extends Model
         $statement = $this->connection->prepare("SELECT `id`, `title`,`author`,`chapo`,`creationDate`, `content`, `modificationDate`, `picture` FROM `post` WHERE `id` = ? ORDER BY `creationDate` DESC");
         
         $statement->execute([$id]);
-        $statement->setFetchMode(PDO::FETCH_CLASS | PDO::FETCH_PROPS_LATE, 'Post');
+        $statement->setFetchMode(PDO::FETCH_CLASS | PDO::FETCH_PROPS_LATE, self::PostClass);
         return $statement->fetch();
     }
 
@@ -54,7 +59,7 @@ class PostModel extends Model
     {
         $statement = $this->connection->prepare("SELECT * FROM post WHERE id = ?");
         $statement->execute([$id]);
-        $statement->setFetchMode(PDO::FETCH_CLASS | PDO::FETCH_PROPS_LATE, 'Post');
+        $statement->setFetchMode(PDO::FETCH_CLASS | PDO::FETCH_PROPS_LATE, self::PostClass);
         return $statement->fetch();
     }
 
