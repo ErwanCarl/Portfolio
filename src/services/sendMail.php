@@ -39,6 +39,7 @@ class SendMail extends ConfigMail {
 
         //Content
         $mail->isHTML(true);                                  //Set email format to HTML
+        $mail->CharSet = "utf-8";
         $mail->Subject = 'Prise de contact - '.$form_input['name'];
         $mail->Body    = $form_input['message'];
         $mail->AltBody = $form_input['message'];
@@ -73,6 +74,7 @@ class SendMail extends ConfigMail {
     
         //Content
         $mail->isHTML(true);                                  //Set email format to HTML
+        $mail->CharSet = "utf-8";
         $mail->Subject = 'Validation de votre compte - '.$user->getUsername();
         $mail->Body    = 
             '<p>Bienvenue sur le site portfolio de Erwan Carlini,</p>
@@ -120,6 +122,7 @@ class SendMail extends ConfigMail {
     
         //Content
         $mail->isHTML(true);                                  //Set email format to HTML
+        $mail->CharSet = "utf-8";
         $mail->Subject = 'Changement de mot de passe - '.$user->getUsername();
         $mail->Body    = 
             '<p>Ce mail vous est envoyé pour redéfinir le mot de passe de votre compte,</p>
