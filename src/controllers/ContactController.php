@@ -9,6 +9,6 @@ class ContactController
 {
     public function contact() : void
     {
-        require('templates/contact.php');
+        require(TEMPLATE_DIR.'/contact.php');
     }
 }

@@ -9,18 +9,23 @@ use App\model\UserModel;
 use App\entity\User;
 use App\services\ConnectionHandler;
 use App\services\EmailFormatHandler;
+use App\services\TokenHandler;
+use App\services\InputCheckHandler;
 
 class ConnectionController 
 {
-    public function accountConnection(array $formInput) : void
+    public function accountConnection() : void
     {
+        $csrfTokenCheck = new TokenHandler();
+        $csrfTokenCheck->csrfTokenCheck($_POST['csrf_token']);
+
         $userMailFormat = new User();
-        $userMailFormat->setMail($formInput['mail']);
+        $userMailFormat->setMail($_POST['mail']);
         $emailFormatCheck = new EmailFormatHandler();
         $emailFormatCheck->emailFormatCheck($userMailFormat);
 
         $userModel = new UserModel();
-        $userExtract = $userModel->getUserInformations($formInput);
+        $userExtract = $userModel->getUserInformations($_POST);
 
         $connectionCheck = new ConnectionHandler();
         $connectionCheck->connectionCheck($userExtract);
@@ -28,41 +33,50 @@ class ConnectionController
 
     public function passwordLandingPage() : void 
     {
-        require('templates/lostPassword.php');
+        require(TEMPLATE_DIR.'/lostPassword.php');
     }
 
-    public function lostPassword(array $formInput) : void 
+    public function lostPassword() : void 
     {
         $userMailFormat = new User();
-        $userMailFormat->setMail($formInput['email']);
+        $userMailFormat->setMail($_POST['email']);
         $emailFormatCheck = new EmailFormatHandler();
         $emailFormatCheck->emailFormatCheck($userMailFormat);
 
         $userModel = new UserModel();
-        $userCheck = $userModel->getUserByMailCheck($formInput['email']);
+        $userCheck = $userModel->getUserByMailCheck($_POST['email']);
         $passwordChangeCheck = new ConnectionHandler();
         $passwordChangeCheck -> passwordChangeCheck($userCheck, $userModel);
     }
 
-    public function passwordModifyCheck(array $mailInfo) : void 
+    public function passwordModifyCheck(string $token) : void 
     {
-        $accountKey = $mailInfo['token'];
         $userModel = new UserModel();
-        $user = $userModel->accountCheck($accountKey);
+        $user = $userModel->accountCheck($token);
         $passwordLinkCheck = new ConnectionHandler();
         $passwordLinkCheck -> passwordLinkCheck($user);
     }
 
-    public function passwordModify(array $userInfo) : void 
+    public function passwordModify() : void 
     {
+        $inputCheck = new InputCheckHandler();
+        $inputCheck->passwordChangeInputCheck($_POST);
+        
         $userMailFormat = new User();
-        $userMailFormat->setMail($userInfo['email']);
+        $userMailFormat->setMail($_POST['email']);
         $emailFormatCheck = new EmailFormatHandler();
         $emailFormatCheck->emailFormatCheck($userMailFormat);
 
         $userModel = new UserModel();
-        $userSecurity = $userModel->userPasswordChangeSecurity($userInfo);
+        $userSecurity = $userModel->userPasswordChangeSecurity($_POST);
         $accountPasswordSecurityCheck = new ConnectionHandler();
-        $accountPasswordSecurityCheck->accountPasswordSecurityCheck($userSecurity, $userInfo);
+        $accountPasswordSecurityCheck->accountPasswordSecurityCheck($userSecurity, $_POST);
+    }
+
+    public function closeSession() : void 
+    {
+        unset($_SESSION);
+        session_destroy();
+        header('Location: /accountcreationending');
     }
 }

@@ -8,7 +8,7 @@ namespace App\services;
 use App\config\ConfigMail;
 use App\entity\User;
 
-require 'vendor/autoload.php';
+require '../vendor/autoload.php';
 use \Mailjet\Resources;
 use \PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\SMTP;
@@ -39,16 +39,17 @@ class SendMail extends ConfigMail {
 
         //Content
         $mail->isHTML(true);                                  //Set email format to HTML
+        $mail->CharSet = "utf-8";
         $mail->Subject = 'Prise de contact - '.$form_input['name'];
         $mail->Body    = $form_input['message'];
         $mail->AltBody = $form_input['message'];
 
         if($mail->send()) {
             $_SESSION['success'] = "La prise de contact a bien été envoyé à l'administrateur.";
-            header('Location: index.php');
+            header('Location: /');
         }else{
             $_SESSION['error'] = "L'envoi du message a échoué. Erreur : {$mail->ErrorInfo}.";
-            header('Location: index.php');
+            header('Location: /');
         }
     }
 
@@ -73,6 +74,7 @@ class SendMail extends ConfigMail {
     
         //Content
         $mail->isHTML(true);                                  //Set email format to HTML
+        $mail->CharSet = "utf-8";
         $mail->Subject = 'Validation de votre compte - '.$user->getUsername();
         $mail->Body    = 
             '<p>Bienvenue sur le site portfolio de Erwan Carlini,</p>
@@ -80,7 +82,7 @@ class SendMail extends ConfigMail {
             <p>Pour activer votre compte, veuillez cliquer sur le lien ci-dessous
             ou copier/coller dans votre navigateur Internet. </p>
             
-            <p>'.self::HOST.'index.php?action=inscriptionvalidation&token='.$user->getAccountKey().'</p>
+            <p>'.self::HOST.'inscriptionvalidation/'.$user->getAccountKey().'</p>
             
             <p>-------------------------------</p>
             <p>Ceci est un mail automatique, merci de ne pas y répondre.</p>'; 
@@ -91,7 +93,7 @@ class SendMail extends ConfigMail {
             Pour activer votre compte, veuillez cliquer sur le lien ci-dessous
             ou copier/coller dans votre navigateur Internet. 
             
-            '.self::HOST.'index.php?action=inscriptionvalidation&token='.$user->getAccountKey().'
+            '.self::HOST.'inscriptionvalidation/'.$user->getAccountKey().'
             
             -------------------------------
             Ceci est un mail automatique, merci de ne pas y répondre.'; 
@@ -120,6 +122,7 @@ class SendMail extends ConfigMail {
     
         //Content
         $mail->isHTML(true);                                  //Set email format to HTML
+        $mail->CharSet = "utf-8";
         $mail->Subject = 'Changement de mot de passe - '.$user->getUsername();
         $mail->Body    = 
             '<p>Ce mail vous est envoyé pour redéfinir le mot de passe de votre compte,</p>
@@ -127,7 +130,7 @@ class SendMail extends ConfigMail {
             <p>Pour changer votre mot de passe, veuillez cliquer sur le lien ci-dessous
             ou copier/coller dans votre navigateur Internet. </p>
             
-            <p>'.self::HOST.'index.php?action=lostpassword&token='.$user->getAccountKey().'</p>
+            <p>'.self::HOST.'lostpassword/'.$user->getAccountKey().'</p>
 
             <p>Si vous n\'êtes pas à l\'origine de cette demande de changement de mot de passe, 
             veuillez ne pas tenir compte du mail. </p>
@@ -141,7 +144,7 @@ class SendMail extends ConfigMail {
            Pour changer votre mot de passe, veuillez cliquer sur le lien ci-dessous
             ou copier/coller dans votre navigateur Internet. 
             
-            '.self::HOST.'index.php?action=lostpassword&token='.$user->getAccountKey().'
+            '.self::HOST.'lostpassword/'.$user->getAccountKey().'
 
            Si vous n\'êtes pas à l\'origine de cette demande de changement de mot de passe, 
             veuillez ne pas tenir compte du mail.
@@ -151,10 +154,10 @@ class SendMail extends ConfigMail {
 
         if($mail->send()) {
             $_SESSION['success'] = "Un mail vous a été envoyé pour redéfinir votre mot de passe.";
-            header('Location: index.php?action=accountcreation');
+            header('Location: /accountcreation');
         }else{
             $_SESSION['error'] = "La demande de changement de mot de passe a échoué, veuillez contacter l'administrateur.";
-            header('Location: index.php?action=accountcreation');
+            header('Location: /accountcreation');
         }
     }
 }

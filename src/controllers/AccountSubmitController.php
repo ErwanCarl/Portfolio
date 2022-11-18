@@ -9,29 +9,33 @@ use App\model\UserModel;
 use App\entity\User;
 use App\services\AccountValidationHandler;
 use App\services\EmailFormatHandler;
+use App\services\InputCheckHandler;
 
 class AccountSubmitController
 {
-    public function accountSubmit($formInput) : void 
+    public function accountSubmit() : void 
     {
+        $inputCheck = new InputCheckHandler();
+        $inputCheck->userInputCheck($_POST);
+
         $userModel = new UserModel();
-        $user = new User($formInput);
+        $user = new User($_POST);
 
         $emailFormatCheck = new EmailFormatHandler();
         $emailFormatCheck->emailFormatCheck($user);
 
         $accountKey = base_convert(hash('sha256', time() . mt_rand()), 16, 36);
         $user->setAccountKey($accountKey);
-        $usert = $userModel->userPseudoCheck($user);
+        $userModel->userPseudoCheck($user);
 
         $accountValidation = new AccountValidationHandler();
         $accountValidation->accountCreationHandler($userModel, $user);
     }
 
-    public function inscriptionValidation(string $accountKey) : void 
+    public function inscriptionValidation(string $token) : void 
     {
         $userModel = new UserModel();
-        $validateAccount = $userModel->validateAccount($accountKey);
+        $validateAccount = $userModel->validateAccount($token);
 
         $accountValidation = new AccountValidationHandler();
         $accountValidation->validationCheck($validateAccount);

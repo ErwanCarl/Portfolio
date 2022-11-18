@@ -35,13 +35,13 @@
 
 <div class="work_creation">
 	<div class="title_bloc">
-		<h2><?php echo htmlspecialchars($post['title']); ?></h2>
+		<h2><?php echo htmlspecialchars($post->getTitle()); ?></h2>
 	</div>
 	<div class="post_bloc">
 		<div class="pic_bloc">
-			<a href="index.php?action=post&id=<?= urlencode($post['id']) ?>">
+			<a href="/post/<?= urlencode($post->getId()) ?>/1">
 				<div class="posts_picture">
-					<img id="pic_base" src="<?php echo htmlspecialchars($post['picture']); ?>">
+					<img id="pic_base" src="<?php echo htmlspecialchars($post->getPicture()); ?>">
 					<img id="pic_hover" src="images/loupe_post_hover.png">
 				</div>
 			</a>
@@ -49,10 +49,10 @@
 		<div class="info_bloc">
 			<div class="author_bloc">
 				<h4><?php 
-				if($post['modificationDate'] === null) {
-					echo htmlspecialchars($post['author'].' - Date de création : '.$post['creationDate']);
+				if($post->getModificationDate() === null) {
+					echo htmlspecialchars($post->getAuthor().' - Date de création : '.$post->getCreationDate());
 				}else{
-					echo htmlspecialchars($post['author'].' - Dernière modification : '.$post['modificationDate']);
+					echo htmlspecialchars($post->getAuthor().' - Dernière modification : '.$post->getModificationDate());
 				}?>
 				</h4>
 			</div>
@@ -60,7 +60,7 @@
 			<hr>
 			
 			<div class="chapo_bloc">
-				<h4><?php echo htmlspecialchars($post['chapo']); ?></h4>
+				<h4><?php echo htmlspecialchars($post->getChapo()); ?></h4>
 			</div>
 		</div>
 		

@@ -12,12 +12,15 @@ use \PDO;
 class CommentModel extends Model
 {
 
+    private const CommentClass = 'App\entity\Comment'; 
+
 /* get all comments from a post thanks to its id */
 
     public function getComments (int $id, int $currentPage, int $elementsNumber) : array
     {
-        $statement = $this->connection->prepare("SELECT `author`,`content`,`creation_date` FROM `comment` WHERE (`post_id` = ? AND validateComment = 1) ORDER BY `creation_date` DESC LIMIT ".(($currentPage-1)*$elementsNumber).", $elementsNumber");
+        $statement = $this->connection->prepare("SELECT `author`,`content`,`creation_date` AS creationDate FROM `comment` WHERE (`post_id` = ? AND validate_comment = 1) ORDER BY `creation_date` DESC LIMIT ".(($currentPage-1)*$elementsNumber).", $elementsNumber");
         $statement->execute([$id]);
+        $statement->setFetchMode(PDO::FETCH_CLASS | PDO::FETCH_PROPS_LATE, self::CommentClass);
         return $statement->fetchAll();
     }
 
@@ -27,13 +30,13 @@ class CommentModel extends Model
 
     public function createComment(int $postId, Comment $comment) : bool 
     {
-        $statement = $this->connection->prepare("INSERT INTO comment(post_id, author, content, userId) VALUES(:post_id, :author, :content, :userId)");
+        $statement = $this->connection->prepare("INSERT INTO comment(post_id, author, content, user_id) VALUES(:post_id, :author, :content, :user_id)");
 
         $line = $statement->execute([
             'post_id' => $postId,
             'author'=> $comment->getAuthor(),
             'content' => $comment->getContent(),
-            'userId'=>$_SESSION['userInformations']['id']
+            'user_id'=>$_SESSION['userInformations']['id']
         ]);
 
         return ($line);
@@ -44,23 +47,23 @@ class CommentModel extends Model
         $statement = $this->connection->query("
             SELECT * 
             FROM post 
-            JOIN comment on comment.post_id = post.id
-            WHERE validateComment = 0
+            INNER JOIN comment on comment.post_id = post.id
+            WHERE validate_comment = 0
             ORDER BY comment.creation_date"
         );
-        
+        $statement->setFetchMode(PDO::FETCH_CLASS | PDO::FETCH_PROPS_LATE, self::CommentClass);
         return $statement->fetchAll();
     }
 
     public function commentValidation(int $id) : bool 
     {
-        $statement = $this->connection->prepare("UPDATE comment SET `validateComment` = 1 WHERE id = ?");
+        $statement = $this->connection->prepare("UPDATE comment SET `validate_comment` = 1 WHERE id = ?");
         return $statement->execute([$id]);
     }
 
     public function commentModeration(int $id) : bool 
     {
-        $statement = $this->connection->prepare("UPDATE comment SET `validateComment` = 2 WHERE id = ?");
+        $statement = $this->connection->prepare("UPDATE comment SET `validate_comment` = 2 WHERE id = ?");
         return $statement->execute([$id]);
     }
 
@@ -69,11 +72,12 @@ class CommentModel extends Model
         $statement = $this->connection->query("
             SELECT * 
             FROM post 
-            JOIN comment on comment.post_id = post.id
-            WHERE validateComment = 2
+            INNER JOIN comment on comment.post_id = post.id
+            WHERE validate_comment = 2
             ORDER BY comment.creation_date DESC 
             LIMIT ".(($currentPage-1)*$elementsNumber).", $elementsNumber"
         );
+        $statement->setFetchMode(PDO::FETCH_CLASS | PDO::FETCH_PROPS_LATE, self::CommentClass);
         return $statement->fetchAll();
     }
 
@@ -85,7 +89,7 @@ class CommentModel extends Model
         $statement = $this->connection->query("
             SELECT COUNT(id) as moderatedCommentsNumber 
             FROM comment 
-            WHERE validateComment = 2"
+            WHERE validate_comment = 2"
         );
         $statement->execute();
         return $statement->fetchAll();
@@ -96,7 +100,7 @@ class CommentModel extends Model
         $statement = $this->connection->prepare("
             SELECT COUNT(id) as validateCommentsNumber
             FROM comment 
-            WHERE validateComment = 1 AND post_id = :post_id"
+            WHERE validate_comment = 1 AND post_id = :post_id"
             );
         $statement->execute([
             'post_id' => $id

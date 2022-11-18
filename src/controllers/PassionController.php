@@ -9,6 +9,6 @@ class PassionController
 {
     public function passionList() : void 
     {
-        require('templates/passions.php');
+        require(TEMPLATE_DIR.'/passions.php');
     }
 }

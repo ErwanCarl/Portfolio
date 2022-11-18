@@ -15,10 +15,10 @@ class AccountValidationHandler {
     {
         if ($userModel->userPseudoCheck($user) > 0) {
             $_SESSION['error'] = "Ce pseudo est déjà utilisé, veuillez en choisir un autre.";
-            header('Location: index.php?action=accountcreation');
+            header('Location: /accountcreation');
         } elseif ($userModel->userMailCheck($user) > 0) {
             $_SESSION['error'] = "Cet email est déjà utilisé, veuillez en utiliser un autre.";
-            header('Location: index.php?action=accountcreation');
+            header('Location: /accountcreation');
         } else {
             $result = $userModel->userCreation($user);
 
@@ -28,14 +28,14 @@ class AccountValidationHandler {
 
                 if($accountValidationMail) {
                     $_SESSION['success'] = "Votre compte a bien été créé, vérifiez vos mails pour le valider.";
-                    header('Location: index.php?action=accountcreation');
+                    header('Location: /accountcreation');
                 }else{
                     $_SESSION['error'] = "Le mail de validation de compte n'a pas été envoyé, veuillez contacter l'administrateur.";
-                    header('Location: index.php?action=accountcreation');
+                    header('Location: /accountcreation');
                 }
             }else{
                 $_SESSION['error'] = "Impossible de créer le compte, veuillez contacter l'administrateur.";
-                header('Location: index.php?action=accountcreation');
+                header('Location: /accountcreation');
             }
         }
     }
@@ -44,10 +44,10 @@ class AccountValidationHandler {
     {
         if($validateAccount) {
             $_SESSION['success'] = "Votre compte a été validé, vous pouvez désormais vous connecter.";
-            header('Location: index.php?action=accountcreation');
+            header('Location: /accountcreation');
         }else{
             $_SESSION['error'] = "Le lien a expiré ou a déjà été utilisé, veuillez tenter de vous connecter ou contactez l'administrateur.";
-            header('Location: index.php?action=accountcreation');
+            header('Location: /accountcreation');
         }
     }
 }

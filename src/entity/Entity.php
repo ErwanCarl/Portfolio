@@ -12,14 +12,22 @@ Class Entity
         }
     }
 
+    // to transform snake cae from BDD to Camel case functions from entities
+
+    public function snakeToCamel(string $input) : string
+    {
+        return lcfirst(str_replace(' ', '', ucwords(str_replace('_', ' ', $input))));
+    }
+
     public function hydrate(array $data) : void
     {
         foreach($data as $key => $value)
         {
-            $method = 'set'.ucfirst($key);
-            if(method_exists($this, $method))
+            $method = 'set_'.$key;
+            $transformedMethod = $this->snakeToCamel($method);
+            if(method_exists($this, $transformedMethod))
             {
-                $this->$method($value);
+                $this->$transformedMethod($value);
             }
         }
     }

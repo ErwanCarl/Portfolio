@@ -31,7 +31,7 @@
 <hr class="passionBar">
 
 <div class="return_button">
-	<button type="button" onclick="window.location='index.php?action=admin#commentValidation'" class="btn btn-info mb-2">Retour à la modération</button>
+	<button type="button" onclick="window.location='/admin#commentValidation'" class="btn btn-info mb-2">Retour à la modération</button>
 </div>
 
 <?php if($moderatedComments != null) { ?>
@@ -42,17 +42,20 @@
 	<div class="comments_validation" id="moderation_bloc">
 		<div class="validation_system">
 			<div class ="comment_author">
-				<?php echo htmlspecialchars('Auteur : '.$moderatedComment['author'].' - Article : '.$moderatedComment['title']); ?>
+				<?php echo htmlspecialchars('Auteur : '.$moderatedComment->getAuthor().' - Article : '.$moderatedComment->title); ?>
 			</div>
 			
 			<div class ="comment_content">
-				<?php echo htmlspecialchars($moderatedComment['content']); ?>
+				<?php echo htmlspecialchars($moderatedComment->getContent()); ?>
 			</div>
 		</div>
 
 		<div class="validation_button" id="moderation_bloc2">
 			<div class ="comment_button" id="moderation_button">
-				<a href="index.php?action=restauredcomment&id=<?= $moderatedComment['id'] ?>" class="btn btn-info mb-2 active" role="button">Restaurer</a>
+				<form method="post" action="/restauredcomment/<?= $moderatedComment->getId() ?>">
+                    <input type="hidden" name="csrf_token" id="csrf_token" value="<?php echo $_SESSION['csrf_token']; ?>"/>
+                    <button type="submit" class="btn btn-info mb-2 active" role="button">Restaurer</button>
+                </form>
 			</div>
 			<div class="restauration_details">
 				<p>Utiliser cette fonction pour restaurer le commentaire et l'afficher sur l'article.</p>
@@ -65,20 +68,20 @@
 		}
 	?>
 
-<div class="pagination_bloc">
-    <?php for($i=1;$i<=$pageNumber;$i++) { 
-		if($i === $currentPage) { ?>
-			<div class="actual_pagination">
-				<?php echo($i); ?>
-			</div>
-		<?php }else{ ?>
-			<div class="pagination">
-				<a href='index.php?action=moderatedcomment&page=<?= $i ?>'><?php echo($i); ?></a>
-			</div>
+	<div class="pagination_bloc">
+		<?php for($i=1;$i<=$pageNumber;$i++) { 
+			if($i === $currentPage) { ?>
+				<div class="actual_pagination">
+					<?php echo($i); ?>
+				</div>
+			<?php }else{ ?>
+				<div class="pagination">
+					<a href='/moderatedcomment/<?= $i ?>'><?php echo($i); ?></a>
+				</div>
+			<?php } ?>
+				
 		<?php } ?>
-            
-	<?php } ?>
-</div>
+	</div>
 
 <?php }else{ ?>
 	<div class="no_restauration_list">

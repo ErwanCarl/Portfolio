@@ -18,14 +18,16 @@ class PostModel extends Model
 
     public function getPosts(): array 
     {
-        $statement = $this->connection->query("SELECT `id`, `title`,`author`,`chapo`,`creationDate`, `modificationDate`, `picture` FROM `post` ORDER BY `creationDate` DESC");
+        $statement = $this->connection->query("SELECT `id`, `title`,`author`,`chapo`,`creation_date` AS creationDate, `modification_date` AS modificationDate, `picture` FROM `post` ORDER BY `creation_date` DESC");
+        $statement->setFetchMode(PDO::FETCH_CLASS | PDO::FETCH_PROPS_LATE, self::PostClass);
 
         return $statement->fetchAll();
     }
 
     public function getPostsHomepage(): array 
     {
-        $statement = $this->connection->query("SELECT `id`, `title`,`author`,`chapo`,`creationDate`, `modificationDate`, `picture` FROM `post` ORDER BY `creationDate` DESC LIMIT 3");
+        $statement = $this->connection->query("SELECT `id`, `title`,`author`,`chapo`,`creation_date` AS creationDate, `modification_date` AS modificationDate, `picture` FROM `post` ORDER BY `creation_date` DESC LIMIT 3");
+        $statement->setFetchMode(PDO::FETCH_CLASS | PDO::FETCH_PROPS_LATE, self::PostClass);
 
         return $statement->fetchAll();
     }
@@ -34,8 +36,7 @@ class PostModel extends Model
 
     public function getPost(int $id): Post 
     {
-        $statement = $this->connection->prepare("SELECT `id`, `title`,`author`,`chapo`,`creationDate`, `content`, `modificationDate`, `picture` FROM `post` WHERE `id` = ? ORDER BY `creationDate` DESC");
-        
+        $statement = $this->connection->prepare("SELECT `id`, `title`,`author`,`chapo`,`creation_date` AS creationDate, `content`, `modification_date` AS modificationDate, `picture` FROM `post` WHERE `id` = ? ORDER BY `creation_date` DESC");
         $statement->execute([$id]);
         $statement->setFetchMode(PDO::FETCH_CLASS | PDO::FETCH_PROPS_LATE, self::PostClass);
         return $statement->fetch();
@@ -55,9 +56,9 @@ class PostModel extends Model
         return $line;
     }
 
-    public function postModification($id) : Post 
+    public function postModification(int $id) : Post 
     {
-        $statement = $this->connection->prepare("SELECT * FROM post WHERE id = ?");
+        $statement = $this->connection->prepare("SELECT `id`, `title`,`author`,`chapo`,`creation_date` AS creationDate, `content`, `modification_date` AS modificationDate, `picture`, `user_id` AS userId FROM post WHERE id = ?");
         $statement->execute([$id]);
         $statement->setFetchMode(PDO::FETCH_CLASS | PDO::FETCH_PROPS_LATE, self::PostClass);
         return $statement->fetch();
@@ -66,7 +67,7 @@ class PostModel extends Model
     public function modifyRegister(Post $post) : bool 
     {
         if($post->getPicture() === null) {
-            $statement = $this->connection->prepare("UPDATE post SET title = :title, chapo = :chapo, content = :content, modificationDate = NOW() WHERE id = :id");
+            $statement = $this->connection->prepare("UPDATE post SET title = :title, chapo = :chapo, content = :content, modification_date = NOW() WHERE id = :id");
         return $statement->execute([
             'id' => $post->getId(),
             'title' => $post->getTitle(),
@@ -74,7 +75,7 @@ class PostModel extends Model
             'content' => $post->getContent(),
         ]);
         }else{
-            $statement = $this->connection->prepare("UPDATE post SET title = :title, chapo = :chapo, content = :content, modificationDate = NOW(), picture = :picture WHERE id = :id");
+            $statement = $this->connection->prepare("UPDATE post SET title = :title, chapo = :chapo, content = :content, modification_date = NOW(), picture = :picture WHERE id = :id");
         return $statement->execute([
             'id' => $post->getId(),
             'title' => $post->getTitle(),

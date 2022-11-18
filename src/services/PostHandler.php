@@ -14,10 +14,10 @@ class PostHandler {
     {
         if($postDelete) {
             $_SESSION['success2'] = 'L\'article a bien été supprimé.';
-            header('Location:index.php?action=admin#gestionArticle');
+            header('Location: /admin#gestionArticle');
         } else {
             $_SESSION['error2'] = 'La suppression de l\'article a échouée.';
-            header('Location:index.php?action=admin#gestionArticle');
+            header('Location: /admin#gestionArticle');
         }
     }
 
@@ -25,7 +25,7 @@ class PostHandler {
     {
         if(!isset($picture_file['picture']) || $picture_file['picture']['error'] != 0) {
             $_SESSION['error'] = 'Une image est requise, son téléchargement a échoué.';
-            header('Location:index.php?action=postcreation');
+            header('Location: /postcreation');
         } else {    
             if($picture_file['picture']['size'] <= 1000000) {
                 $fileInfo = pathinfo($picture_file['picture']['name']);
@@ -44,18 +44,18 @@ class PostHandler {
 
                     if($postCreate) {
                         $_SESSION['success'] = 'L\'article a correctement été crée.';
-                        header('Location:index.php?action=blogposts');
+                        header('Location: /blogposts');
                     } else {
                         $_SESSION['error'] = 'La création de l\'article a échouée.';
-                        header('Location:index.php?action=postcreation');
+                        header('Location: /postcreation');
                     }
                 } else {
                     $_SESSION['error'] = 'Attention, les extensions autorisées pour les images sont PNG, JPG, JPEG et GIF.';
-                    header('Location:index.php?action=postcreation');
+                    header('Location: /postcreation');
                 }
             } else {
                 $_SESSION['error'] = 'L\'image ne doit pas dépasser 1 Mo.';
-                header('Location:index.php?action=postcreation');
+                header('Location: /postcreation');
             } 
         }
     }
@@ -64,7 +64,7 @@ class PostHandler {
     {
         if($picture_file['picture']['error'] != 0 && $picture_file['picture']['error'] != 4) {
             $_SESSION['error'] = 'Le téléchargement de l\'image a échoué.';
-            header('Location:index.php?action=postmodify&id='.$id);
+            header('Location: /postmodify/'.$id);
         } else {    
             if($picture_file['picture']['size'] <= 1000000 && $picture_file['picture']['error'] != 4) {
                 $fileInfo = pathinfo($picture_file['picture']['name']);
@@ -84,14 +84,14 @@ class PostHandler {
                     if($postModify) {
                         unset($_SESSION['Modify']);
                         $_SESSION['success'] = 'L\'article a été correctement modifié.';
-                        header('Location:index.php?action=post&id='.$id);
+                        header('Location: /post/'.$id.'/1');
                     } else {
                         $_SESSION['error'] = 'La modification de l\'article a échouée.';
-                        header('Location:index.php?action=postmodify&id='.$id);  
+                        header('Location: /postmodify/'.$id);  
                     }                  
                 } else {
                     $_SESSION['error'] = 'Attention, les extensions autorisées pour les images sont PNG, JPG, JPEG et GIF.';
-                    header('Location:index.php?action=postmodify&id='.$id);                    
+                    header('Location: /postmodify/'.$id);                    
                 }
             } elseif($picture_file['picture']['error'] = 4) {
                 $picture = null;
@@ -105,14 +105,14 @@ class PostHandler {
                 if($postModify) {
                     unset($_SESSION['Modify']);
                     $_SESSION['success'] = 'L\'article a été correctement modifié.';
-                    header('Location:index.php?action=post&id='.$id);
+                    header('Location: /post/'.$id.'/1');
                 } else {
                     $_SESSION['error'] = 'La modification de l\'article a échouée.';
-                    header('Location:index.php?action=postmodify&id='.$id);  
+                    header('Location: /postmodify/'.$id);  
                 }                                    
             } else {
                 $_SESSION['error'] = 'L\'image ne doit pas dépasser 1 Mo.';
-                header('Location:index.php?action=postmodify&id='.$id);                    
+                header('Location: /postmodify/'.$id);                    
             } 
         }
     }

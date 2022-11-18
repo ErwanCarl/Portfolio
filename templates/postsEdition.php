@@ -30,21 +30,21 @@
 
 <hr class="passionBar">
 
-<?php if(isset($post) AND isset($_SESSION['Modify'])) { ?>
+<?php if(isset($post) && isset($_SESSION['Modify'])) { ?>
 	<div class="form_post_creation">
-		<form action="index.php?action=modifysubmit&id=<?=urlencode($post->getId())?>" method="post" enctype="multipart/form-data">
+		<form action="/modifysubmit/<?= urlencode($post->getId())?>" method="post" enctype="multipart/form-data">
 			<div class="form_case">
 				<p>Auteur : <span><?php echo htmlspecialchars($post->getAuthor()); ?></p></span>
 			</div>
 
 			<div class="form_case">
 				<label for="title">Titre</label>
-				<input required type="text" name="title" id="title" value="<?php echo htmlspecialchars($post->getTitle()); ?>">
+				<input required type="text" name="title" maxlength="50" id="title" value="<?php echo htmlspecialchars($post->getTitle()); ?>">
 			</div>
 
 			<div class="form_case">
 				<label for="chapo">Chapô</label>
-				<textarea required name="chapo" id="chapo"rows="3" cols="5"><?php echo htmlspecialchars($post->getChapo()); ?></textarea>  
+				<textarea required name="chapo" id="chapo" maxlength="255" rows="3" cols="5"><?php echo htmlspecialchars($post->getChapo()); ?></textarea>  
 			</div>
 
 			<div class="form_case">
@@ -53,6 +53,7 @@
 			</div>
 
 			<div class="form_case">
+				<input type="hidden" name="MAX_FILE_SIZE" value="1000000" />
 				<label for="picture">Image</label>
 				<input type="file" id="image_input" name="picture" id="picture" placeholder="<?php echo htmlspecialchars($post->getPicture()); ?>" value="<?php echo htmlspecialchars($post->getPicture()); ?>" />
             </div>
@@ -65,18 +66,18 @@
 
 <?php }else{ ?>
 	<div class="form_post_creation">
-		<form action="index.php?action=newpostsubmit" method="post" enctype="multipart/form-data">
+		<form action="/newpostsubmit" method="post" enctype="multipart/form-data">
 			<div class="form_case">
 				<p>Auteur : <span><?php echo htmlspecialchars($_SESSION['userInformations']['username']); ?></span></p>
 			</div>
 			<div class="form_case">
 				<label for="title">Titre</label>
-				<input required type="text" name="title" id="title">
+				<input required type="text" name="title" id="title" maxlength="50">
 			</div>
 
 			<div class="form_case">
 				<label for="chapo">Chapô</label>
-				<textarea required name="chapo" id="chapo"rows="3" cols="5"></textarea>  
+				<textarea required name="chapo" id="chapo" maxlength="255" rows="3" cols="5"></textarea>  
 			</div>
 
 			<div class="form_case">

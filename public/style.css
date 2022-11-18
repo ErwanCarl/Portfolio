@@ -109,8 +109,6 @@ nav ul a {
     margin-left: -50px;
 }
 
-
-
 /* --------------------   homepage   ------------------------ */
 
 body {
@@ -498,6 +496,49 @@ body > div:nth-child(2) > form {
 .modal-footer {
     width: 60%;
     margin: auto;
+}
+
+.modal-footer form {
+    border: none;
+    margin: 0 10px 10px 0;
+    padding: 0;
+}
+
+#moderation_comment .comment_button form, #moderation_bloc2 form {
+    border: none;
+    margin: 0;
+    padding: 0;
+    width: 100%;
+}
+
+#moderation_bloc2 form button {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+#moderation_comment > div.validation_button > div > form > button {
+    width: 100%;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+#moderation_bloc2 {
+    text-align: center;
+}
+
+.post_administration #exampleModal > div > div > div.modal-footer > form > button {
+    margin-top: 0;
+    width: 100%;
+}    
+
+.post_admin form {
+    text-align: center;
+}
+
+.modal-footer form button {
+    width: 92.5%;
+}
+
+#exampleModal > div > div > div.modal-footer > button {
+    width: 55%;
 }
 
 body > div.post > div.post_author > h4:nth-child(2) {
@@ -971,5 +1012,28 @@ body > div.adminNav > div.nav1 {
 .mlpdc p {
 	text-align: left;
     margin-bottom: 50px;
+}
+
+/* ------------------- not-found / forbidden pages ------------------------ */
+
+#not_found_page, #forbidden_page {
+    margin: 100px auto;
+    padding: 0 10px;
+}
+
+#not_found_page h1, #forbidden_page h1 {
+    margin-bottom : 0;
+}
+
+#not_found_page h3, #forbidden_page h3 {
+    margin-bottom : 80px;
+}
+
+.back_home a {
+    color: #e07dc3;
+}
+
+.back_home a:hover {
+    color: #301f61;
 }
 

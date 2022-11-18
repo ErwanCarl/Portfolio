@@ -593,6 +593,9 @@
 
 /* ----------- moderated comments ------------*/
 
+    #moderation_bloc2 form {
+        width: 60%;
+    }
     #moderation_bloc, .comments_validation {
         flex-direction: column;
     }

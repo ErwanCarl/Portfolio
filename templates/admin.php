@@ -34,9 +34,9 @@
     <div class="nav1" id="adminNavBar">
         <nav>
             <ul>
-                <li><a href="index.php?action=admin#commentValidation">Validation de commentaires</a></li>
-                <li><a href="index.php?action=admin#gestionArticle">Gestion des articles</a></li>
-                <li><a href="index.php?action=admin#permissions">Permissions utilisateurs</a></li>
+                <li><a href="/admin#commentValidation">Validation de commentaires</a></li>
+                <li><a href="/admin#gestionArticle">Gestion des articles</a></li>
+                <li><a href="/admin#permissions">Permissions utilisateurs</a></li>
             </ul>
         </nav>
     </div>
@@ -57,21 +57,27 @@
     <div class="comments_validation" id="moderation_comment">
         <div class="validation_system">
             <div class ="comment_author">
-                <?php echo htmlspecialchars('Auteur : '.$pendingComment['author'].' - Article : '.$pendingComment['title']); ?>
+                <?php echo htmlspecialchars('Auteur : '.$pendingComment->getAuthor().' - Article : '.$pendingComment->title); ?>
             </div>
             
             <div class ="comment_content">
-                <?php echo htmlspecialchars($pendingComment['content']); ?>
+                <?php echo htmlspecialchars($pendingComment->getContent()); ?>
             </div>
         </div>
 
         <div class="validation_button">
             <div class ="comment_button">
-                <a href="index.php?action=validatecomment&id=<?= $pendingComment['id'] ?>" class="btn btn-success mb-2 active" role="button">Valider</a>
+                <form method="post" action="/validatecomment/<?= $pendingComment->getId() ?>">
+                    <input type="hidden" name="csrf_token" id="csrf_token" value="<?php echo $_SESSION['csrf_token']; ?>"/>
+                    <button type="submit" class="btn btn-success mb-2 active" role="button">Valider</button>
+                </form>
             </div>
 
             <div class ="comment_button">
-                <a href="index.php?action=refusedcomment&id=<?= $pendingComment['id'] ?>" class="btn btn-danger mb-2 active" role="button">Refuser</a>
+                <form method="post" action="/refusedcomment/<?= $pendingComment->getId() ?>">
+                    <input type="hidden" name="csrf_token" id="csrf_token" value="<?php echo $_SESSION['csrf_token']; ?>"/>
+                    <button type="submit" class="btn btn-danger mb-2 active" role="button">Refuser</button>
+                </form>
             </div>
         </div>
     </div>
@@ -87,7 +93,7 @@
 <?php } ?>
 
 <div class="return_button" id="moderated_comment">
-    <button type="button" onclick="window.location='index.php?action=moderatedcomment'" class="btn btn-info mb-2">Restauration</button>
+    <button type="button" onclick="window.location='/moderatedcomment/1'" class="btn btn-info mb-2">Restauration</button>
 </div>
 
 <hr class="adminBar">
@@ -121,7 +127,7 @@
 ?>
 
 <div class="return_button">
-    <button type="button" onclick="window.location='index.php?action=postcreation'" class="btn btn-success mb-2">Créer un article</button>
+    <button type="button" onclick="window.location='/postcreation'" class="btn btn-success mb-2">Créer un article</button>
 </div>
 
 <div class="post_administration">
@@ -131,13 +137,13 @@
 
     <div class="work_creation" id="admin_creation">
         <div class="title_bloc">
-            <h2><?php echo htmlspecialchars($post['title']); ?></h2>
+            <h2><?php echo htmlspecialchars($post->getTitle()); ?></h2>
         </div>
         <div class="post_bloc">
             <div class="pic_bloc">
-                <a href="index.php?action=post&id=<?= urlencode($post['id']) ?>">
+                <a href="/post/<?= urlencode($post->getId()) ?>/1">
                     <div class="posts_picture">
-                        <img id="pic_base" src="<?php echo htmlspecialchars($post['picture']); ?>">
+                        <img id="pic_base" src="<?php echo htmlspecialchars($post->getPicture()); ?>">
                         <img id="pic_hover" src="images/loupe_post_hover.png">
                     </div>
                 </a>
@@ -145,10 +151,10 @@
             <div class="info_bloc">
                 <div class="author_bloc">
                     <h4><?php 
-                    if($post['modificationDate'] === null) {
-                        echo htmlspecialchars($post['author'].' - Date de création : '.$post['creationDate']);
+                    if($post->getModificationDate() === null) {
+                        echo htmlspecialchars($post->getAuthor().' - Date de création : '.$post->getCreationDate());
                     }else{
-                        echo htmlspecialchars($post['author'].' - Dernière modification : '.$post['modificationDate']);
+                        echo htmlspecialchars($post->getAuthor().' - Dernière modification : '.$post->getModificationDate());
                     }?>
                     </h4>
                 </div>
@@ -156,7 +162,7 @@
                 <hr>
 
                 <div class="chapo_bloc">
-                    <h4><?php echo htmlspecialchars($post['chapo']); ?></h4>
+                    <h4><?php echo htmlspecialchars($post->getChapo()); ?></h4>
                 </div>
             </div>
         </div>
@@ -164,7 +170,7 @@
     
     <div class="post_admin_page">
         <div class="return_button">
-            <button type="button" onclick="window.location='index.php?action=postmodify&id=<?= urlencode($post['id']) ?>'" class="btn btn-warning mb-2">Modifier</button>
+            <button type="button" onclick="window.location='/postmodify/<?= urlencode($post->getId()) ?>'" class="btn btn-warning mb-2">Modifier</button>
         </div>
 
         <div class="return_button">
@@ -182,7 +188,10 @@
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Annuler</button>
-                        <button type="button" class="btn btn-danger" onclick="window.location='index.php?action=postdelete&id=<?= urlencode($post['id']) ?>'">Confirmer</button>
+                        <form method="post" action="/postdelete/<?= urlencode($post->getId()) ?>">
+                            <input type="hidden" name="csrf_token" id="csrf_token" value="<?php echo $_SESSION['csrf_token']; ?>"/>
+                            <button type="submit" class="btn btn-danger">Confirmer</button>
+                        </form>
                     </div>
                 </div>
             </div>
@@ -228,7 +237,7 @@
 
 
 <div class="user_administration">
-    <form class="user_search_form" action="index.php?action=usersearch" method="post">
+    <form class="user_search_form" action="/usersearch" method="post">
         <div class="form_case">
             <label for="pseudo">Rechercher un utilisateur</label>
         </div>
@@ -245,7 +254,8 @@
 
 <?php if(isset($_SESSION['userChange'])) { ?>
     <div class="role_change_bloc">
-        <form class="form_role_change" action="index.php?action=changerole" method="post">
+        <form class="form_role_change" action="/changerole" method="post">
+            <input type="hidden" name="csrf_token" id="csrf_token" value="<?php echo $_SESSION['csrf_token']; ?>"/>
             <div class="usernamefound_bloc">
                 <p>Utilisateur : <span><?php echo htmlspecialchars($_SESSION['userChange']['username']); ?></span></p>
                 <p>Rôle actuel : <span><?php echo htmlspecialchars($_SESSION['userChange']['role']); ?></span></p>
