@@ -58,7 +58,7 @@ class User extends Entity {
         return $this->mail; 
     }
 
-    public function getPhoneNumber() : string
+    public function getPhoneNumber() : ?string
     { 
         return $this->phoneNumber; 
     }
@@ -73,7 +73,7 @@ class User extends Entity {
         return $this->role; 
     }
 
-    public function getAccountKey() : string
+    public function getAccountKey() : ?string
     { 
         return $this->accountKey; 
     }
@@ -137,7 +137,7 @@ class User extends Entity {
             $this->role = $role;
     }
     
-    public function setAccountKey(string $accountKey) : void
+    public function setAccountKey(?string $accountKey) : void
     {
             $this->accountKey = $accountKey;
     }

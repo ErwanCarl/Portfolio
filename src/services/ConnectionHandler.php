@@ -16,7 +16,7 @@ class ConnectionHandler
         if ($userExtract != null) {
             if($userExtract->getValidateAccount() != 1) {
                 $_SESSION['error'] = "Votre compte n'est pas validé, veuillez vérifier vos emails pour procéder à la validation.";
-                header('Location: index.php?action=accountcreation');
+                header('Location: /accountcreation');
             }else{
                 $_SESSION['success'] = "Vous êtes connecté. Bienvenue !";
                 $_SESSION['Connection'] = "Connected";
@@ -30,11 +30,11 @@ class ConnectionHandler
                     'validateAccount'=>$userExtract->getValidateAccount(),
                     'role'=>$userExtract->getRole()
                 ];
-                header('Location: index.php');
+                header('Location: /');
             }
         } else {
             $_SESSION['error'] = "Vos identifiants sont incorrects, veuillez réessayer.";
-            header('Location: index.php?action=accountcreation');
+            header('Location: /accountcreation');
         }
     }
 
@@ -42,11 +42,11 @@ class ConnectionHandler
     {
         if($userCheck === null) {
             $_SESSION['error'] = "Le mail n'existe pas dans notre base de données.";
-            require('templates/accountCreation.php');
+            require(TEMPLATE_DIR.'/accountCreation.php');
         }else{
             $accountKey = base_convert(hash('sha256', time() . mt_rand()), 16, 36);
             $userCheck->setAccountKey($accountKey);
-            $accountKeyInsert = $userModel->accountKeyGeneration($userCheck->getAccountKey(), $userCheck->getMail());
+            $userModel->accountKeyGeneration($userCheck->getAccountKey(), $userCheck->getMail());
 
             $passwordMail = new SendMail();
             $passwordMail->passwordMail($userCheck);
@@ -56,10 +56,10 @@ class ConnectionHandler
     public function passwordLinkCheck(?User $user) : void 
     {
         if($user != null) {
-            require('templates/lostPassword.php');
+            require(TEMPLATE_DIR.'/lostPassword.php');
         }else{
             $_SESSION['error'] = "Le lien n'est pas ou plus valide, veuillez faire une autre demande de mot de passe oublié.";
-            require('templates/accountCreation.php');
+            header('Location: /accountcreation');
         }
     }
 
@@ -71,21 +71,21 @@ class ConnectionHandler
                 $passwordChangeSuccess = $passwordChange->passwordChange($userInfo['password'], $userInfo['email']);
                     if($passwordChangeSuccess) {
                         $_SESSION['success'] = "Votre mot de passe a été modifié avec succès.";
-                        require('templates/accountCreation.php');
+                        require(TEMPLATE_DIR.'/accountCreation.php');
                     }else{
                         $_SESSION['error'] = "Le changement de mot de passe a échoué, veuillez contacter l'administrateur.";
-                        require('templates/accountCreation.php');
+                        require(TEMPLATE_DIR.'/accountCreation.php');
                     }
             }else{
                 $user = new User();
                 $user->setMail($userInfo['email']);
                 $user->setAccountKey($userInfo['token']);
                 $_SESSION['error'] = "Les mots de passe ne sont pas identiques, veuillez recommencer.";
-                require('templates/lostPassword.php');
+                require(TEMPLATE_DIR.'/lostPassword.php');
             }
         }else{
             $_SESSION['error'] = "Alerte sécurité : le mail et la clé ne correspondent pas à la demande de changement de mot de passe.";
-            require('templates/accountCreation.php');
+            require(TEMPLATE_DIR.'/accountCreation.php');
         }
     }
 }

@@ -8,7 +8,7 @@
 		<meta name="copyright" content="Erwan Carlini">
 		<meta name="keywords" content="Erwan Carlini, Développement Web, Application, PhP, CSS, Html, Professionnel">
 		<title>Erwan Carlini - Portfolio</title>
-		<link rel="icon" type="image/jpg" href="images/digitV2.jpg">
+		<link rel="icon" type="image/jpg" href="<?php PUBLIC_DIR ?>/images/digitV2.jpg">
 		<link rel="preconnect" href="https://fonts.googleapis.com">
 		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 		<link href="https://fonts.googleapis.com/css2?family=Parisienne&display=swap" rel="stylesheet">
@@ -22,8 +22,8 @@
 		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
 		<!-- Fin bootstrap -->
 		<script src="https://cdn.tiny.cloud/1/no-api-key/tinymce/6/tinymce.min.js" referrerpolicy="origin"></script>
-		<link rel="stylesheet" type="text/css" href="style.css">
-		<link rel="stylesheet" type="text/css" href="responsive.css">
+		<link rel="stylesheet" type="text/css" href="<?php PUBLIC_DIR ?>/style.css">
+		<link rel="stylesheet" type="text/css" href="<?php PUBLIC_DIR ?>/responsive.css">
 		
 		
 	</head>

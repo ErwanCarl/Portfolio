@@ -8,29 +8,39 @@ namespace App\controllers;
 use App\model\CommentModel;
 use App\model\UserModel;
 use App\services\AdminHandler;
+use App\services\TokenHandler;
 use App\services\PaginationHandler;
 
 class AdminController 
 {
     public function administration() : void
     {
+        $tokenHandler = new TokenHandler();
+        $tokenHandler->generateCsrfToken();
+
         $admin = new AdminHandler();
         $admin->adminAccessCheck();
     }
 
     public function commentValidate($id) : void 
     {
+        $csrfTokenCheck = new TokenHandler();
+        $csrfTokenCheck->csrfTokenCheck($_POST['csrf_token']);
+        
         $commentModel = new CommentModel();
-        $validateComment = $commentModel->commentValidation($id);
+        $validateComment = $commentModel->commentValidation((int) $id);
 
         $adminValidateCommentCheck = new AdminHandler();
         $adminValidateCommentCheck->adminValidateCommentCheck($validateComment);
     }
 
-    public function commentRestaurate($id) : void 
+    public function commentRestaurate(int $id) : void 
     {
+        $csrfTokenCheck = new TokenHandler();
+        $csrfTokenCheck->csrfTokenCheck($_POST['csrf_token']);
+        
         $commentModel = new CommentModel();
-        $validateComment = $commentModel->commentValidation($id);
+        $validateComment = $commentModel->commentValidation((int) $id);
 
         $adminRestaurateCommentCheck = new AdminHandler();
         $adminRestaurateCommentCheck->adminRestaurateCommentCheck($validateComment);
@@ -38,15 +48,21 @@ class AdminController
 
     public function commentDelete($id) : void 
     {
+        $csrfTokenCheck = new TokenHandler();
+        $csrfTokenCheck->csrfTokenCheck($_POST['csrf_token']);
+
         $commentModel = new CommentModel();
-        $deleteComment = $commentModel->commentModeration($id);
+        $deleteComment = $commentModel->commentModeration((int) $id);
 
         $adminDeleteCommentCheck = new AdminHandler();
         $adminDeleteCommentCheck->adminDeleteCommentCheck($deleteComment);
     }
 
-    public function moderatedComment(int $page) : void 
+    public function moderatedComment(?int $page) : void 
     {
+        $tokenHandler = new TokenHandler();
+        $tokenHandler->generateCsrfToken();
+        
         $elementsNumber = 5;
         $commentModel = new CommentModel();
         $moderatedCommentsNumber = $commentModel->moderatedCommentsCount();
@@ -56,24 +72,31 @@ class AdminController
         $currentPage = $pagination->pagination($page, $pageNumber);
 
         $moderatedComments = $commentModel->moderatedListing($currentPage, $elementsNumber);
-        require('templates/moderatedComments.php');
+        require(TEMPLATE_DIR.'/moderatedComments.php');
     }
 
-    public function usernameSearch(array $username) : void 
+    public function usernameSearch() : void 
     {
+        $tokenHandler = new TokenHandler();
+        $tokenHandler->generateCsrfToken();
+
         unset($_SESSION['userChange']);
         $userModel = new UserModel();
-        $userFound = $userModel->getUserSearched($username);
+        $userFound = $userModel->getUserSearched($_POST);
 
         $userFoundCheck = new AdminHandler();
         $userFoundCheck->userFoundCheck($userFound);
     }
 
-    public function changeUserRole(array $newUserRole) : void 
+    public function changeUserRole() : void 
     {
+        $csrfTokenCheck = new TokenHandler();
+        $csrfTokenCheck->csrfTokenCheck($_POST['csrf_token']);
+
+        $_POST['username'] = $_SESSION['userChange']['username'];
         unset($_SESSION['userChange']);
         $userModel = new UserModel();
-        $roleChange = $userModel->modifyUserRole($newUserRole);
+        $roleChange = $userModel->modifyUserRole($_POST);
 
         $roleModificationCheck = new AdminHandler();
         $roleModificationCheck->roleModificationCheck($roleChange);

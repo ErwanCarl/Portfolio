@@ -27,8 +27,10 @@
 ?>
 
 <div class="form_contact" id="connection_form">
-    <form action="index.php?action=connection" method="post">
+    <form action="/connection" method="post">
         <h2>Connexion</h2>
+
+        <input type="hidden" name="csrf_token" id="csrf_token" value="<?php echo $_SESSION['csrf_token']; ?>"/>
 
         <div class="form_case">
             <label for="mail">Email</label>
@@ -44,7 +46,7 @@
             <button type="submit">Se connecter</button>
         </div>
         <div class="lost_password">
-            <button type="button" onclick="window.location='index.php?action=passwordlandingpage'" class="btn btn-secondary mb-2">Mot de passe oublié</button>
+            <button type="button" onclick="window.location='/passwordlandingpage'" class="btn btn-secondary mb-2">Mot de passe oublié</button>
         </div>
     </form>
 </div>
@@ -53,37 +55,37 @@
 <!-- ------------------------ Creation system -------------------- --> 
 
 <div class="form_contact" id="account_create">
-    <form action="index.php?action=accountsubmit" method="post">
+    <form action="/accountsubmit" method="post">
         <h2>Création de compte utilisateur</h2>
 
         <div class="form_case">
             <label for="name">Nom</label>
-            <input required type="text" name="name" id="name">
+            <input required type="text" name="name" id="name" maxlength="50" pattern="[a-zA-Z]+">
         </div>
 
         <div class="form_case">
             <label for="nickname">Prénom</label>
-            <input required type="text" name="nickname" id="nickname">
+            <input required type="text" name="nickname" id="nickname" maxlength="50" pattern="[a-zA-Z]+">
         </div>
 
         <div class="form_case">
             <label for="username">Pseudo</label>
-            <input required type="text" name="username" id="username">
+            <input required type="text" name="username" id="username" maxlength="100">
         </div>
 
         <div class="form_case">
             <label for="mail">Email</label>
-            <input required type="email" name="mail" id="mail">
+            <input required type="email" name="mail" id="mail" maxlength="255">
         </div>
 
         <div class="form_case">
             <label for="phonenumber">Téléphone</label>
-            <input type="tel" name="phonenumber" id="phonenumber" pattern="[0-9]{10}">
+            <input type="tel" name="phonenumber" id="phonenumber" maxlength="20" pattern="[0-9]{10,20}">
         </div>
 
         <div class="form_case">
             <label for="password">Mot de passe</label>
-            <input required type="password" name="password" id="password" minlength="8" pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$" TITLE="Le mot de passe doit contenir au minimum 8 caractères, une lettre minuscule, une lettre majuscule et un chiffre.">
+            <input required type="password" name="password" id="password" minlength="8" maxlength="255" pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$" TITLE="Le mot de passe doit contenir au minimum 8 caractères, une lettre minuscule, une lettre majuscule et un chiffre.">
         </div>
 
         <div class="form_button">

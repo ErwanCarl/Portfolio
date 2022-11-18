@@ -8,15 +8,16 @@ namespace App\controllers;
 use App\model\CommentModel;
 use App\services\AddCommentHandler;
 
+
 class AddCommentController 
 {  
-    public function addComment(int $id, array $formInput): void 
+    public function addComment(int $id): void 
     {
         $author = $_SESSION['userInformations']['username'];
         $content = null;
-        
+
         $addCommentHandler = new AddCommentHandler();
-        $comment = $addCommentHandler->formDataCheck($content, $author, $formInput, $id);
+        $comment = $addCommentHandler->formDataCheck($content, $author, $_POST, $id);
         
         $addComment = new CommentModel();
         $addCommentSuccessfull = $addComment->createComment($id, $comment);

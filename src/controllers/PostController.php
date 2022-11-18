@@ -9,6 +9,8 @@ use App\model\CommentModel;
 use App\model\PostModel;
 use App\services\PaginationHandler;
 use App\services\PostHandler;
+use App\services\TokenHandler;
+use App\services\InputCheckHandler;
 
 class PostController 
 {
@@ -26,43 +28,56 @@ class PostController
         $currentPage = $pagination->pagination($page, $pageNumber);
         
         $comments = $commentModel->getComments($id, $currentPage, $elementsNumber);
-        require('templates/post.php');
+
+        $tokenHandler = new TokenHandler();
+        $tokenHandler->generateCsrfToken();
+        
+        require(TEMPLATE_DIR.'/post.php');
     }
 
     public function posts() : void 
     {
         $postModel = new PostModel();
         $posts = $postModel->getPosts();
-        require('templates/blogposts.php');
+        require(TEMPLATE_DIR.'/blogposts.php');
     }
 
     public function postCreation() : void 
     {
-        require('templates/postsEdition.php');
+        require(TEMPLATE_DIR.'/postsEdition.php');
     }
 
-    public function newPostSubmit(array $form_input, array $picture_file) : void 
+    public function newPostSubmit() : void 
     {
+        $inputCheck = new InputCheckHandler();
+        $inputCheck->postInputCheck($_POST);
+
         $postDataCheck = new PostHandler();
-        $postDataCheck->postCreateDataCheck($form_input, $picture_file);
+        $postDataCheck->postCreateDataCheck($_POST, $_FILES);
     }
 
-    public function postEdition($id) : void 
+    public function postEdition(int $id) : void 
     {
         $postModel = new PostModel();
         $post = $postModel->postModification($id);
         $_SESSION['Modify'] = 'Set';
-        require('templates/postsEdition.php');
+        require(TEMPLATE_DIR.'/postsEdition.php');
     }
 
-    public function modifySubmit(int $id, array $form_input, array $picture_file) : void 
+    public function modifySubmit(int $id) : void 
     {
+        $inputCheck = new InputCheckHandler();
+        $inputCheck->postInputCheck($_POST);
+        
         $postDataCheck = new PostHandler();
-        $postDataCheck->postModifyDataCheck($form_input, $picture_file, $id);
+        $postDataCheck->postModifyDataCheck($_POST, $_FILES, $id);
     }
 
     public function postDelete(int $id) : void 
     {
+        $csrfTokenCheck = new TokenHandler();
+        $csrfTokenCheck->csrfTokenCheck($_POST['csrf_token']);
+
         $postModel = new PostModel();
         $postDelete = $postModel->postSuppression($id);
 

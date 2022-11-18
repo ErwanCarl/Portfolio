@@ -28,7 +28,7 @@
 	if(isset($user)) { 
 ?>
         <div class="form_password">
-            <form action="index.php?action=passwordmodify" method="post">
+            <form action="/passwordmodify" method="post">
                 <h2>Changement de mot de passe</h2>
 
                 <div class="form_case">
@@ -41,12 +41,12 @@
 
                 <div class="form_case">
                     <label for="password">Nouveau mot de passe</label>
-                    <input required type="password" name="password" id="password" minlength="8" pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$" TITLE="Le mot de passe doit contenir au minimum 8 caractères, une lettre minuscule, une lettre majuscule et un chiffre.">
+                    <input required type="password" name="password" id="password" minlength="8" maxlength="255" pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$" TITLE="Le mot de passe doit contenir au minimum 8 caractères, une lettre minuscule, une lettre majuscule et un chiffre.">
                 </div>
 
                 <div class="form_case">
                     <label for="passwordconfirmation">Confirmer le mot de passe</label>
-                    <input required type="password" name="passwordconfirmation" id="passwordconfirmation" minlength="8" pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$" TITLE="Le mot de passe doit contenir au minimum 8 caractères, une lettre minuscule, une lettre majuscule et un chiffre.">
+                    <input required type="password" name="passwordconfirmation" id="passwordconfirmation" minlength="8" maxlength="255" pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$" TITLE="Le mot de passe doit contenir au minimum 8 caractères, une lettre minuscule, une lettre majuscule et un chiffre.">
                 </div>
 
                 <div class="form_button">
@@ -59,7 +59,7 @@
 	} else { 
 ?>
         <div class="form_password">
-            <form action="index.php?action=sendpasswordmail" method="post">
+            <form action="/sendpasswordmail" method="post">
                 <h2>Récupération de mot de passe</h2>
 
                 <div class="form_case">

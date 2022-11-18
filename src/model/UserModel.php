@@ -97,16 +97,16 @@ class UserModel extends Model
         return $line;
     }
 
-    public function validateAccount(string $account_key) : bool 
+    public function validateAccount(string $accountKey) : bool 
     {
         $user = $this->connection->prepare("SELECT * FROM user WHERE `account_key` = ?");
-        $user->execute([$account_key]);
+        $user->execute([$accountKey]);
         $user->setFetchMode(PDO::FETCH_CLASS | PDO::FETCH_PROPS_LATE, self::UserClass);
         $userFound = $user->fetch();
         
         if($userFound) {
-            $statement = $this->connection->prepare("UPDATE user SET `validateAccount` = 1, `account_key` = null WHERE `account_key` = ?");
-            $line = $statement->execute([$account_key]);
+            $statement = $this->connection->prepare("UPDATE user SET `validate_account` = 1, `account_key` = null WHERE `account_key` = ?");
+            $line = $statement->execute([$accountKey]);
             return $line;
         }else{
             return false;
@@ -153,11 +153,11 @@ class UserModel extends Model
         return $success;
     }
 
-    public function accountKeyGeneration(string $user_account_key, string $userMail) : bool 
+    public function accountKeyGeneration(string $userAccountKey, string $userMail) : bool 
     {
         $accountKey = $this->connection->prepare("UPDATE user SET `account_key` = :account_key WHERE `mail` = :mail");
         $success = $accountKey->execute([
-            'account_key' => $user_account_key,
+            'account_key' => $userAccountKey,
             'mail' => $userMail
         ]);
         return $success;

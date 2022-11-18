@@ -9,6 +9,6 @@ class LegalNoticeController
 {
     public function legalNotice() : void 
     {
-        require('templates/legalnotice.php');
+        require(TEMPLATE_DIR.'/legalnotice.php');
     }
 }

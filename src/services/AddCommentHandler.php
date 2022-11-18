@@ -18,7 +18,7 @@ class AddCommentHandler {
             return $comment;
         } else {
             $_SESSION['error'] = 'Les données du formulaire sont invalides, veuillez contacter l\'administrateur.';
-            header('Location: index.php?action=post&id='.$id);
+            header('Location: /post/'.$id);
         }
     }
 
@@ -26,10 +26,10 @@ class AddCommentHandler {
     {
         if($addCommentSuccessfull) {
             $_SESSION['success'] = 'Votre commentaire a bien été ajouté et est en cours de modération.';
-            header('Location: index.php?action=post&id='.$id);
+            header('Location: /post/'.$id.'/1');
         }else{
             $_SESSION['error'] = 'Impossible d\'ajouter le commentaire.';
-            header('Location: index.php?action=post&id='.$id);
+            header('Location: /post/'.$id.'/1');
         }
     }
 }

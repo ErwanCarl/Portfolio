@@ -14,15 +14,14 @@ class Post extends Entity
     private string $author;
     private string $content;
     private string $chapo;
-    private $creationDate;
-    private $modificationDate;
+    private string $creationDate;
+    private ?string $modificationDate;
     private ?string $picture;
     private int $userId;
 
     public function __construct($data = []) 
     {
         parent::__construct($data);
-        $this->creationDate = new \DateTimeImmutable('now');
     }
 
 
@@ -53,12 +52,12 @@ class Post extends Entity
         return $this->chapo;
     }
 
-    public function getCreationDate() 
+    public function getCreationDate() : string 
     { 
         return $this->creationDate; 
     }
 
-    public function getModificationDate() 
+    public function getModificationDate() : ?string 
     { 
         return $this->modificationDate; 
     }
@@ -106,12 +105,12 @@ class Post extends Entity
         }
     }
 
-    public function setCreationDate($creationDate) : void
+    public function setCreationDate(string $creationDate) : void
     {
         $this->creationDate = $creationDate;
     }
 
-    public function setModificationDate($modificationDate) : void
+    public function setModificationDate(?string $modificationDate) : void
     {
         $this->modificationDate = $modificationDate;
     }

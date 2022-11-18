@@ -68,12 +68,12 @@
 
 	<div class="creation">
 		<div class="posts_title">
-			<h4><?php echo htmlspecialchars($post['title']); ?></h4>
+			<h4><?php echo htmlspecialchars($post->getTitle()); ?></h4>
 		</div>
 		<div class="posts_link">
-			<a href="index.php?action=post&id=<?= urlencode($post['id']) ?>">
+			<a href="/post/<?= urlencode($post->getId()) ?>/1">
 				<div class="posts_picture">
-					<img id="pic_base" src="<?php echo htmlspecialchars($post['picture']); ?>">
+					<img id="pic_base" src="<?php echo htmlspecialchars($post->getPicture()); ?>">
 					<img id="pic_hover" src="images/loupe_post_hover.png">
 				</div>
 			</a>
@@ -88,8 +88,10 @@
 <hr class="homeBar">
 
 <div class="form_contact">
-	<form action="index.php?action=sendcontactmail" method="post">
+	<form action="/sendcontactmail" method="post">
 		<h2>Contact</h2>
+
+		<input type="hidden" name="csrf_token" id="csrf_token" value="<?php echo $_SESSION['csrf_token']; ?>"/>
 
 		<div class="form_case">
 			<label for="name">Prénom / Nom</label>

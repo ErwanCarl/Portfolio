@@ -13,7 +13,7 @@ class Model
     public function __construct() 
     {
     	if ($this->connection === null) {
-        	$this->connection = new PDO('mysql:host=localhost;dbname=blogpost;charset=utf8', 'root', 'Montpellier34090!');
+        	$this->connection = new PDO('mysql:host=localhost;dbname=dbname;charset=utf8', 'username', 'password');
 			$this->connection->setAttribute(\PDO::ATTR_ERRMODE, \PDO::ERRMODE_EXCEPTION);
 		}
 	}

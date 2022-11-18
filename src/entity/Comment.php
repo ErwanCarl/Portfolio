@@ -12,7 +12,7 @@ class Comment extends Entity {
     private ?int $id;
     private string $author;
     private string $content;
-    private $creationDate;
+    private string $creationDate;
     private int $validateComment;
     private int $postId;
     private int $userId;
@@ -20,7 +20,6 @@ class Comment extends Entity {
     public function __construct($data = []) 
     {
         parent::__construct($data);
-        $this->creationDate = new \DateTimeImmutable('now');
     }
 
 /* ---------------------------- Getters -----------------------------*/
@@ -40,7 +39,7 @@ class Comment extends Entity {
         return $this->content; 
     }
 
-    public function getCreationDate()
+    public function getCreationDate() : string
     { 
         return $this->creationDate; 
     }
@@ -79,7 +78,7 @@ class Comment extends Entity {
         $this->content = $content;
     }
 
-    public function setCreationDate($creationDate) : void
+    public function setCreationDate(string $creationDate) : void
     {
         $this->creationDate = $creationDate;
     }

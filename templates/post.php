@@ -36,7 +36,7 @@
 <hr class="passionBar">
 
 <div class="return_button">
-    <button type="button" onclick="window.location='index.php?action=blogposts#return'" class="btn btn-info mb-2">Retour aux blog posts</button>
+    <button type="button" onclick="window.location='/blogposts#return'" class="btn btn-info mb-2">Retour aux blog posts</button>
 </div>
 
 <div class="post">
@@ -67,13 +67,13 @@
     </div>
 
     <div class="bloc_post_pic">
-        <img id="post_pic" src="<?php echo htmlspecialchars($post->getPicture()); ?>">
+        <img id="post_pic" src="<?php echo '/'.htmlspecialchars($post->getPicture()); ?>">
     </div>
 
     <?php if(isset($_SESSION['Connection']) AND $_SESSION['userInformations']['role'] === 'admin') { ?>
         <div class="post_admin">
             <div class="return_button">
-                <button type="button" onclick="window.location='index.php?action=postmodify&id=<?= urlencode($post->getId()) ?>'" class="btn btn-warning mb-2">Modifier</button>
+                <button type="button" onclick="window.location='/postmodify/<?= urlencode($post->getId()) ?>'" class="btn btn-warning mb-2">Modifier</button>
             </div>
 
             <div class="return_button">
@@ -91,7 +91,11 @@
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Annuler</button>
-                            <button type="button" class="btn btn-danger" onclick="window.location='index.php?action=postdelete&id=<?= urlencode($post->getId()) ?>'">Confirmer</button>
+                            <form method="post" action="/postdelete/<?= urlencode($post->getId()) ?>">
+                                <input type="hidden" name="csrf_token" id="csrf_token" value="<?php echo $_SESSION['csrf_token']; ?>"/>
+                                <button type="submit" class="btn btn-danger">Confirmer</button>
+                            </form>
+                            
                         </div>
                     </div>
                 </div>
@@ -105,7 +109,7 @@
 
 
 <div class="return_button">
-    <button type="button" onclick="window.location='index.php?action=post&id=<?= urlencode($post->getId()) ?>#comment_connect'" class="btn btn-success mb-2">Ajouter un commentaire</button>
+    <button type="button" onclick="window.location='/post/<?= urlencode($post->getId()) ?>/1#form_comment'" class="btn btn-success mb-2">Ajouter un commentaire</button>
 </div>
 <!---------------- comments part ------------------>
 
@@ -124,15 +128,15 @@
             ?>
             <div class="comments_author">
                 <h4>
-                <em><?php echo htmlspecialchars($comment['creation_date']); ?></em> -
-                    <?php echo htmlspecialchars($comment['author']); ?>
+                <em><?php echo htmlspecialchars($comment->getCreationDate()); ?></em> -
+                    <?php echo htmlspecialchars($comment->getAuthor()); ?>
                     a écrit : 
                 </h4>
             </div>
 
             <div class="comments_content">
                 <h4>
-                    <?php echo htmlspecialchars($comment['content']); ?>
+                    <?php echo htmlspecialchars($comment->getContent()); ?>
                 </h4>
             </div>
             
@@ -159,7 +163,7 @@
 			</div>
 		<?php }else{ ?>
 			<div class="pagination">
-				<a href='index.php?action=post&id=<?= urlencode($post->getId()) ?>&page=<?= $i ?>#comment_post'><?php echo($i); ?></a>
+				<a href='/post/<?= urlencode($post->getId()) ?>/<?= $i ?>#comment_post'><?php echo($i); ?></a>
 			</div>
 		<?php } ?>
             
@@ -170,7 +174,7 @@
 
 <?php if(isset($_SESSION['Connection'])) { ?>
     <div class="add_comment" id="comment_connect">
-        <form method=post action="index.php?action=addComment&id=<?= $post->getId() ?>">
+        <form id ="form_comment" method=post action="/addComment/<?= $post->getId() ?>">
             <h2>Ajoutez un commentaire</h2>
 
             <div class="form_case">
@@ -197,7 +201,7 @@
 <?php } ?>
 
     <div class="return_button">
-        <button type="button" onclick="window.location='index.php?action=blogposts#return'" class="btn btn-info mb-2">Retour aux blog posts</button>
+        <button type="button" onclick="window.location='/blogposts#return'" class="btn btn-info mb-2">Retour aux blog posts</button>
     </div>
 
 <?php $content=ob_get_clean(); ?>

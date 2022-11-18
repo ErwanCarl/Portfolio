@@ -6,10 +6,10 @@
         ;?>
                 <div class="sub_footer">
                     <div class="foot_img">
-                        <img src="images/logo_connexion.png" />
+                        <img src="/images/logo_connexion.png" />
                     </div>
                     <div>
-                        <a href="index.php?action=accountcreation">Se connecter</a>
+                        <a href="/accountcreation">Se connecter</a>
                     </div>
                 </div>
         <?php 
@@ -17,10 +17,10 @@
         ?>
                 <div class="sub_footer">
                     <div class="foot_img">
-                        <img src="images/logo_connexion.png" />
+                        <img src="/images/logo_connexion.png" />
                     </div>
                     <div>
-                        <a href="index.php?action=closesession">Se déconnecter</a>
+                        <a href="/closesession">Se déconnecter</a>
                     </div>
                 </div>
         <?php
@@ -29,29 +29,29 @@
 
         <div class="sub_footer">
             <div class="foot_img">   
-                <img src="images/roue_crantee.png" />
+                <img src="/images/roue_crantee.png" />
             </div>
             <div>
-                <a href="index.php?action=admin">Administration</a>
+                <a href="/admin">Administration</a>
             </div>
         </div>
 
         <div class="sub_footer">
             <div class="foot_img">
-                <img src="images/law_logo.png" />
+                <img src="/images/law_logo.png" />
             </div>
             <div>
-                <a href="index.php?action=legalnotice">Mentions légales</a>
+                <a href="/legalnotice">Mentions légales</a>
             </div>
         </div>
 
         <div class="social_bloc">
             <div class="footer_socialmedia">
-                <a href="https://github.com/ErwanCarl"><img alt="Logo GitHub" src="images/Githublogo_footer.png"/></a>          
+                <a href="https://github.com/ErwanCarl"><img alt="Logo GitHub" src="/images/Githublogo_footer.png"/></a>          
             </div>
 
             <div class="footer_socialmedia">
-                <a href="https://www.linkedin.com/in/erwan-carlini-711a1a134/"><img alt="Logo LinkedIn" src="images/linkedinlogo_footer.png" /></a>          
+                <a href="https://www.linkedin.com/in/erwan-carlini-711a1a134/"><img alt="Logo LinkedIn" src="/images/linkedinlogo_footer.png" /></a>          
             </div>
         </div>
     </div>	

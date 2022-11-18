@@ -17,10 +17,10 @@
         <div class="nav1">
             <nav>
                 <ul>
-                    <li><a href="index.php">Accueil</a></li>
-                    <li><a href="index.php?action=blogposts">Blog posts</a></li>
-                    <li><a href="index.php?action=passions">Passions</a></li>
-                    <li><a href="index.php?action=contact">Contact</a></li>
+                    <li><a href="/">Accueil</a></li>
+                    <li><a href="/blogposts">Blog posts</a></li>
+                    <li><a href="/passions">Passions</a></li>
+                    <li><a href="/contact">Contact</a></li>
                 </ul>
             </nav>
         </div>
@@ -31,7 +31,7 @@
             <div class="nav2">
                 <nav>
                     <ul>
-                        <li><a href="index.php?action=accountcreation">Connexion</a></li>
+                        <li><a href="/accountcreation">Connexion</a></li>
                     </ul>
                 </nav>
             </div>
@@ -42,7 +42,7 @@
             <div class="nav2">
                 <nav>
                     <ul>
-                        <li><a href="index.php?action=closesession">Déconnexion</a></li>
+                        <li><a href="/closesession">Déconnexion</a></li>
                     </ul>
                 </nav>
             </div>

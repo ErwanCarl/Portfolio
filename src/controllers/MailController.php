@@ -7,18 +7,22 @@ namespace App\controllers;
 
 use App\services\SendMail;
 use App\services\EmailFormatHandler;
+use App\services\TokenHandler;
 use App\entity\User;
 
 class MailController
 {
-    public function contactMail(array $form_input) : void 
+    public function contactMail() : void 
     {
+        $csrfTokenCheck = new TokenHandler();
+        $csrfTokenCheck->csrfTokenCheck($_POST['csrf_token']);
+
         $userMailFormat = new User();
-        $userMailFormat->setMail($form_input['email']);
+        $userMailFormat->setMail($_POST['email']);
         $emailFormatCheck = new EmailFormatHandler();
         $emailFormatCheck->emailFormatCheck($userMailFormat);
 
         $sendMail = new SendMail();
-        $contactMail = $sendMail->sendContactMail($form_input);
+        $sendMail->sendContactMail($_POST);
     }     
 }
