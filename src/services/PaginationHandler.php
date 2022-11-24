@@ -9,7 +9,7 @@ class PaginationHandler
 {
     public function pagination(int $page, float $pageNumber) : int 
     {
-        if(isset($page) && $page > 0 && $page <= $pageNumber) {
+        if($page > 0 && $page <= $pageNumber) {
             $currentPage = $page;
             return $currentPage;
         }else{

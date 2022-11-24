@@ -19,7 +19,7 @@ class Post extends Entity
     private ?string $picture;
     private int $userId;
 
-    public function __construct($data = []) 
+    public function __construct(array $data = []) 
     {
         parent::__construct($data);
     }

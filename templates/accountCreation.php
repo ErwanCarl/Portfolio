@@ -60,12 +60,12 @@
 
         <div class="form_case">
             <label for="name">Nom</label>
-            <input required type="text" name="name" id="name" maxlength="50" pattern="[a-zA-Z]+">
+            <input required type="text" name="name" id="name" maxlength="50">
         </div>
 
         <div class="form_case">
             <label for="nickname">Prénom</label>
-            <input required type="text" name="nickname" id="nickname" maxlength="50" pattern="[a-zA-Z]+">
+            <input required type="text" name="nickname" id="nickname" maxlength="50">
         </div>
 
         <div class="form_case">
@@ -85,7 +85,7 @@
 
         <div class="form_case">
             <label for="password">Mot de passe</label>
-            <input required type="password" name="password" id="password" minlength="8" maxlength="255" pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$" TITLE="Le mot de passe doit contenir au minimum 8 caractères, une lettre minuscule, une lettre majuscule et un chiffre.">
+            <input required type="password" name="password" id="password" minlength="8" maxlength="255" pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,255}$" TITLE="Le mot de passe doit contenir au minimum 8 caractères, une lettre minuscule, une lettre majuscule et un chiffre.">
         </div>
 
         <div class="form_button">

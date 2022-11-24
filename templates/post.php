@@ -70,7 +70,7 @@
         <img id="post_pic" src="<?php echo '/'.htmlspecialchars($post->getPicture()); ?>">
     </div>
 
-    <?php if(isset($_SESSION['Connection']) AND $_SESSION['userInformations']['role'] === 'admin') { ?>
+    <?php if(isset($_SESSION['Connection']) && $_SESSION['userInformations']['role'] === 'admin') { ?>
         <div class="post_admin">
             <div class="return_button">
                 <button type="button" onclick="window.location='/postmodify/<?= urlencode($post->getId()) ?>'" class="btn btn-warning mb-2">Modifier</button>
@@ -109,7 +109,7 @@
 
 
 <div class="return_button">
-    <button type="button" onclick="window.location='/post/<?= urlencode($post->getId()) ?>/1#form_comment'" class="btn btn-success mb-2">Ajouter un commentaire</button>
+    <button type="button" onclick="window.location='/post/<?= urlencode($post->getId()) ?>/<?= $currentPage ?>#comment_connect'" class="btn btn-success mb-2">Ajouter un commentaire</button>
 </div>
 <!---------------- comments part ------------------>
 
@@ -118,7 +118,7 @@
         <h4>Commentaires</h4>
     </div>
 
-    <?php if($comments != null) { ?>
+    <?php if($comments !== null) { ?>
 
     <div class="comments">
 

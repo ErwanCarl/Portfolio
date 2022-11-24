@@ -22,7 +22,7 @@ class InputCheckHandler {
             header('Location: /accountcreation');
             die;
         } elseif (!preg_match("/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,255}$/", $formInput['password'])) {
-            $_SESSION['error'] = 'Le champ "Mot de passe" ne peut être vide, être inférieur à 8 caractères, excéder 255 et respecter le format.';
+            $_SESSION['error'] = 'Le champ "Mot de passe" ne peut être vide, être inférieur à 8 caractères, excéder 255 et doit respecter le format.';
             header('Location: /accountcreation');
             die;
         } elseif (strlen($formInput['mail']) > 255 || strlen($formInput['mail']) === 0) {
@@ -57,8 +57,8 @@ class InputCheckHandler {
 
     public function passwordChangeInputCheck(array $formInput) : void 
     {
-        if(strlen($formInput['password']) > 255 || strlen($formInput['password']) === 0 || !preg_match($formInput['password'],"^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$")) {
-            $_SESSION['error'] = 'Le champ "Mot de passe" ne peut être vide, être inférieur à 8 caractères, excéder 255 et respecter le format.';
+        if(!preg_match("/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,255}$/", $formInput['password'])) {
+            $_SESSION['error'] = 'Le champ "Mot de passe" ne peut être vide, être inférieur à 8 caractères, excéder 255 et doit respecter le format.';
             header('Location: /passwordlandingpage');
             die;
         }

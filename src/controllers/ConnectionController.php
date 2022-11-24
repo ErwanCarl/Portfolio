@@ -44,7 +44,7 @@ class ConnectionController
         $emailFormatCheck->emailFormatCheck($userMailFormat);
 
         $userModel = new UserModel();
-        $userCheck = $userModel->getUserByMailCheck($_POST['email']);
+        $userCheck = $userModel->getUserByMailCheck($userMailFormat->getMail());
         $passwordChangeCheck = new ConnectionHandler();
         $passwordChangeCheck -> passwordChangeCheck($userCheck, $userModel);
     }

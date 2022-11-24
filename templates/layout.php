@@ -8,7 +8,7 @@
 		<meta name="copyright" content="Erwan Carlini">
 		<meta name="keywords" content="Erwan Carlini, Développement Web, Application, PhP, CSS, Html, Professionnel">
 		<title>Erwan Carlini - Portfolio</title>
-		<link rel="icon" type="image/jpg" href="<?php PUBLIC_DIR ?>/images/digitV2.jpg">
+		<link rel="icon" type="image/x-icon" href="<?php PUBLIC_DIR ?>/favicon.ico">
 		<link rel="preconnect" href="https://fonts.googleapis.com">
 		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 		<link href="https://fonts.googleapis.com/css2?family=Parisienne&display=swap" rel="stylesheet">

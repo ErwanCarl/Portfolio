@@ -12,7 +12,7 @@ use \PDO;
 class CommentModel extends Model
 {
 
-    private const CommentClass = 'App\entity\Comment'; 
+    private const COMMENT_CLASS = 'App\entity\Comment'; 
 
 /* get all comments from a post thanks to its id */
 
@@ -20,7 +20,7 @@ class CommentModel extends Model
     {
         $statement = $this->connection->prepare("SELECT `author`,`content`,`creation_date` AS creationDate FROM `comment` WHERE (`post_id` = ? AND validate_comment = 1) ORDER BY `creation_date` DESC LIMIT ".(($currentPage-1)*$elementsNumber).", $elementsNumber");
         $statement->execute([$id]);
-        $statement->setFetchMode(PDO::FETCH_CLASS | PDO::FETCH_PROPS_LATE, self::CommentClass);
+        $statement->setFetchMode(PDO::FETCH_CLASS | PDO::FETCH_PROPS_LATE, self::COMMENT_CLASS);
         return $statement->fetchAll();
     }
 
@@ -51,7 +51,7 @@ class CommentModel extends Model
             WHERE validate_comment = 0
             ORDER BY comment.creation_date"
         );
-        $statement->setFetchMode(PDO::FETCH_CLASS | PDO::FETCH_PROPS_LATE, self::CommentClass);
+        $statement->setFetchMode(PDO::FETCH_CLASS | PDO::FETCH_PROPS_LATE, self::COMMENT_CLASS);
         return $statement->fetchAll();
     }
 
@@ -77,7 +77,7 @@ class CommentModel extends Model
             ORDER BY comment.creation_date DESC 
             LIMIT ".(($currentPage-1)*$elementsNumber).", $elementsNumber"
         );
-        $statement->setFetchMode(PDO::FETCH_CLASS | PDO::FETCH_PROPS_LATE, self::CommentClass);
+        $statement->setFetchMode(PDO::FETCH_CLASS | PDO::FETCH_PROPS_LATE, self::COMMENT_CLASS);
         return $statement->fetchAll();
     }
 

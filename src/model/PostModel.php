@@ -12,14 +12,14 @@ use \PDO;
 class PostModel extends Model
 {
 
-    private const PostClass = 'App\entity\Post'; 
+    private const POST_CLASS = 'App\entity\Post'; 
 
 /* Get all blogposts informations */
 
     public function getPosts(): array 
     {
         $statement = $this->connection->query("SELECT `id`, `title`,`author`,`chapo`,`creation_date` AS creationDate, `modification_date` AS modificationDate, `picture` FROM `post` ORDER BY `creation_date` DESC");
-        $statement->setFetchMode(PDO::FETCH_CLASS | PDO::FETCH_PROPS_LATE, self::PostClass);
+        $statement->setFetchMode(PDO::FETCH_CLASS | PDO::FETCH_PROPS_LATE, self::POST_CLASS);
 
         return $statement->fetchAll();
     }
@@ -27,7 +27,7 @@ class PostModel extends Model
     public function getPostsHomepage(): array 
     {
         $statement = $this->connection->query("SELECT `id`, `title`,`author`,`chapo`,`creation_date` AS creationDate, `modification_date` AS modificationDate, `picture` FROM `post` ORDER BY `creation_date` DESC LIMIT 3");
-        $statement->setFetchMode(PDO::FETCH_CLASS | PDO::FETCH_PROPS_LATE, self::PostClass);
+        $statement->setFetchMode(PDO::FETCH_CLASS | PDO::FETCH_PROPS_LATE, self::POST_CLASS);
 
         return $statement->fetchAll();
     }
@@ -38,7 +38,7 @@ class PostModel extends Model
     {
         $statement = $this->connection->prepare("SELECT `id`, `title`,`author`,`chapo`,`creation_date` AS creationDate, `content`, `modification_date` AS modificationDate, `picture` FROM `post` WHERE `id` = ? ORDER BY `creation_date` DESC");
         $statement->execute([$id]);
-        $statement->setFetchMode(PDO::FETCH_CLASS | PDO::FETCH_PROPS_LATE, self::PostClass);
+        $statement->setFetchMode(PDO::FETCH_CLASS | PDO::FETCH_PROPS_LATE, self::POST_CLASS);
         return $statement->fetch();
     }
 
@@ -60,7 +60,7 @@ class PostModel extends Model
     {
         $statement = $this->connection->prepare("SELECT `id`, `title`,`author`,`chapo`,`creation_date` AS creationDate, `content`, `modification_date` AS modificationDate, `picture`, `user_id` AS userId FROM post WHERE id = ?");
         $statement->execute([$id]);
-        $statement->setFetchMode(PDO::FETCH_CLASS | PDO::FETCH_PROPS_LATE, self::PostClass);
+        $statement->setFetchMode(PDO::FETCH_CLASS | PDO::FETCH_PROPS_LATE, self::POST_CLASS);
         return $statement->fetch();
     }
 
