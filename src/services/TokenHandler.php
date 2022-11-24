@@ -24,12 +24,12 @@ class TokenHandler {
             } else {
                 $_SESSION['error'] = "Un problème a été rencontré lors de la correspondance des données, veuillez recommencer.";
                 header('Location: /forbidden#forbidden_page');
-                die;
+                exit();
             }
         } else {
             $_SESSION['error'] = "Un problème a été rencontré lors de la correspondance, veuillez recommencer.";
             header('Location: /forbidden#forbidden_page');
-            die;
+            exit();
         }
     }
 }

@@ -127,7 +127,7 @@ class User extends Entity {
         }
     }
 
-    public function setValidateAccount($validateAccount) : void
+    public function setValidateAccount(int $validateAccount) : void
     {
         $this->validateAccount = (int) $validateAccount;
     }
