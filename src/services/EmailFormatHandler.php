@@ -15,7 +15,7 @@ class EmailFormatHandler {
         if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
             $_SESSION['error'] = "L'email entré n'est pas au bon format.";
             header('Location: /accountcreation');
-            die;
+            exit();
         }
     }
 }
