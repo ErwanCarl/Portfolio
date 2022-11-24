@@ -1,11 +1,11 @@
-#P5 Openclassrooms - Blog - Erwan Carlini
+# P5 Openclassrooms - Blog - Erwan Carlini
 
 ---------------
 
-##Starting project
+## Starting project
 ------
 
-### requirements
+### Requirements
 
 - PHP : 8.1.0
 - MySQL 8.0.30
@@ -14,11 +14,11 @@
 
 First, clone project then install all composer packages with command line : ``composer install``
 
-### import database
+### Import database
 
 To get all necessaries datas, in your PhpMyAdmin, import blogpost-db.sql in database folder from root directory.
 
-### configuration settings
+### Configuration settings
 
 Then, we need to set two configuration files to start the project correctly.  
 
@@ -27,6 +27,7 @@ Then, we need to set two configuration files to start the project correctly.
 * Step 1 : Rename the file ModelSample.php into Model.php  
 * Step 2 : Modify the line 16 `$this->connection = new PDO('mysql:host=localhost;dbname=dbname;charset=utf8', 'username', 'password'); ` 
 You have to replace the dbname by the name of your database, the username and the password by yours to log in your phpMyAdmin.  
+
 #### ConfigMailSample file in src/config
 
 * Step 1 : Rename the file ConfigMailSample.php into ConfigMail.php  
@@ -40,10 +41,10 @@ Then, if you want to use all features in the project, you can give yourselves th
 ------
 
 * Pecee Simple Router  
-* phpMailer  
+* PhpMailer  
 * Symfony server to get the https required to send mails correctly  
-* composer  
-* Vendor / autoload  
+* Composer  
+* Vendor / Autoload  
 
 <p align="center"><a href="https://symfony.com" target="_blank">
     <img src="https://symfony.com/logos/symfony_black_02.svg">
