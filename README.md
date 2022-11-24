@@ -3,7 +3,7 @@
 ---------------
 
 ## Starting project
-------
+
 
 ### Requirements
 
@@ -38,7 +38,6 @@ You have to replace the dbname by the name of your database, the username and th
 Then, if you want to use all features in the project, you can give yourselves the admin role by putting the value admin in the 'user' table, column 'role' on your account line.  
 
 ## Libraries use list
-------
 
 * Pecee Simple Router  
 * PhpMailer  
