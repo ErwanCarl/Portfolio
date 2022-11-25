@@ -22,20 +22,19 @@ To get all necessaries datas, in your PhpMyAdmin, import blogpost-db.sql in data
 
 Then, we need to set two configuration files to start the project correctly.  
 
-#### ModelSample file in src/model
+* #### ModelSample file in src/model
 
-* Step 1 : Rename the file ModelSample.php into Model.php  
-* Step 2 : Modify the line 16 `$this->connection = new PDO('mysql:host=localhost;dbname=dbname;charset=utf8', 'username', 'password'); ` 
-You have to replace the dbname by the name of your database, the username and the password by yours to log in your phpMyAdmin.  
+  * Step 1 : Rename the file ModelSample.php into Model.php  
+  * Step 2 : Modify the line 16 `$this->connection = new PDO('mysql:host=localhost;dbname=dbname;charset=utf8', 'username', 'password'); ` > You have to replace the dbname by the name of your database, the username and the password by yours to log in your phpMyAdmin.  
 
-#### ConfigMailSample file in src/config
+* #### ConfigMailSample file in src/config
 
-* Step 1 : Rename the file ConfigMailSample.php into ConfigMail.php  
-* Step 2 : You will have to replace host, username and password values in the variables by your mailer host and logs in order to succeed the mail sending in the project features  
+  * Step 1 : Rename the file ConfigMailSample.php into ConfigMail.php  
+  * Step 2 : You will have to replace host, username and password values in the variables by your mailer host and logs in order to succeed the mail sending in the project features  
 
 ### Admin features
 
-Then, if you want to use all features in the project, you can give yourselves the admin role by putting the value admin in the 'user' table, column 'role' on your account line.  
+Then, if you want to use all features in the project, you can give yourselves the admin role by putting the value admin in the 'user' table, column 'role' on your account row.  
 
 ## Libraries use list
 
