@@ -9,7 +9,6 @@ use App\config\ConfigMail;
 use App\entity\User;
 
 require '../vendor/autoload.php';
-use \Mailjet\Resources;
 use \PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\SMTP;
 use PHPMailer\PHPMailer\Exception;

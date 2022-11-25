@@ -7,8 +7,9 @@ namespace App\controllers;
 
 use App\model\PostModel;
 use App\services\TokenHandler;
+use App\controllers\Basecontroller;
 
-class HomepageController 
+class HomepageController extends BaseController
 {
     public function homepage() : void 
     {

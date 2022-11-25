@@ -12,9 +12,4 @@ class Manager
         header('Location : /'.$path);
         exit();
     }
-
-    public function redirectTo($path) : string 
-    {
-        return $this->redirect($path);
-    }
 }
