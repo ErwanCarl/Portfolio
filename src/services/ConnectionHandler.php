@@ -8,8 +8,9 @@ namespace App\services;
 use App\model\UserModel;
 use App\entity\User;
 use App\services\SendMail;
+use App\services\RedirectHandler;
 
-class ConnectionHandler
+class ConnectionHandler extends RedirectHandler
 {
     public function connectionCheck(?User $userExtract) : void 
     {
@@ -86,6 +87,14 @@ class ConnectionHandler
         }else{
             $_SESSION['error'] = "Alerte sécurité : le mail et la clé ne correspondent pas à la demande de changement de mot de passe.";
             require(TEMPLATE_DIR.'/accountCreation.php');
+        }
+    }
+
+    public function isConnected() : void 
+    {
+        if(isset($_SESSION['Connection'])) {
+            $_SESSION['error'] = "Vous êtes déjà connecté.";
+            parent::redirect('forbidden');
         }
     }
 }

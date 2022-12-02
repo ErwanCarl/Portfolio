@@ -6,6 +6,7 @@ declare(strict_types=1);
 namespace App\controllers;
 
 use App\services\TokenHandler;
+use App\services\ConnectionHandler;
 
 class AccountCreationController 
 {
@@ -13,6 +14,9 @@ class AccountCreationController
     {
         $tokenHandler = new TokenHandler();
         $tokenHandler->generateCsrfToken();
+
+        $isConnected = new ConnectionHandler();
+        $isConnected->isConnected();
 
         require(TEMPLATE_DIR.'/accountCreation.php');
     }

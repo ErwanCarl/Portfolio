@@ -5,11 +5,11 @@ declare(strict_types=1);
 
 namespace App\services;
 
-class Manager
+class RedirectHandler
 {
-    public function redirect(string $path) : void
+    public static function redirect(string $path) : void
     {
-        header('Location : /'.$path);
+        header('Location: /'.$path);
         exit();
     }
 }
