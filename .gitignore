@@ -1,4 +1,4 @@
 src/config/ConfigMail.php
+src/model/Model.php
 vendor/
 /vendor/
-src/model/Model.php

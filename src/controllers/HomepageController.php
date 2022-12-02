@@ -9,7 +9,7 @@ use App\model\PostModel;
 use App\services\TokenHandler;
 use App\controllers\Basecontroller;
 
-class HomepageController extends BaseController
+class HomepageController
 {
     public function homepage() : void 
     {

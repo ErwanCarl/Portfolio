@@ -43,7 +43,7 @@ class ConnectionHandler extends RedirectHandler
     {
         if($userCheck === null) {
             $_SESSION['error'] = "Le mail n'existe pas dans notre base de données.";
-            require(TEMPLATE_DIR.'/accountCreation.php');
+            parent::redirect('passwordlandingpage');
         }else{
             $accountKey = base_convert(hash('sha256', time() . mt_rand()), 16, 36);
             $userCheck->setAccountKey($accountKey);
@@ -72,21 +72,21 @@ class ConnectionHandler extends RedirectHandler
                 $passwordChangeSuccess = $passwordChange->passwordChange($userInfo['password'], $userInfo['email']);
                     if($passwordChangeSuccess) {
                         $_SESSION['success'] = "Votre mot de passe a été modifié avec succès.";
-                        require(TEMPLATE_DIR.'/accountCreation.php');
+                        header('Location: /accountcreation');
                     }else{
                         $_SESSION['error'] = "Le changement de mot de passe a échoué, veuillez contacter l'administrateur.";
-                        require(TEMPLATE_DIR.'/accountCreation.php');
+                        header('Location: /accountcreation');
                     }
             }else{
                 $user = new User();
                 $user->setMail($userInfo['email']);
                 $user->setAccountKey($userInfo['token']);
                 $_SESSION['error'] = "Les mots de passe ne sont pas identiques, veuillez recommencer.";
-                require(TEMPLATE_DIR.'/lostPassword.php');
+                header('Location: /lostpassword/'.$user->getAccountKey());
             }
         }else{
             $_SESSION['error'] = "Alerte sécurité : le mail et la clé ne correspondent pas à la demande de changement de mot de passe.";
-            require(TEMPLATE_DIR.'/accountCreation.php');
+            header('Location: /accountcreation');
         }
     }
 
@@ -94,7 +94,7 @@ class ConnectionHandler extends RedirectHandler
     {
         if(isset($_SESSION['Connection'])) {
             $_SESSION['error'] = "Vous êtes déjà connecté.";
-            parent::redirect('forbidden');
+            parent::redirect('');
         }
     }
 }
