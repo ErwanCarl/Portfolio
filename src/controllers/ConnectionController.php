@@ -33,6 +33,9 @@ class ConnectionController
 
     public function passwordLandingPage() : void 
     {
+        $isConnected = new ConnectionHandler();
+        $isConnected->isConnected();
+        
         require(TEMPLATE_DIR.'/lostPassword.php');
     }
 
