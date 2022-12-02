@@ -5,7 +5,9 @@ declare(strict_types=1);
 
 namespace App\services;
 
-class TokenHandler {
+use App\services\RedirectHandler;
+
+class TokenHandler extends RedirectHandler {
 
     public function generateCsrfToken() : void
     {
@@ -23,13 +25,11 @@ class TokenHandler {
                 unset($_SESSION['csrf_token_time']);
             } else {
                 $_SESSION['error'] = "Un problème a été rencontré lors de la correspondance des données, veuillez recommencer.";
-                header('Location: /forbidden#forbidden_page');
-                exit();
+                parent::redirect('forbidden#forbidden_page');
             }
         } else {
             $_SESSION['error'] = "Un problème a été rencontré lors de la correspondance, veuillez recommencer.";
-            header('Location: /forbidden#forbidden_page');
-            exit();
+            parent::redirect('forbidden#forbidden_page');
         }
     }
 }

@@ -6,16 +6,16 @@ declare(strict_types=1);
 namespace App\services;
 
 use App\entity\User;
-use App\services\Manager;
+use App\services\RedirectHandler;
 
-class EmailFormatHandler extends Manager {
+class EmailFormatHandler extends RedirectHandler {
 
-    public function emailFormatCheck(User $user) 
+    public function emailFormatCheck(User $user) : void
     {
         $email = $user->getMail();
         if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
             $_SESSION['error'] = "L'email entré n'est pas au bon format.";
-            return $this->redirect('accountcreation');
+            parent::redirect('accountcreation');
         }
     }
 }
