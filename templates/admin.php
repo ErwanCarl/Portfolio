@@ -48,7 +48,7 @@
     <h2>Validation de commentaires</h2>
 </div>
 
-<?php if($pendingComments !== null) { ?>
+<?php if($pendingComments != null) { ?>
 
     <?php
         foreach($pendingComments as $pendingComment) {

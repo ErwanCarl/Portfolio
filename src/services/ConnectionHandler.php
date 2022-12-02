@@ -14,7 +14,7 @@ class ConnectionHandler extends RedirectHandler
 {
     public function connectionCheck(?User $userExtract) : void 
     {
-        if ($userExtract !== null) {
+        if ($userExtract != null) {
             if($userExtract->getValidateAccount() != 1) {
                 $_SESSION['error'] = "Votre compte n'est pas validé, veuillez vérifier vos emails pour procéder à la validation.";
                 header('Location: /accountcreation');
@@ -56,7 +56,7 @@ class ConnectionHandler extends RedirectHandler
 
     public function passwordLinkCheck(?User $user) : void 
     {
-        if($user !== null) {
+        if($user != null) {
             require(TEMPLATE_DIR.'/lostPassword.php');
         }else{
             $_SESSION['error'] = "Le lien n'est pas ou plus valide, veuillez faire une autre demande de mot de passe oublié.";
@@ -66,7 +66,7 @@ class ConnectionHandler extends RedirectHandler
 
     public function accountPasswordSecurityCheck(?User $userSecurity, array $userInfo) : void 
     {
-        if($userSecurity !== null) {
+        if($userSecurity != null) {
             if($userInfo['password'] === $userInfo['passwordconfirmation']) {
                 $passwordChange = new UserModel;
                 $passwordChangeSuccess = $passwordChange->passwordChange($userInfo['password'], $userInfo['email']);

@@ -1,5 +1,6 @@
 # P5 Openclassrooms - Blog - Erwan Carlini
 
+[![SymfonyInsight](https://insight.symfony.com/projects/3e4940fc-7979-4f2e-a18e-20c1e0ffdf34/big.svg)](https://insight.symfony.com/projects/3e4940fc-7979-4f2e-a18e-20c1e0ffdf34)
 ---------------
 
 ## Starting project

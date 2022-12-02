@@ -134,7 +134,7 @@ class UserModel extends Model
         $userFound = $user->execute([$accountKey]);
         $user->setFetchMode(PDO::FETCH_CLASS | PDO::FETCH_PROPS_LATE, self::USER_CLASS);
         $userFound = $user->fetch();
-        if($userFound !== null) {
+        if($userFound != null) {
             $userFound->setAccountKey($accountKey);
             return $userFound;
         }else{
@@ -172,7 +172,7 @@ class UserModel extends Model
         ]);
         $checkUser->setFetchMode(PDO::FETCH_CLASS | PDO::FETCH_PROPS_LATE, self::USER_CLASS);
         $userFound = $checkUser->fetch();
-        if($userFound !== false) {
+        if($userFound != false) {
             return $userFound;
         }else{
             return null;
