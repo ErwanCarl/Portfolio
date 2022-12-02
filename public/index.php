@@ -1,7 +1,6 @@
 <?php
 
-require_once('../Autoloader.php');
-Autoloader::register();
+require_once '../vendor/autoload.php';
 
 use App\router\Router;
 

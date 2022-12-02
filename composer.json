@@ -1,4 +1,5 @@
 {
+    "license": "proprietary",
     "name": "erwancarl/p5_openclassrooms",
     "description": "Blogposts",
     "authors": [
@@ -15,11 +16,7 @@
     },
 
     "require": {
-        "mailjet/mailjet-apiv3-php": "^1.5",
         "phpmailer/phpmailer": "^6.6",
         "pecee/simple-router": "4.3.7.2"
-    },
-    "require-dev": {
-        "squizlabs/php_codesniffer": "*"
     }
 }

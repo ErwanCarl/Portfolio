@@ -22,7 +22,7 @@ class AdminController
         $admin->adminAccessCheck();
     }
 
-    public function commentValidate($id) : void 
+    public function commentValidate(int $id) : void 
     {
         $csrfTokenCheck = new TokenHandler();
         $csrfTokenCheck->csrfTokenCheck($_POST['csrf_token']);
@@ -46,7 +46,7 @@ class AdminController
         $adminRestaurateCommentCheck->adminRestaurateCommentCheck($validateComment);
     }
 
-    public function commentDelete($id) : void 
+    public function commentDelete(int $id) : void 
     {
         $csrfTokenCheck = new TokenHandler();
         $csrfTokenCheck->csrfTokenCheck($_POST['csrf_token']);
