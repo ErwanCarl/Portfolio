@@ -34,7 +34,7 @@
 	<button type="button" onclick="window.location='/admin#commentValidation'" class="btn btn-info mb-2">Retour à la modération</button>
 </div>
 
-<?php if($moderatedComments !== null) { ?>
+<?php if($moderatedComments != null) { ?>
 	<?php
 		foreach($moderatedComments as $moderatedComment) {
 	?>

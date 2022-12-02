@@ -87,7 +87,7 @@
 		
 			<div class="form_case">
 				<input type="hidden" name="MAX_FILE_SIZE" value="1000000" />
-				<label for="picture">Image</label>
+				<label for="picture">Image (Obligatoire)</label>
 				<input type="file" id="image_input" name="picture" id="picture"/>
 
             </div>

@@ -118,7 +118,7 @@
         <h4>Commentaires</h4>
     </div>
 
-    <?php if($comments !== null) { ?>
+    <?php if($comments != null) { ?>
 
     <div class="comments">
 
