@@ -25,7 +25,7 @@ class InputCheckHandler extends RedirectHandler {
         } elseif (strlen($formInput['mail']) > 255 || strlen($formInput['mail']) === 0) {
             $_SESSION['error'] = 'Le champ "Mail" ne peut être vide ou excéder 255 caractères.';
             parent::redirect('accountcreation');
-        } elseif (isset($formInput['phonenumber'])) {
+        } elseif (isset($formInput['phonenumber']) && $formInput['phonenumber'] != null) {
             if(!preg_match("/[0-9]{10,20}/", $formInput['phonenumber'])) {
                 $_SESSION['error'] = 'Le champ "Téléphone" doit seulement être composé de 10 à 20 chiffres.';
                 parent::redirect('accountcreation');
